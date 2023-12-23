@@ -191,7 +191,7 @@ s = set(l)  # przepisanie listy do seta
 print(s)
 s.add(5634)  # doddanie do seta, nie ma gwarancji na której pozyvji wyląduje
 s.add('sdaf')
-s.update(l)  # dodanie całej listy 
+s.update(l)  # dodanie całej listy
 # dodanie kilku elementów w postaci listy
 s.update(['dsfs', 345, 65.34, 'dfsdf'])
 print(s)
@@ -203,4 +203,43 @@ print(s)
 # nie ma możliwości zmiany wartości
 
 # tuple () -> szybla lista const
-t = (1,2,3,4,5,6,7,8)
+t = (1, 2, 3, 4, 5, 6, 7, 8)  # definicja
+print(t)
+print(t[0])  # dostęp do elementu
+print(t[3:])
+print(t[:6])
+print({3 in t})  # czy 3 jest w tuple t
+tt = ('sss', 3.45, "asdf", 123)
+print(tt)
+print({"asdf" in tt})  # czy "asdf" jest w tuple tt
+# przypisanie do zmiennych
+(x, y, z) = (1, 2, 3)
+print(x)
+print(y)
+print(z)
+x = 10
+print(x)
+
+# dictionary {k:v, k:v} -> para: key - value
+# tworzenie 1
+d = {'asd': 'dsa', 'qwe': 'ewq', 1: 'jeden', 2: 'dwa', 'trzy': 3, "cztery": 4}
+print(d)
+print(d.items()) 
+# tworzenie 2
+d = dict(asd='dsa', qwe='ewq', jeden=1, dwa=2, trzy=3, cztery=4)
+print(d)
+
+print(d.items()) # wyświetlenie w formacie par
+print(d.keys()) # same klucze
+print(d.values()) # same wartości
+
+print(d['jeden']) # odczyt po kluczu
+print(f'value {d["dwa"]}') # to co wyżej tylko w sformatowanym stringu
+
+d['add'] = 'cvb' # dodanie do map
+print(d.items()) 
+d['add'] = 'fgdsfgdfg' # zmiana wartości
+print(d.items()) 
+del d['add'] # usuwanie pozycji
+print(d.items()) 
+
