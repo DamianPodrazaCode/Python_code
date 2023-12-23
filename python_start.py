@@ -224,32 +224,98 @@ print(x)
 # tworzenie 1
 d = {'asd': 'dsa', 'qwe': 'ewq', 1: 'jeden', 2: 'dwa', 'trzy': 3, "cztery": 4}
 print(d)
-print(d.items()) 
+print(d.items())
 # tworzenie 2
 d = dict(asd='dsa', qwe='ewq', jeden=1, dwa=2, trzy=3, cztery=4)
 print(d)
 
-print(d.items()) # wyświetlenie w formacie par
-print(d.keys()) # same klucze
-print(d.values()) # same wartości
+print(d.items())  # wyświetlenie w formacie par
+print(d.keys())  # same klucze
+print(d.values())  # same wartości
 
-print(d['jeden']) # odczyt po kluczu
-print(f'value {d["dwa"]}') # to co wyżej tylko w sformatowanym stringu
+print(d['jeden'])  # odczyt po kluczu
+print(f'value {d["dwa"]}')  # to co wyżej tylko w sformatowanym stringu
 
-d['add'] = 'cvb' # dodanie do map
-print(d.items()) 
-d['add'] = 'fgdsfgdfg' # zmiana wartości
-print(d.items()) 
-del d['add'] # usuwanie pozycji
-print(d.items()) 
+d['add'] = 'cvb'  # dodanie do map
+print(d.items())
+d['add'] = 'fgdsfgdfg'  # zmiana wartości
+print(d.items())
+del d['add']  # usuwanie pozycji
+print(d.items())
 
-#flow control
+# flow control
 
 # przy if zamiast nawiasów{} są odsunięcia tabem
-x = 1 
+x = True  # lub 1
 if x:  # lub x==True:
-    print('true')  
+    print('true')
     print(x)
 else:
     print('false')
-    
+
+x = 100
+y = 25
+if x == y:
+    print('równe')
+if x != y:
+    print('nierówne')
+if x < y:
+    print('mniejsze')
+if x > y:
+    print('większe')
+
+x = 100
+if x == 10:
+    print(x)
+elif x == 20:
+    print(x)
+elif x == 30:
+    print(x)
+else:
+    print("reszta", x)
+
+x = 0
+while x < 10:
+    x += 1
+    print(x)
+
+# x = 0
+# while x < 10:
+#     pass #taki nop, ale wtym przypadku zrobi się pętla nieskończona
+# są jeszcze continue i break standard jak w C
+
+x = [1, '123', 3, 4, 'abc', 6, 7]  # to samo dla Tuple, i Set
+for i in x:  # i bedzie przyjmowała kolejne wartości listy
+    print(i)
+
+d = dict(asd='dsa', qwe='ewq', jeden=1, dwa=2, trzy=3, cztery=4)
+print(d)
+for k in d.keys():     # wylistowanie kluczy
+    print(k)
+for k in d.values():    # wylistowanie wartości
+    print(k)
+for k in d.items():    # wylistowanie par
+    print(k)
+for k in d.keys():  # wylistowanie wartości po kluczu
+    print(k, d[k])
+for k, v in d.items():  # wylistowanie wartości i klucza
+    print(k, v)
+
+# range() -> automat do tworzenia iteratora
+x = range(10)  # iterator od <0 - 10)
+print(x)
+for i in x:
+    print(i)
+
+x = range(2, 10)  # iterator od <2 - 10) (start, stop)
+print(x)
+for i in x:
+    print(i)
+
+x = range(2, 10, 2)  # iterator od <2 - 10) z krokiem co 2 (start,stop,step)
+print(x)
+for i in x:
+    print(i)
+
+s = input("wpisz coś :") # pobieranie z terminala
+print(s)
