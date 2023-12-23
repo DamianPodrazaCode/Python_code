@@ -243,3 +243,13 @@ print(d.items())
 del d['add'] # usuwanie pozycji
 print(d.items()) 
 
+#flow control
+
+# przy if zamiast nawiasów{} są odsunięcia tabem
+x = 1 
+if x:  # lub x==True:
+    print('true')  
+    print(x)
+else:
+    print('false')
+    
