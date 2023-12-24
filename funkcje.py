@@ -74,3 +74,39 @@ print(fun(12,3))
 ret = lambda x=0, y=0: x*y
 print(ret(2,3))
 print(ret(12,3))
+
+#przekazanie listy do funkcji
+lista = [1,2,3]    
+
+def fun(*args): #pobiera listę argumentów
+    for i in args:
+        print(i)
+fun(1,2,3)
+fun(*lista)
+
+def fun(a,b,c): #pobiera ograniczoną ilość argumentów
+    print(a, b, c)
+fun(1,2,3) # normalne wywołanie funkcji
+fun(*lista) # przekaszanie listy jako argument, lista musi zawierać tyle elementów co ilość argumentów w funkcji
+
+#przekazanie mapy do funkcji
+mapa = {'arg1' : 111, 'arg2' : '222', 'arg3' : 333} 
+
+def fun(**args):
+    for key in args:
+        print(key, args[key])
+fun(arg1=111, arg2='222', arg3=333)
+fun(**mapa)        
+
+def fun(a,b,c):
+    print(a)    
+    print(b)
+    print(c)
+
+d = dict(a=111, b='222', c=333)
+fun(**d)
+
+#funkcja w argumencie funkcji
+
+
+#funkcja jako arument funkcji
