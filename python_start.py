@@ -317,6 +317,9 @@ print(x)
 for i in x:
     print(i)
 
+for i in range(10): # bezpośrednio w for
+    print(i)    
+
 s = input("wpisz coś :")  # pobieranie z terminala
 print(s)
 strToList = s.split(',')  # podzielenie w miejscach ',', stworzenie listy
@@ -330,10 +333,11 @@ print(x + y)
 print(z)
 print(v)
 
-lista = [] #pusta lista
-item1 = [x,y]
+lista = [] #pusta lista, jeszcze nie określona
+item1 = [x,y] #stworzenie elementu listy który jest listą
 item2 = [z,v]
-lista.append(item1)
+lista.append(item1) #dodanie do listy elementu który jest listą
 lista.append(item2)
 print(lista)
+
 
