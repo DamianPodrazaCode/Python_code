@@ -317,5 +317,23 @@ print(x)
 for i in x:
     print(i)
 
-s = input("wpisz coś :") # pobieranie z terminala
+s = input("wpisz coś :")  # pobieranie z terminala
 print(s)
+strToList = s.split(',')  # podzielenie w miejscach ',', stworzenie listy
+print(strToList)
+
+x = int(strToList[0]) # casting string na int
+y = int(strToList[1])
+z = float(strToList[2]) # casting string na float
+v = complex(strToList[3]) # casting string na zespolone
+print(x + y)
+print(z)
+print(v)
+
+lista = [] #pusta lista
+item1 = [x,y]
+item2 = [z,v]
+lista.append(item1)
+lista.append(item2)
+print(lista)
+
