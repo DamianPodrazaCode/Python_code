@@ -107,6 +107,17 @@ d = dict(a=111, b='222', c=333)
 fun(**d)
 
 #funkcja w argumencie funkcji
-
+def fun1():
+    return 1
+def fun2():
+    return 2
+def fun(a, b):
+    print(a + b)
+fun(fun1(),fun2()) #funkcje uruchamiają się w argumencie i przekazują zwrucone wartości    
 
 #funkcja jako arument funkcji
+def fun(a, b):
+    x = a()
+    y = b()
+    print(x + y)
+fun(fun1,fun2)  #argumenty są wskaźnikami do funkcji które są uruchamiane w funkcji głównej
