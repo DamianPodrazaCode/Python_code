@@ -106,6 +106,10 @@ def fun(a,b,c):
 d = dict(a=111, b='222', c=333)
 fun(**d)
 
+def getData():
+    return dict(a=111, b='222', c=333)
+fun(**getData()) #jako parametr funkcja która zwaca mape
+
 #funkcja w argumencie funkcji
 def fun1():
     return 1

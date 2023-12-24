@@ -340,4 +340,3 @@ lista.append(item1) #dodanie do listy elementu który jest listą
 lista.append(item2)
 print(lista)
 
-
