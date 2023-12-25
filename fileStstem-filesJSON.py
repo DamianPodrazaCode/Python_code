@@ -8,3 +8,14 @@ print(type(s), s)
 #to file
 with open(filename, 'w') as file:
     json.dump(outD, file) #dump to file
+
+#from string
+inD = json.loads(s) #load dict fro str
+print(type(inD), inD)
+
+#from file
+filename = 'example.txt'
+with open(filename, 'r') as file:
+    fileLoad = json.load(file)
+print(type(fileLoad))
+print(fileLoad)
