@@ -75,6 +75,4 @@ def readFile(filename):
 myFile = 'test.txt'
 writeFile(myFile)
 appendFile(myFile)
-appendFile(myFile)
-appendFile(myFile)
 readFile(myFile)
