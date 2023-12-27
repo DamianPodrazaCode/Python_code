@@ -29,7 +29,7 @@ print('---------------------------------------------operatory')
 * -> mnożenie
 / -> dzielenie
 // -> dzielenie całkowite
-% -> reszta z dzielenia
+% -> reszta z dzielenia (jest podzielne całkowicie == 0)
 + -> dodawanie
 - -> odejmowanie
 operacje '+' na napisach to konkatencja (sklejanie)

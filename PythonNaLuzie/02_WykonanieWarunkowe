@@ -1,5 +1,33 @@
-# print('---------------------------------------------')
-# print('---------------------------------------------')
+print('---------------------------------------------operatory logiczne')
+x = True #typu bool
+y = False
+print(type(x))
+'''
+x != y
+x == y 
+x > y
+x < y
+x >= y
+x <= y
+x is y (==)
+x is not y (!=) 
+x and y
+x or y
+x not y
+'''
+
+print('---------------------------------------------instrukcja warunkowa')
+zm1 = 1
+# w przypadku każdej instrukcji zakończonej ':' pod spodem jest pojedyncza instrukcjia lub blok instrukcji, 
+# który jest wcięty, jest to jedyne oznaczenie bloku instrukcji
+if zm1 > 0 : 
+    print('jest większa od zera')
+
+# czasami pisze się warunek ale jeszcze niema się ciała warunku, wtedy używa sie instrukcji pustej 'pass' tymczasowo
+if zm1 != 0 :
+    pass    
+
+
 # print('---------------------------------------------')
 # print('---------------------------------------------')
 # print('---------------------------------------------')
