@@ -40,6 +40,3 @@ def fun2(x, y) :
 fun() # funkcja pusta, bo niezwraca żadnej wartości
 print(fun2(2, 3)) # funkcja owocna
 
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
