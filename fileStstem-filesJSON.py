@@ -1,6 +1,6 @@
 import json
 
-filename = 'json.txt'
+filename = 'test.json'
 outD = dict(name='Damian', age=46, pet='dog')
 s = json.dumps(outD) #konwertuje dict na str
 print(type(s), s)
@@ -14,7 +14,7 @@ inD = json.loads(s) #load dict fro str
 print(type(inD), inD)
 
 #from file
-filename = 'example.txt'
+filename = 'example.json'
 with open(filename, 'r') as file:
     fileLoad = json.load(file)
 print(type(fileLoad))
