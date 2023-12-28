@@ -35,12 +35,41 @@ if napis == 'abcd' : # czy napis jest za 'abcd'
     pass
 
 print('---------------------------------------------dąstępne metody')
-print(dir(napis)) # dir to lista dostępnych metod w objekcie
+# print(dir(napis)) # dir to lista dostępnych metod w objekcie
 # print(help(str)) # manual dla klasy
 
+print('---------------------------------------------formatowanie')
+'''
+'d' - Signed integer decimal.
+'i' - Signed integer decimal.
+'o' - Signed octal value.
+'u' - Obsolete type - it is identical to 'd'.
+'x' - Signed hexadecimal (lowercase).
+'X' - Signed hexadecimal (uppercase).
+'e' - Floating point exponential format (lowercase).
+'E' - Floating point exponential format (uppercase).
+'f' - Floating point decimal format.
+'F' - Floating point decimal format.
+'g' - Floating point format. Uses lowercase exponential format if exponent is less than -4 or not less than precision, decimal format otherwise.
+'G' - Floating point format. Uses uppercase exponential format if exponent is less than -4 or not less than precision, decimal format otherwise.
+'c' - Single character (accepts integer or single character string).
+'r' - String (converts any Python object using repr()).
+'s' - String (converts any Python object using str()).
+'a' - String (converts any Python object using ascii()).
+'%' - No argument is converted, results in a '%' character in the result.
+'''
 
+zm1 = 15
+zm2 = 1.23
+zm3 = -1.23
 
-# print('---------------------------------------------')
+print('text %d text %f text %+f' % (zm1, zm2, zm3)) # formatowanie
+print('text %+d text %+f text %+f' % (zm1, zm2, zm3)) # formatowanie ze znakiem plus normalnie nie wyświetlanym
+napis = 'text %03d text %f' % (zm1, zm2)
+print(napis)
+print('text %04d text % 4d' % (zm1, zm1)) # formatowanie, zero przed liczbą lub spacja przed liczbą
+print('text %40d text %f' % (zm1, zm2)) # formatowanie, zero przed liczbą lub spacja przed liczbą
+
 # print('---------------------------------------------')
 # print('---------------------------------------------')
 # print('---------------------------------------------')
