@@ -19,11 +19,27 @@ print(string.find(' '))   # -1 jak nie znajdzie
 print(string.find(' ', 6, 10))  # znajdź w wycinku, -1 jak nie znajdzie
 # print(string.index('#'))  # jak nieznajdzie to error
 # print(string.index(' ', 6, 10)) # znajdź w wycinku jak nieznajdzie to error
+print(string.upper()) # na duże
+print(string.lower()) # na małe
+print(string.strip()) # usówa białę znaki na początku i końcu
 
-print('a' in 'abc') #sprawdza czy 'a' zawiera się w 'abc' w tym przypadku to True
+print('---------------------------------------------porównywanie')
+napis = 'abcd' 
+if 'a' in 'abc' :   # sprawdza czy 'a' zawiera się w 'abc' w tym przypadku to True
+    pass
+if napis == 'abcd' : # czy równe 
+    pass
+if napis < 'abcd' : # czy napis jest przed 'abcd'
+    pass
+if napis == 'abcd' : # czy napis jest za 'abcd'
+    pass
 
-# print('---------------------------------------------')
-# print('---------------------------------------------')
+print('---------------------------------------------dąstępne metody')
+print(dir(napis)) # dir to lista dostępnych metod w objekcie
+# print(help(str)) # manual dla klasy
+
+
+
 # print('---------------------------------------------')
 # print('---------------------------------------------')
 # print('---------------------------------------------')
