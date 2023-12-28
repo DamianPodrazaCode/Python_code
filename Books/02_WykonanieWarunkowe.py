@@ -14,6 +14,7 @@ x is not y (!=)
 x and y
 x or y
 x not y
+'a' in 'abc' #sprawdza czy 'a' zawiera się w 'abc' w tym przypadku to True
 '''
 
 print('---------------------------------------------instrukcja warunkowa')
