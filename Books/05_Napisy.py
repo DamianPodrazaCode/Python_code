@@ -68,17 +68,5 @@ print('text %+d text %+f text %+f' % (zm1, zm2, zm3)) # formatowanie ze znakiem 
 napis = 'text %03d text %f' % (zm1, zm2)
 print(napis)
 print('text %04d text % 4d' % (zm1, zm1)) # formatowanie, zero przed liczbą lub spacja przed liczbą
-print('text %40d text %f' % (zm1, zm2)) # formatowanie, zero przed liczbą lub spacja przed liczbą
+print('text %f' % (zm2)) # formatowanie, zero przed liczbą lub spacja przed liczbą
 
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')

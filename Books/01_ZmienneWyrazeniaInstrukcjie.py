@@ -1,7 +1,7 @@
 
 print('---------------------------------------------wartości i typy')
 # wartości i typy
-#instrukcjia type() zwraca typ wartości
+# instrukcjia type() zwraca typ wartości
 print(type(17)) #int
 print(type(1.123)) #float
 print(type('asd')) #string
@@ -29,7 +29,7 @@ print('---------------------------------------------operatory')
 * -> mnożenie
 / -> dzielenie
 // -> dzielenie całkowite
-% -> reszta z dzielenia (jest podzielne całkowicie == 0)
+% -> reszta z dzielenia (jak jest podzielne całkowicie == 0)
 + -> dodawanie
 - -> odejmowanie
 operacje '+' na napisach to konkatencja (sklejanie)

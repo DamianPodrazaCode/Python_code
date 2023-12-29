@@ -1,12 +1,12 @@
 print('---------------------------------------------while break continue')
 zm1 = 0
-while zm1 < 10 :
+while zm1 < 10 : # wykonuj dopóki zm1 mniejsze od 10
     print(zm1)
     zm1 += 1
 print('end while')    
 
 zm1 = 10
-while True :
+while True : # pętla nieskończona
     if zm1 <= 0 :
         break
     print(zm1)
@@ -24,17 +24,19 @@ while True :
 print('end while')    
 
 print('---------------------------------------------for')
-# pętla iteracyjna, całkiem inna niż w C
-# iteracja wg listy
-lista = ['jeden', 'dwa', 'trzy', 'cztery', 'pięć']
+# for to pętla iteracyjna, całkiem inna niż w C
+# iteracja wg listy, for przejedzie przez całą listę pokolei od elementu pierwszego
+lista = ['jeden', 'dwa', 'trzy', 'cztery', 'pięć'] 
 for str in lista : 
     print(str)
 print('end for')
 
+# lista wbudowana w for'a
 for str in [2, 3, 4, 5, 3, 567, 23423, 564, 23, 12334, 45, 45, 3] :
     print(str)
 print('end for')
 
+# iteracja oparta na zakresie liczbowym
 # range([start],stop,[step]) - tylko liczby całkowite
 for str in range(10) : # będzie liczyć od 0 do 9
     print(str)

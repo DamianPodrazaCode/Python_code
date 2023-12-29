@@ -1,5 +1,5 @@
 print('---------------------------------------------operatory logiczne')
-x = True #typu bool
+x = True #typ bool
 y = False
 print(type(x))
 '''
@@ -14,13 +14,13 @@ x is not y (!=)
 x and y
 x or y
 x not y
-'a' in 'abc' #sprawdza czy 'a' zawiera się w 'abc' w tym przypadku to True
+'a' in 'abc' #sprawdza czy 'a' zawiera się stringu w 'abc' w tym przypadku to True
 '''
 
 print('---------------------------------------------instrukcja warunkowa')
 zm1 = 1
-# w przypadku każdej instrukcji zakończonej ':' pod spodem jest pojedyncza instrukcjia lub blok instrukcji, 
-# który jest wcięty, jest to jedyne oznaczenie bloku instrukcji
+# w przypadku każdej instrukcji zakończonej ':' pod spodem jest albo pojedyncza instrukcjia albo blok instrukcji, 
+# który jest wcięty, jest to jedyne oznaczenie bloku instrukcji w 'C' jesto to para '{}'
 if zm1 > 0 : 
     print('jest większa od zera')
 
@@ -47,7 +47,7 @@ else :
 # try - except (jeżeli w 'try' wystąpi wyjątek to wykona się exept)
 inp = input('Podaj temperaturę w skali Fahrenheita: ')
 try:
-    fahr = float(inp) # cast z worowadzonej liczby na float
+    fahr = float(inp) # cast z worowadzonej liczby na float, tu może wystąpić wyjątek
     cel = (fahr - 32.0) * 5.0 / 9.0
     print(cel)
 except:
