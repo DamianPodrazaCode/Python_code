@@ -32,11 +32,34 @@ else :
 
 fhand = open(fileName, 'r') 
 
+print('---------------------------------------------czytanie txt linia po linii')
 count = 0
-for line in fhand :
+for line in fhand : # domyślnie w czasie iteracji do line są wrzucane linie pliku
     count += 1
+    # print(line) # wyświetlanie linia po linii
 print(count, 'lini w pliku')
 
+print('---------------------------------------------czytanie txt w całości')
+fhand.seek(0) # ustawienie pozycji w pliku na początek
+plik = fhand.read() # odczyt całego pliku do stringa (tylko małe pliki)
+print(plik)
+print('rozmiar to ', len(plik), ' bajtów')
+del plik # usunięcie zmienne plik
+
+print('---------------------------------------------czytanie txt z filtrowaniem wybieranie')
+fhand.seek(0) # ustawienie pozycji w pliku na początek
+for line in fhand : # domyślnie w czasie iteracji do line są wrzucane linie pliku
+    if line.startswith('From:') : # sprawdzenie 
+        print(line.rstrip()) # wyświetlenire lini z usunięciem końca linii
+
+print('---------------------------------------------czytanie txt z filtrowaniem pominięcia')
+fhand.seek(0) # ustawienie pozycji w pliku na początek
+for line in fhand : # domyślnie w czasie iteracji do line są wrzucane linie pliku
+    if not line.startswith('From:') : # sprawdzenie 
+        continue
+    print(line.rstrip()) # wyświetlenire lini z usunięciem końca linii
+
+# str(89)
 fhand.close()
 
 # print('---------------------------------------------')
