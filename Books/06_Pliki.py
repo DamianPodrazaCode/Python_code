@@ -30,7 +30,7 @@ else :
     sFile = os.path.abspath(fileName) # 
     print(sFile)
 
-fhand = open(fileName, 'r') 
+fhand = open(fileName, 'r', encoding='UTF-8') 
 
 print('---------------------------------------------czytanie txt linia po linii')
 count = 0
@@ -67,7 +67,7 @@ fileName = 'Books/mbox.txt'
 sFile = os.path.abspath(fileName) 
 
 try :
-    fhand = open(fileName, 'r') 
+    fhand = open(fileName, 'r', encoding='UTF-8') 
     print(fhand) 
 except :
     print('Nie można otworzyć:', sFile)
@@ -75,12 +75,21 @@ except :
 
 fhand.close()
 
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
+print('--------------------------------------------- zapis')
+fileName = 'Books/outTest.txt'
+sFile = os.path.abspath(fileName) 
+
+try :
+    fhand = open(fileName, 'w', encoding='UTF-8') 
+    print(fhand) 
+except :
+    print('Nie można zapisać:', sFile)
+    exit(1)
+
+line = 'ęóąśłżźćń text text text\n' 
+fhand.write(line)
+fhand.write(line)
+
+# fhand.flush() # nie musi być jeżeli za nią jest close()
+fhand.close()
+
