@@ -64,9 +64,24 @@ print(min(lista)) # minimalna wartość
 print(sum(lista)) # suma wartości, muszą być same liczby
 print(sum(lista) / len(lista)) # średnia arytmetyczna, muszą być same liczby
 
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
-# print('---------------------------------------------')
+# konwersja napisu na listę
+napis = 'asdfghjkl'
+lista = list(napis)
+print(napis)
+print(lista)
+
+# rozdzielenie napisu specjalnym znakiem
+napis = 'asd fgh 123 543'
+lista = napis.split(' ')
+print(napis)
+print(lista)
+
+# złączenie w napis
+napis = ''
+singn = ':' # separator
+napis = singn.join(lista)
+print(napis)
+
+
+
+
