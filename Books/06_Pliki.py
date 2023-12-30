@@ -55,14 +55,26 @@ for line in fhand : # domyślnie w czasie iteracji do line są wrzucane linie pl
 print('---------------------------------------------czytanie txt z filtrowaniem pominięcia')
 fhand.seek(0) # ustawienie pozycji w pliku na początek
 for line in fhand : # domyślnie w czasie iteracji do line są wrzucane linie pliku
-    if not line.startswith('From:') : # sprawdzenie 
+    if not ( line.startswith('From:') or line.startswith('Subject:') ) : # sprawdzenie 
         continue
-    print(line.rstrip()) # wyświetlenire lini z usunięciem końca linii
+    else :
+        print(line.rstrip()) # wyświetlenire lini z usunięciem końca linii
 
-# str(89)
 fhand.close()
 
-# print('---------------------------------------------')
+print('---------------------------------------------zabezpieczenie try - exept')
+fileName = 'Books/mbox.txt'
+sFile = os.path.abspath(fileName) 
+
+try :
+    fhand = open(fileName, 'r') 
+    print(fhand) 
+except :
+    print('Nie można otworzyć:', sFile)
+    exit(1)
+
+fhand.close()
+
 # print('---------------------------------------------')
 # print('---------------------------------------------')
 # print('---------------------------------------------')
