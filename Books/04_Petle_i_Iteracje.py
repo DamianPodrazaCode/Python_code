@@ -5,6 +5,7 @@ while zm1 < 10 : # wykonuj dopóki zm1 mniejsze od 10
     zm1 += 1
 print('end while')    
 
+# Instrukcja "break" służy do przerywana działania pętli.
 zm1 = 10
 while True : # pętla nieskończona
     if zm1 <= 0 :
@@ -13,6 +14,7 @@ while True : # pętla nieskończona
     zm1 -= 1
 print('end while')    
 
+# Instrukcja "continue" powoduje przeskok do następnego obrotu pętli.
 zm1 = 10
 while True :
     zm1 -= 1
@@ -43,6 +45,10 @@ for str in range(10) : # będzie liczyć od 0 do 9
 print('end for')
 
 for str in range(2,50) : # bedzie liczyć o 2 do 49
+    print(str)
+print('end for')
+
+for str in range(20,1,-1) : # bedzie liczyć o 20 do 2
     print(str)
 print('end for')
 

@@ -7,10 +7,10 @@ sFile = os.path.abspath(sys.argv[0]) # ścieżka do pliku w tego kodu, bo pierws
 print('pierwszy argument ', sFile)
 
 # sprawdzenie czy plik istnieje
-fileName = 'Books/mbox.txt'
+fileName = 'mbox.txt'
 if not os.path.exists(fileName) :
     print('file not exist')
-    exit(1)
+    sys.exit(0)
 else : 
     sFile = os.path.abspath(fileName) # 
     print(sFile)
@@ -22,10 +22,10 @@ print(fhand) # nazwa, tryb otwarcia pliku, kodowanie
 fhand.close()
 
 print('---------------------------------------------uchwyt zliczenie lini')
-fileName = 'Books/mbox-short.txt'
+fileName = 'mbox-short.txt'
 if not os.path.exists(fileName) :
     print('file not exist')
-    exit(1)
+    sys.exit(0)
 else : 
     sFile = os.path.abspath(fileName) # 
     print(sFile)
@@ -71,7 +71,7 @@ try :
     print(fhand) 
 except :
     print('Nie można otworzyć:', sFile)
-    exit(1)
+    sys.exit(0)
 
 fhand.close()
 
@@ -84,7 +84,7 @@ try :
     print(fhand) 
 except :
     print('Nie można zapisać:', sFile)
-    exit(1)
+    sys.exit(0)
 
 line = 'ęóąśłżźćń text text text\n' 
 fhand.write(line)

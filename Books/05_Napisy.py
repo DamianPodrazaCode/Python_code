@@ -70,3 +70,6 @@ print(napis)
 print('text %04d text % 4d' % (zm1, zm1)) # formatowanie, zero przed liczbą lub spacja przed liczbą
 print('text %f' % (zm2)) # formatowanie, zero przed liczbą lub spacja przed liczbą
 
+x = 1
+y = 2
+print('y={}, x={}'.format(y,x))
