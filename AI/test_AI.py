@@ -1,40 +1,102 @@
-import mlpack
-import pandas as pd
+# Import necessary libraries
 import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from keras import layers
+from art import text2art
 
-# Load the dataset from an online URL.  Replace with 'covertype.csv.gz' if you
-# want to use on the full dataset.
-df = pd.read_csv('http://www.mlpack.org/datasets/covertype-small.csv.gz')
+# Function to print the introduction of the program
+def print_intro():
+    # Generate ASCII art with the text "LotteryAi"
+    ascii_art = text2art("LotteryAi")
+    # Print the introduction and ASCII art
+    print("============================================================")
+    print("LotteryAi")
+    print("Created by: Corvus Codex")
+    print("Github: https://github.com/CorvusCodex/")
+    print("Licence : MIT License")
+    print("Support my work:")
+    print("BTC: bc1q7wth254atug2p4v9j3krk9kauc0ehys2u8tgg3")
+    print("ETH & BNB: 0x68B6D33Ad1A3e0aFaDA60d6ADf8594601BE492F0")
+    print("Buy me a coffee: https://www.buymeacoffee.com/CorvusCodex")
+    print("============================================================")
+    print(ascii_art)
+    print("Lottery prediction artificial intelligence")
 
-# Split the labels.
-labels = df['label']
-dataset = df.drop('label')
+# Function to load data from a file and preprocess it
+def load_data():
+    # Load data from file, ignoring white spaces and accepting unlimited length numbers
+    data = np.genfromtxt('data.txt', delimiter=',', dtype=int)
+    # Replace all -1 values with 0
+    data[data == -1] = 0
+    # Split data into training and validation sets
+    train_data = data[:int(0.8*len(data))]
+    val_data = data[int(0.8*len(data)):]
+    # Get the maximum value in the data
+    max_value = np.max(data)
+    return train_data, val_data, max_value
 
-# Split the dataset using mlpack.  The output comes back as a dictionary,
-# which we'll unpack for clarity of code.
-output = mlpack.preprocess_split(input_=dataset,
-                                 input_labels=labels,
-                                 test_ratio=0.3)
-training_set = output['training']
-training_labels = output['training_labels']
-test_set = output['test']
-test_labels = output['test_labels']
+# Function to create the model
+def create_model(num_features, max_value):
+    # Create a sequential model
+    model = keras.Sequential()
+    # Add an Embedding layer, LSTM layer, and Dense layer to the model
+    model.add(layers.Embedding(input_dim=max_value+1, output_dim=64))
+    model.add(layers.LSTM(256))
+    model.add(layers.Dense(num_features, activation='softmax'))
+    # Compile the model with categorical crossentropy loss, adam optimizer, and accuracy metric
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    return model
 
-# Train a random forest.
-output = mlpack.random_forest(training=training_set,
-                              labels=training_labels,
-                              print_training_accuracy=True,
-                              num_trees=10,
-                              minimum_leaf_size=3)
-random_forest = output['output_model']
+# Function to train the model
+def train_model(model, train_data, val_data):
+    # Fit the model on the training data and validate on the validation data for 100 epochs
+    history = model.fit(train_data, train_data, validation_data=(val_data, val_data), epochs=100)
 
-# Predict the labels of the test points.
-output = mlpack.random_forest(input_model=random_forest,
-                              test=test_set)
+# Function to predict numbers using the trained model
+def predict_numbers(model, val_data, num_features):
+    # Predict on the validation data using the model
+    predictions = model.predict(val_data)
+    # Get the indices of the top 'num_features' predictions for each sample in validation data
+    indices = np.argsort(predictions, axis=1)[:, -num_features:]
+    # Get the predicted numbers using these indices from validation data
+    predicted_numbers = np.take_along_axis(val_data, indices, axis=1)
+    return predicted_numbers
 
-# Now print the accuracy.  The 'probabilities' output could also be used
-# to generate an ROC curve.
-correct = np.sum(
-    output['predictions'] == np.reshape(test_labels, (test_labels.shape[0],)))
-print(str(correct) + ' correct out of ' + str(len(test_labels)) + ' (' +
-    str(100 * float(correct) / float(len(test_labels))) + '%).')
+# Function to print the predicted numbers
+def print_predicted_numbers(predicted_numbers):
+   # Print a separator line and "Predicted Numbers:"
+   print("============================================================")
+   print("Predicted Numbers:")
+   # Print only the first row of predicted numbers
+   print(', '.join(map(str, predicted_numbers[0])))
+   print("============================================================")
+   print("Buy me a coffee: https://www.buymeacoffee.com/CorvusCodex")
+   print("============================================================")
+
+# Main function to run everything   
+def main():
+   # Print introduction of program 
+   print_intro()
+   
+   # Load and preprocess data 
+   train_data, val_data, max_value = load_data()
+   
+   # Get number of features from training data 
+   num_features = train_data.shape[1]
+   
+   # Create and compile model 
+   model = create_model(num_features, max_value)
+   
+   # Train model 
+   train_model(model, train_data, val_data)
+   
+   # Predict numbers using trained model 
+   predicted_numbers = predict_numbers(model, val_data, num_features)
+   
+   # Print predicted numbers 
+   print_predicted_numbers(predicted_numbers)
+
+# Run main function if this script is run directly (not imported as a module)
+if __name__ == "__main__":
+   main()
