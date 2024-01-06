@@ -5,30 +5,16 @@ import tensorflow as tf
 from tensorflow import keras
 from keras import layers
 
-
-# Function to print the introduction of the program
 def print_intro():
-    # Generate ASCII art with the text "LotteryAi"
-    ascii_art = text2art("LotteryAi")
-    # Print the introduction and ASCII art
-    print("============================================================")
-    print("LotteryAi")
-    print("Created by: Corvus Codex")
-    print("Github: https://github.com/CorvusCodex/")
-    print("Licence : MIT License")
-    print("Support my work:")
-    print("BTC: bc1q7wth254atug2p4v9j3krk9kauc0ehys2u8tgg3")
-    print("ETH & BNB: 0x68B6D33Ad1A3e0aFaDA60d6ADf8594601BE492F0")
-    print("Buy me a coffee: https://www.buymeacoffee.com/CorvusCodex")
+    ascii_art = text2art("Lottery Ai")
     print("============================================================")
     print(ascii_art)
-    print("Lottery prediction artificial intelligence")
+    print("============================================================")
 
 # Function to load data from a file and preprocess it
 def load_data():
     # Load data from file, ignoring white spaces and accepting unlimited length numbers
     data = np.genfromtxt('data.txt', delimiter=',', dtype=int)
-    # print(data)
     # Replace all -1 values with 0
     data[data == -1] = 0
     # Split data into training and validation sets
@@ -36,6 +22,9 @@ def load_data():
     val_data = data[int(0.8*len(data)):]
     # Get the maximum value in the data
     max_value = np.max(data)
+    # print(train_data)
+    # print(val_data)
+    # print(max_value)
     return train_data, val_data, max_value
 
 # Function to create the model
@@ -72,8 +61,6 @@ def print_predicted_numbers(predicted_numbers):
    print("Predicted Numbers:")
    # Print only the first row of predicted numbers
    print(', '.join(map(str, predicted_numbers[0])))
-   print("============================================================")
-   print("Buy me a coffee: https://www.buymeacoffee.com/CorvusCodex")
    print("============================================================")
 
 # Main function to run everything   
