@@ -107,3 +107,34 @@ print(lista.index('asd')) # pobranie indexu elementu, jeżeli go nie ma to wywal
 
 #Listy składane
 
+liczby = []
+for x in range(1, 21) : 
+    liczby.append(x)
+print(liczby)
+
+parzyste = []
+for i in liczby:
+    if(i % 2 == 0):
+        parzyste.append(i)
+print(parzyste)
+
+parzyste = [i for i in liczby if i % 2 == 0] 
+# wynik z 'i' bedzie dodany do listy 'parzyste', dla karzdej kolejnej 'liczby' która spełna warunek (i modulo 2) = 0 czyli parzysta
+print(parzyste)
+
+parzyste=[i * 10 for i in liczby]
+# przed przypisaniem każdej i do parzyste pomnóż i przez 10
+print(parzyste)
+
+# totalny skrót
+print( [i for i in range(1, 21) if i % 2 == 0] )
+
+# map z lambdą
+print(list(map(lambda x : x * 2, liczby)))
+# to samo, map z funkcją
+def fun(x) :
+    return x * 2
+print(list(map(fun, liczby))) # do funkcji przekazywany jest każdy kolejnmy elemant jako parametr
+# map(funkcja, iterator) 
+
+
