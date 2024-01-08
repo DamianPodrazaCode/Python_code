@@ -18,19 +18,19 @@ print(wektor, ' - ', wektor.ndim, ' - ', wektor.shape)
 # shape - kształt wymiarów
 
 # matrix
-matryca = torch.tensor([[1,2],
+macierz = torch.tensor([[1,2],
                         [3,4]])
-print(matryca, ' - ', matryca.ndim, ' - ', matryca.shape) 
+print(macierz, ' - ', macierz.ndim, ' - ', macierz.shape) 
 # >>> tensor([[1, 2],
 #             [3, 4]])  -  2  -  torch.Size([2, 2])
 
 # dostęp do danych
-print(matryca[0])
+print(macierz[0])
 # >>> tensor([1, 2])
-print(matryca[1])
+print(macierz[1])
 # >>> tensor([3, 4])
 
-# tensor
+# tensor wielowymarowy
 dataTensor = torch.tensor([[[1,2,3],
                             [4,5,6],
                             [7,8,9]]])
@@ -59,7 +59,7 @@ print(randTensorFloat)
 randRTensorIMG = torch.rand(size = (224, 224, 3)) 
 print(randRTensorIMG, ' - ', randRTensorIMG.ndim, ' - ', randRTensorIMG.shape) 
 
-# tensor wypełniony zerami albo jedynkami
+# tensor wypełniony zerami 
 zeroTensor = torch.zeros(size=(5, 5))
 print(zeroTensor)
 '''
@@ -70,6 +70,7 @@ tensor([[0., 0., 0., 0., 0.],
         [0., 0., 0., 0., 0.]])
 '''
 
+# tensor wypełniony jedynkami
 oneTensor = torch.ones(size=(5, 5))
 print(oneTensor)
 '''
@@ -80,3 +81,35 @@ tensor([[1., 1., 1., 1., 1.],
         [1., 1., 1., 1., 1.]])
 '''
 print(oneTensor.dtype) # odczytanie typu danych w tensor
+
+# range - tensor w zakresie
+print(torch.arange(0, 10)) # int 
+# >>> tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+data = torch.arange(0., 10.) # float
+print(data)
+# >>> tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+print(torch.arange(0, 10, 2)) # int ze skokiem co 2
+# >>> tensor([0, 2, 4, 6, 8])
+
+# tensor o takim samym kształcie jak wejściowy, wypełnony zerami
+dataCopy = torch.zeros_like(input=data)
+print(dataCopy)
+# >>> tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+# typy danych w tensor
+float32tensor = torch.tensor([3., 4., 5.], dtype=None) # mimo ustawienia typu na none, domyślnym typem danych tensora jest float32
+print(float32tensor, float32tensor.dtype) 
+# >>> tensor([3., 4., 5.]) torch.float32
+float16tensor = torch.tensor([1., 2., 3.], dtype=torch.float16) 
+print(float16tensor, float16tensor.dtype) 
+# >>> tensor([1., 2., 3.], dtype=torch.float16) torch.float16
+
+dataTensor = torch.tensor([3., 4., 5.], 
+                          dtype=None,
+                          device="cuda",
+                          requires_grad=False)
+print(dataTensor, dataTensor.dtype, dataTensor.shape, dataTensor.device, dataTensor.requires_grad) 
+# >>> tensor([3., 4., 5.], device='cuda:0') torch.float32 torch.Size([3]) cuda:0 False
+
+# operacje na tensor (dodawanie, odejmowanie, mnożenie, dzielenie, mnożenie macierzy)
+
