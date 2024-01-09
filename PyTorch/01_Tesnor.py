@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import time
 
-# tensor - czyli dane IO
+# tensor - czyli dane IO, w postaci skalara, wektora i tablic wielowymiarowych
 
 # scalar
 scalar = torch.tensor(7)
@@ -32,6 +32,15 @@ print(macierz[1])
 # >>> tensor([3, 4])
 
 # tensor wielowymarowy
+#dwu wymiarowy
+dataTensor = torch.tensor([[1,2,3], 
+                           [4,5,6],
+                           [7,8,9]])
+print(dataTensor, ' - ', dataTensor.ndim, ' - ', dataTensor.shape) 
+# tensor([[1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]])  -  2  -  torch.Size([3, 3])
+# trój wymiarowy, ale nie pełny
 dataTensor = torch.tensor([[[1,2,3],
                             [4,5,6],
                             [7,8,9]]])
@@ -171,3 +180,32 @@ print(mB)
 print(mB.T) # przewrócenie macierzy (Transpose)
 # tensor([[3, 2, 5],
 #         [3, 0, 4]])
+
+print('.......................tensor aggregation -> min, max, mean, sum')
+x = torch.randint(low=0,high=100,size=([10]))
+print(x)
+# tensor([20, 79, 81, 67, 98, 66, 14, 44,  8, 84])
+print(torch.min(x), x.min()) # dwa wykonania tej samej funkcji
+# tensor(8) tensor(8)
+print(torch.max(x), x.max())
+# tensor(98) tensor(98)
+print(torch.mean(x.type(torch.float32))) # zapis 'x.type(torch.float32)' konwertuje x do danych float32, bo tego wymaga funkcja mean
+print(x.type(torch.float32).mean()) # to wyżej
+#tensor(56.1000)
+print(torch.sum(x), x.sum())
+#tensor(561) tensor(561)
+
+# znalezienie pierwszej pozycji 
+x = torch.randint(low=0,high=100,size=([10]))
+print(x)
+# tensor([85, 11, 66, 19, 23, 73, 32, 97, 13, 68])
+print(x.argmin())  # pozycja min
+# tensor(1)
+print(x.argmax())  # max
+# tensor(7)
+
+print('.......................tensor zmiany kształtu')
+x = torch.arange(1., 10.)
+print(x, x.shape)
+# >>> tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
+
