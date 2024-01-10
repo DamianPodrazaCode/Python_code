@@ -314,3 +314,27 @@ print(x[:, 0])
 # tensor([[1, 2, 3]])
 print(x[:, 1, 1])
 # tensor([5])
+print(x[0, 0, :])
+# tensor([1, 2, 3])
+
+# NumPy to tensor
+array = np.arange(1., 8.)
+tensor = torch.from_numpy(array) 
+# tensor = torch.from_numpy(array).type(torch.float32) # konwersja do float32
+print(array)
+# [1. 2. 3. 4. 5. 6. 7.]
+print(tensor)
+# tensor([1., 2., 3., 4., 5., 6., 7.], dtype=torch.float64)
+
+array = array + 1 # jak dodamy, to zmiana w array nie wpłynie na tensor
+array[0] = 12
+print(array)
+print(tensor)
+
+#tensor to NumPy
+tensor = torch.ones(7)
+numpy_from_tensor = tensor.numpy()
+print(tensor, tensor.dtype)
+# tensor([1., 1., 1., 1., 1., 1., 1.]) torch.float32
+print(numpy_from_tensor, numpy_from_tensor.dtype)
+# [1. 1. 1. 1. 1. 1. 1.] float32
