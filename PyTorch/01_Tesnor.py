@@ -9,12 +9,12 @@ import time
 # scalar
 scalar = torch.tensor(7)
 print(scalar)  
-# >>> tensor(7)
+# tensor(7)
 
 # vector
 wektor = torch.tensor([1, 3])
 print(wektor, ' - ', wektor.ndim, ' - ', wektor.shape)  
-# >>> tensor([1, 3])  -  1  -  torch.Size([2])
+# tensor([1, 3])  -  1  -  torch.Size([2])
 # ndim - ilość wymiarów
 # shape - kształt wymiarów
 
@@ -22,14 +22,14 @@ print(wektor, ' - ', wektor.ndim, ' - ', wektor.shape)
 macierz = torch.tensor([[1,2],
                         [3,4]])
 print(macierz, ' - ', macierz.ndim, ' - ', macierz.shape) 
-# >>> tensor([[1, 2],
-#             [3, 4]])  -  2  -  torch.Size([2, 2])
+# tensor([[1, 2],
+#         [3, 4]])  -  2  -  torch.Size([2, 2])
 
 # dostęp do danych
 print(macierz[0])
-# >>> tensor([1, 2])
+# tensor([1, 2])
 print(macierz[1])
-# >>> tensor([3, 4])
+# tensor([3, 4])
 
 # tensor wielowymarowy
 #dwu wymiarowy
@@ -45,26 +45,26 @@ dataTensor = torch.tensor([[[1,2,3],
                             [4,5,6],
                             [7,8,9]]])
 print(dataTensor, ' - ', dataTensor.ndim, ' - ', dataTensor.shape) 
-# >>> tensor([[[1, 2, 3],
-#              [4, 5, 6],
-#              [7, 8, 9]]])  -  3  -  torch.Size([1, 3, 3])
+# tensor([[[1, 2, 3],
+#          [4, 5, 6],
+#          [7, 8, 9]]])  -  3  -  torch.Size([1, 3, 3])
 
 # dostęp
 print(dataTensor[0])
-# >>> tensor([[1, 2, 3],
-#             [4, 5, 6],
-#             [7, 8, 9]])
+# tensor([[1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]])
 print(dataTensor[0][0])
-# >>> tensor([1, 2, 3])
+# tensor([1, 2, 3])
 print(dataTensor[0][0][0])
-# >>> tensor(1)
+# tensor(1)
 
 # random tensors
 randTensorFloat = torch.rand(3, 4) # tu podajemy wymiary tensora
 print(randTensorFloat)
-# >>> tensor([[0.9781, 0.4199, 0.5948, 0.1169],
-#             [0.1806, 0.2670, 0.8709, 0.2166],
-#             [0.4721, 0.1201, 0.9758, 0.1681]])
+# tensor([[0.9781, 0.4199, 0.5948, 0.1169],
+#         [0.1806, 0.2670, 0.8709, 0.2166],
+#         [0.4721, 0.1201, 0.9758, 0.1681]])
 
 randRTensorIMG = torch.rand(size = (224, 224, 3)) 
 print(randRTensorIMG, ' - ', randRTensorIMG.ndim, ' - ', randRTensorIMG.shape) 
@@ -94,53 +94,53 @@ print(oneTensor.dtype) # odczytanie typu danych w tensor
 
 print('.......................range - tensor w zakresie')
 print(torch.arange(0, 10)) # int 
-# >>> tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+# tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 data = torch.arange(0., 10.) # float
 print(data)
-# >>> tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+# tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
 print(torch.arange(0, 10, 2)) # int ze skokiem co 2
-# >>> tensor([0, 2, 4, 6, 8])
+# tensor([0, 2, 4, 6, 8])
 
 print('.......................tensor o takim samym kształcie jak wejściowy, wypełnony zerami')
 dataCopy = torch.zeros_like(input=data)
 print(dataCopy)
-# >>> tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+# tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
 
 print('.......................typy danych w tensor')
 float32tensor = torch.tensor([3., 4., 5.], dtype=None) # mimo ustawienia typu na none, domyślnym typem danych tensora jest float32
 print(float32tensor, float32tensor.dtype) 
-# >>> tensor([3., 4., 5.]) torch.float32
+# tensor([3., 4., 5.]) torch.float32
 float16tensor = torch.tensor([1., 2., 3.], dtype=torch.float16) 
 print(float16tensor, float16tensor.dtype) 
-# >>> tensor([1., 2., 3.], dtype=torch.float16) torch.float16
+# tensor([1., 2., 3.], dtype=torch.float16) torch.float16
 
 dataTensor = torch.tensor([3., 4., 5.], 
                           dtype=None,
                           device="cuda",
                           requires_grad=False)
 print(dataTensor, dataTensor.dtype, dataTensor.shape, dataTensor.device, dataTensor.requires_grad) 
-# >>> tensor([3., 4., 5.], device='cuda:0') torch.float32 torch.Size([3]) cuda:0 False
+# tensor([3., 4., 5.], device='cuda:0') torch.float32 torch.Size([3]) cuda:0 False
 
 print('.......................operacje na tensor (dodawanie, odejmowanie, mnożenie, dzielenie, mnożenie macierzy)')
 tensor = torch.tensor([1, 2, 3])
 print(tensor + 10)
-# >>> tensor([11, 12, 13])
+# tensor([11, 12, 13])
 print(tensor - 10)
-# >>> tensor([-9, -8, -7])
+# tensor([-9, -8, -7])
 print(tensor * 10)
-# >>> tensor([10, 20, 30])
+# tensor([10, 20, 30])
 print(tensor / 10)
-# >>> tensor([0.1000, 0.2000, 0.3000])
+# tensor([0.1000, 0.2000, 0.3000])
 print(tensor * tensor)
-# >>> tensor([1, 4, 9])
+# tensor([1, 4, 9])
 
 print('.......................operacje wbudowane w PyTorch')
 print(torch.mul(tensor, 10))
-# >>> tensor([10, 20, 30])
+# tensor([10, 20, 30])
 print(torch.add(tensor, 10))
-# >>> tensor([11, 12, 13])
+# tensor([11, 12, 13])
 print(torch.sub(tensor, 10))
-# >>> tensor([-9, -8, -7])
+# tensor([-9, -8, -7])
 
 print('.......................mnożenie macierzy')
 mA = torch.tensor([[1.,2.,3.],
@@ -152,8 +152,8 @@ startT = time.time_ns()
 mOut = torch.matmul(mA, mB) # bardzo szybka metoda !!!!!!!!!!!!!!
 print(time.time_ns() - startT, '[ns]')
 print(mOut)
-# >>> tensor([[ 58.,  64.],
-#             [139., 154.]], device='cuda:0')
+# tensor([[ 58.,  64.],
+#         [139., 154.]], device='cuda:0')
 # print(mA * mB) # będzie błąd bo nie widzi tego jako macierze
 
 print('.......................zasady mnożenie macierzy')
@@ -207,5 +207,110 @@ print(x.argmax())  # max
 print('.......................tensor zmiany kształtu')
 x = torch.arange(1., 10.)
 print(x, x.shape)
-# >>> tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
+# tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
+'''
+Zwraca tensor z tymi samymi danymi i liczbą elementów co dane wejściowe, ale o określonym kształcie. 
+Jeśli to możliwe, zwrócony tensor będzie widokiem danych wejściowych. 
+W przeciwnym razie będzie to kopia. Ciągłe dane wejściowe i dane wejściowe o zgodnych krokach 
+można przekształcać bez kopiowania, ale nie należy polegać na zachowaniu kopiowania i przeglądania.
+'''
+y = x.reshape(1, 9) # z jednowymiarowej tablicy robi dwuwymiarową
+print(y, y.shape) 
+# tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.]]) torch.Size([1, 9])
 
+y = x.reshape(3, 3)
+print(y, y.shape)
+# tensor([[1., 2., 3.],
+#         [4., 5., 6.],
+#         [7., 8., 9.]]) torch.Size([3, 3])
+
+'''
+Zwraca nowy tensor z tymi samymi danymi co własny tensor, ale o innym kształcie.
+'''
+y = x.view(-1, 3) # he size -1 is inferred from other dimensions, czyli jest (3, 3)
+print(y, y.shape) 
+print(x, x.shape) 
+# tensor([[1., 2., 3.],
+#         [4., 5., 6.],
+#         [7., 8., 9.]]) torch.Size([3, 3])
+# tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
+
+# łączenie wielu tensorów, jażeli dim=0 to układa w wiersze, a jak dim-1 to w kolumny
+z = torch.stack([x, x, x, x], dim=1)
+print(z)
+'''
+dim=0
+tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.],
+        [1., 2., 3., 4., 5., 6., 7., 8., 9.],
+        [1., 2., 3., 4., 5., 6., 7., 8., 9.],
+        [1., 2., 3., 4., 5., 6., 7., 8., 9.]])
+'''
+'''
+dim=1
+tensor([[1., 1., 1., 1.],
+        [2., 2., 2., 2.],
+        [3., 3., 3., 3.],
+        [4., 4., 4., 4.],
+        [5., 5., 5., 5.],
+        [6., 6., 6., 6.],
+        [7., 7., 7., 7.],
+        [8., 8., 8., 8.],
+        [9., 9., 9., 9.]])
+'''
+
+# torch.squezze() - ściskanie matrixów
+x = x.reshape(1, 9)
+print(x, x.shape)
+# tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.]]) torch.Size([1, 9])
+
+x = x.squeeze() # spowoduje że przestanie być tablicą dwu wymiarową taj jak wyżej, usuwa pojedyncze wymiary
+print(x, x.shape)
+# tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
+
+# dodanie extra wymiaru
+x = x.unsqueeze(dim=0) # dim=0 wymiar na początku, dim=1 wymiar na końcu
+print(x, x.shape)
+#dla dim=0
+#tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.]]) torch.Size([1, 9])
+#dla dim=1
+# tensor([[1.],
+#         [2.],
+#         [3.],
+#         [4.],
+#         [5.],
+#         [6.],
+#         [7.],
+#         [8.],
+#         [9.]]) torch.Size([9, 1])
+
+# mieszanie wymiarami
+img = torch.rand(size=(100,80,3))
+print(img, img.shape)
+imgp = img.permute(2,0,1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli (3,100,80)
+print(imgp, imgp.shape)
+
+# dostęp do danych przez indexing
+x = torch.arange(1, 10).reshape(1, 3, 3)
+print(x, x.shape)
+# tensor([[[1, 2, 3],
+#          [4, 5, 6],
+#          [7, 8, 9]]]) torch.Size([1, 3, 3])
+
+print(x[0]) # pierwszy wymiar
+# tensor([[1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]])
+
+print(x[0][0]) # można też tak print(x[0, 0])
+# tensor([1, 2, 3])
+
+print(x[0][0][0])
+# tensor(1)
+
+# Można urzyć ":" żeby mieć dostęp do całego wymiaru
+print(x[:, :, 0])
+# tensor([[1, 4, 7]])
+print(x[:, 0])
+# tensor([[1, 2, 3]])
+print(x[:, 1, 1])
+# tensor([5])
