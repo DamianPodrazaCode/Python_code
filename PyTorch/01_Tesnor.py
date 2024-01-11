@@ -234,15 +234,15 @@ print(Tensor, Tensor.shape)
 #         [7., 8., 9.]]) torch.Size([3, 3])
 # tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
 
-print('....................... łączenie wielu tensorów, jażeli dim=0 to układa w wiersze, a jak dim=1 to w kolumny')
-z = torch.stack([Tensor, Tensor, Tensor, Tensor], dim=1)
+print('....................... łączenie wielu tensorów, jażeli dim = 0 to układa w wiersze, a jak dim = 1 to w kolumny')
+z = torch.stack([Tensor, Tensor, Tensor, Tensor], dim = 1)
 print(z)
-# dim=0
+# dim = 0
 # tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.],
 #         [1., 2., 3., 4., 5., 6., 7., 8., 9.],
 #         [1., 2., 3., 4., 5., 6., 7., 8., 9.],
 #         [1., 2., 3., 4., 5., 6., 7., 8., 9.]])
-# dim=1
+# dim = 1
 # tensor([[1., 1., 1., 1.],
 #         [2., 2., 2., 2.],
 #         [3., 3., 3., 3.],
@@ -262,12 +262,12 @@ Tensor = Tensor.squeeze() # spowoduje że przestanie być tablicą dwu wymiarow�
 print(Tensor, Tensor.shape)
 # tensor([1., 2., 3., 4., 5., 6., 7., 8., 9.]) torch.Size([9])
 
-# dodanie extra wymiaru
-x = x.unsqueeze(dim=0) # dim=0 wymiar na początku, dim=1 wymiar na końcu
-print(x, x.shape)
-#dla dim=0
+print('.......................  dodanie extra wymiaru')
+Tensor = Tensor.unsqueeze(dim = 1) # dim = 0 wymiar na początku, dim = 1 wymiar na końcu
+print(Tensor, Tensor.shape)
+#dla dim = 0
 #tensor([[1., 2., 3., 4., 5., 6., 7., 8., 9.]]) torch.Size([1, 9])
-#dla dim=1
+#dla dim = 1
 # tensor([[1.],
 #         [2.],
 #         [3.],
@@ -278,34 +278,32 @@ print(x, x.shape)
 #         [8.],
 #         [9.]]) torch.Size([9, 1])
 
-# mieszanie wymiarami
-img = torch.rand(size=(100,80,3))
-print(img, img.shape)
-imgp = img.permute(2,0,1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli (3,100,80)
-print(imgp, imgp.shape)
+print('.......................  mieszanie wymiarami')
+Tensor = torch.rand(size=(3, 4, 2))
+print(Tensor, Tensor.shape)
+Tensor_tmp = Tensor.permute(2, 0, 1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli shape to(2, 3, 4)
+print(Tensor_tmp, Tensor_tmp.shape)
 
-'''
 print('\n-------------------------------------------------------------------------------')
-# NumPy to tensor
-array = np.arange(1., 8.)
-tensor = torch.from_numpy(array) 
+print('....................... NumPy do tensor')
+array = np.arange(1., 8.) # dekleracja w NumPy, typ danych w float64
+Tensor = torch.from_numpy(array) # Tensor otrzymuje float64
 # tensor = torch.from_numpy(array).type(torch.float32) # konwersja do float32
 print(array)
 # [1. 2. 3. 4. 5. 6. 7.]
-print(tensor)
+print(Tensor)
 # tensor([1., 2., 3., 4., 5., 6., 7.], dtype=torch.float64)
 
-array = array + 1 # jak dodamy, to zmiana w array nie wpłynie na tensor
-array[0] = 12
+array = array + 1 # jak dodamy, to zmiana w array nie wpłynie na tensor,
+array[0] = 12 # a to wpłynie na obydwie tablice jak niebędzie operacji wyżej ????????????
 print(array)
-print(tensor)
+print(Tensor)
 
-#tensor to NumPy
-tensor = torch.ones(7)
-numpy_from_tensor = tensor.numpy()
-print(tensor, tensor.dtype)
+print('....................... tensor do NumPy')
+Tensor = torch.ones(7)
+numpy_from_tensor = Tensor.numpy()
+print(Tensor, Tensor.dtype)
 # tensor([1., 1., 1., 1., 1., 1., 1.]) torch.float32
 print(numpy_from_tensor, numpy_from_tensor.dtype)
 # [1. 1. 1. 1. 1. 1. 1.] float32
 
-'''
