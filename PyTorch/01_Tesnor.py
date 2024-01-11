@@ -281,7 +281,7 @@ print(Tensor, Tensor.shape)
 print('.......................  mieszanie wymiarami')
 Tensor = torch.rand(size=(3, 4, 2))
 print(Tensor, Tensor.shape)
-Tensor_tmp = Tensor.permute(2, 0, 1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli shape to(2, 3, 4)
+Tensor_tmp = Tensor.permute(2, 0, 1) # przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli shape to(2, 3, 4)
 print(Tensor_tmp, Tensor_tmp.shape)
 
 print('\n-------------------------------------------------------------------------------')
@@ -294,16 +294,20 @@ print(array)
 print(Tensor)
 # tensor([1., 2., 3., 4., 5., 6., 7.], dtype=torch.float64)
 
-array = array + 1 # jak dodamy, to zmiana w array nie wpłynie na tensor,
-array[0] = 12 # a to wpłynie na obydwie tablice jak niebędzie operacji wyżej ????????????
+array = array + 0 # jak dodamy, to zmiana w array nie wpłynie na tensor,
+array[0] = 12 # a to wpłynie na obydwie tablice jak nie będzie operacji wyżej ????????????
 print(array)
 print(Tensor)
 
 print('....................... tensor do NumPy')
 Tensor = torch.ones(7)
-numpy_from_tensor = Tensor.numpy()
+array = Tensor.numpy()
 print(Tensor, Tensor.dtype)
 # tensor([1., 1., 1., 1., 1., 1., 1.]) torch.float32
-print(numpy_from_tensor, numpy_from_tensor.dtype)
+print(array, array.dtype)
 # [1. 1. 1. 1. 1. 1. 1.] float32
 
+array = array + 0 # jak dodamy, to zmiana w array nie wpłynie na tensor,
+array[0] = 12 # a to wpłynie na obydwie tablice jak nie będzie operacji wyżej ????????????
+print(array)
+print(Tensor)
