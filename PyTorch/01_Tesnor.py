@@ -85,7 +85,7 @@ print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Te
 #         [1., 1., 1., 1., 1.],
 #         [1., 1., 1., 1., 1.]]), ilość wymiarów:  2 , kształt wymiarów:  torch.Size([5, 5]) typ danych torch.float32
 
-print('.......................range - tensor w zakresie')
+print('.......................arange - tensor w zakresie')
 Tensor = torch.arange(0, 10) # int 
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)
 # tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) , ilość wymiarów:  1 , kształt wymiarów:  torch.Size([10]) typ danych torch.int64
@@ -104,58 +104,57 @@ print(Tensor_tmp, ', ilość wymiarów: ', Tensor_tmp.ndim, ', kształt wymiaró
 # tensor([0, 0, 0, 0, 0]) , ilość wymiarów:  1 , kształt wymiarów:  torch.Size([5]) typ danych torch.int64
 
 print('.......................typy danych w tensor')
-Tensor = torch.tensor([3., 4., 5.], dtype=None) # mimo ustawienia typu na none, domyślnym typem danych tensora jest float32
+Tensor = torch.tensor([3., 4., 5.], dtype = None) # mimo ustawienia typu na none, domyślnym typem danych tensora jest float32
 print(Tensor, Tensor.dtype) 
 # tensor([3., 4., 5.]) torch.float32
 Tensor = torch.tensor([1., 2., 3.], dtype=torch.float16) 
 print(Tensor, Tensor.dtype) 
 # tensor([1., 2., 3.], dtype=torch.float16) torch.float16
+
 print('.......................tensor dane w CUDA')
-dataTensor = torch.tensor([3., 4., 5.], 
+Tensor = torch.tensor([3., 4., 5.], 
                           dtype=None,
                           device="cuda",
                           requires_grad=False)
-print(dataTensor, dataTensor.dtype, dataTensor.shape, dataTensor.device, dataTensor.requires_grad) 
+print(Tensor, Tensor.dtype, Tensor.shape, Tensor.device, Tensor.requires_grad) 
 # tensor([3., 4., 5.], device='cuda:0') torch.float32 torch.Size([3]) cuda:0 False
 
-'''
+print('\n-------------------------------------------------------------------------------')
 print('.......................operacje na tensor (dodawanie, odejmowanie, mnożenie, dzielenie, mnożenie macierzy)')
-tensor = torch.tensor([1, 2, 3])
-print(tensor + 10)
+Tensor = torch.tensor([1, 2, 3])
+print(Tensor + 10)
 # tensor([11, 12, 13])
-print(tensor - 10)
+print(Tensor - 10)
 # tensor([-9, -8, -7])
-print(tensor * 10)
+print(Tensor * 10)
 # tensor([10, 20, 30])
-print(tensor / 10)
+print(Tensor / 10)
 # tensor([0.1000, 0.2000, 0.3000])
-print(tensor * tensor)
+print(Tensor * Tensor)
 # tensor([1, 4, 9])
 
 print('.......................operacje wbudowane w PyTorch')
-print(torch.mul(tensor, 10))
+print(torch.mul(Tensor, 10))
 # tensor([10, 20, 30])
-print(torch.add(tensor, 10))
+print(torch.add(Tensor, 10))
 # tensor([11, 12, 13])
-print(torch.sub(tensor, 10))
+print(torch.sub(Tensor, 10))
 # tensor([-9, -8, -7])
 
 print('.......................mnożenie macierzy')
 mA = torch.tensor([[1.,2.,3.],
-                   [4.,5.,6.]], device='cpu')
+                   [4.,5.,6.]])
 mB = torch.tensor([[7.,8.],
                    [9.,10.],
-                   [11.,12.]], device='cpu')
-startT = time.time_ns()
-mOut = torch.matmul(mA, mB) # bardzo szybka metoda !!!!!!!!!!!!!!
-print(time.time_ns() - startT, '[ns]')
-print(mOut)
+                   [11.,12.]])
+print(torch.matmul(mA, mB))
+# jw. torch.mm(mA, mB)
 # tensor([[ 58.,  64.],
-#         [139., 154.]], device='cuda:0')
+#         [139., 154.]])
 # print(mA * mB) # będzie błąd bo nie widzi tego jako macierze
 
 print('.......................zasady mnożenie macierzy')
-# Dwie główne asady mnożenia macierzy
+# Dwie główne zasady mnożenia macierzy
 # 1. Zewnęterzne wymiary muszą pasować
 # (3, 2) @ (3, 2) nie będzie pasować
 # (3, 2) @ (2, 3) będzie pasować
@@ -169,6 +168,8 @@ print(torch.matmul(mA, mB))
 # (3, 2) @ (2, 3) będzie (3, 3)
 # (2, 3) @ (3, 2) będzie (2, 2)
 
+'''
+print('\n-------------------------------------------------------------------------------')
 print('.......................manipulacje kształtu macierzy')
 mB = torch.randint(0,10,(3,2))
 print(mB)
@@ -280,7 +281,7 @@ imgp = img.permute(2,0,1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(1
 print(imgp, imgp.shape)
 
 
-
+print('\n-------------------------------------------------------------------------------')
 # NumPy to tensor
 array = np.arange(1., 8.)
 tensor = torch.from_numpy(array) 
