@@ -321,3 +321,39 @@ print(Tensor)
 # tensor([[0.8823, 0.9150, 0.3829, 0.9593],
 #         [0.3904, 0.6009, 0.2566, 0.7936],
 #         [0.9408, 0.1332, 0.9346, 0.5936]])
+
+print('\n-------------------------------------------------------------------------------')
+print('....................... tensory i objekty na GPU')
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print('używam', device)
+if device == 'cuda' :
+    countDev = torch.cuda.device_count()
+    print('urządzeń cuda', countDev)
+    # urządzeń cuda 1
+    print(torch.cuda.get_device_name(0))
+    # NVIDIA GeForce GTX 1650
+
+Tensor = torch.tensor([1, 2, 3]) # domyślnie device = 'cpu'
+print(Tensor, Tensor.device)
+# tensor([1, 2, 3]) cpu
+
+# przesunięcie tensora do GPU
+TensorGPU = Tensor.to(device)
+print(TensorGPU)
+# tensor([1, 2, 3], device='cuda:0')
+
+# przesunięcie tensora do CPU
+TensorCPU = TensorGPU.cpu()
+print(TensorCPU, TensorCPU.device)
+# tensor([1, 2, 3]) cpu
+
+# przesunięcie tensora do CPU do NymPy
+TensorCPU = TensorGPU.cpu().numpy()
+print(TensorCPU)
+# [1, 2, 3]
+
+# stworzenie tensora bezpośrednio na GPU
+TensorGPU =  torch.tensor([1, 2, 3], device='cuda') 
+print(TensorGPU)
+# tensor([1, 2, 3], device='cuda:0')
