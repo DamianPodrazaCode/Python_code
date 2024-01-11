@@ -9,28 +9,28 @@ import time
 print('.......................tensor scalar')
 Tensor = torch.tensor(7)
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
-# tensor(7)
+# tensor(7) , ilość wymiarów:  0 , kształt wymiarów:  torch.Size([])
 
 print('.......................tensor vector')
 Tensor = torch.tensor([1, 3])
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
-# tensor([1, 3])  -  1  -  torch.Size([2])
+# tensor([1, 3]) , ilość wymiarów:  1 , kształt wymiarów:  torch.Size([2])
 
 print('.......................tensor matrix, dwu wymiarowy')
-Tensor = torch.tensor([[1,2],
-                       [3,4]])
+Tensor = torch.tensor([[1, 2],
+                       [3, 4]])
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
 # tensor([[1, 2],
-#         [3, 4]])  -  2  -  torch.Size([2, 2])
+#         [3, 4]]) , ilość wymiarów:  2 , kształt wymiarów:  torch.Size([2, 2])
 
 print('....................... trój wymiarowy')
-Tensor = torch.tensor([[[1,2,3],
-                        [4,5,6],
-                        [7,8,9]]])
+Tensor = torch.tensor([[[1, 2, 3],
+                        [4, 5, 6],
+                        [7, 8, 9]]])
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
 # tensor([[[1, 2, 3],
 #          [4, 5, 6],
-#          [7, 8, 9]]])  -  3  -  torch.Size([1, 3, 3])
+#          [7, 8, 9]]]) , ilość wymiarów:  3 , kształt wymiarów:  torch.Size([1, 3, 3])
 
 print('....................... dostęp do danych przez indexing')
 print(Tensor[0], Tensor[0].shape)
@@ -56,38 +56,37 @@ print(Tensor[:, 1, 1]) # z całego wymiaru trzeciego, z wiersza x = 1, z lini y 
 print(Tensor[0, 0, :]) # z całego wymiaru trzeciego, z lini 0 x
 # tensor([1, 2, 3])
 
-print('.............................................................................')
+print('\n-------------------------------------------------------------------------------')
 
-print('....................... random tensors')
-randTensorFloat = torch.rand(3, 4) # tu podajemy wymiary tensora
-print(randTensorFloat)
+print('....................... random tensors float32')
+Tensor = torch.rand(3, 4) # tu podajemy wymiary tensora
+print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)  
 # tensor([[0.9781, 0.4199, 0.5948, 0.1169],
 #         [0.1806, 0.2670, 0.8709, 0.2166],
-#         [0.4721, 0.1201, 0.9758, 0.1681]])
+#         [0.4721, 0.1201, 0.9758, 0.1681]]) , ilość wymiarów:  2 , kształt wymiarów:  torch.Size([3, 4]) typ danych torch.float32
 
-randRTensorIMG = torch.rand(size = (224, 224, 3)) 
-print(randRTensorIMG, ' - ', randRTensorIMG.ndim, ' - ', randRTensorIMG.shape) 
-
+# Tensor = torch.rand(size = (224, 224, 3)) 
+# print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)  
 
 print('....................... tensor wypełniony zerami')
-zeroTensor = torch.zeros(size=(5, 5))
-print(zeroTensor)
+Tensor = torch.zeros(size = (5, 5))
+print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)  
 # tensor([[0., 0., 0., 0., 0.],
 #         [0., 0., 0., 0., 0.],
 #         [0., 0., 0., 0., 0.],
 #         [0., 0., 0., 0., 0.],
-#         [0., 0., 0., 0., 0.]])
+#         [0., 0., 0., 0., 0.]]), ilość wymiarów:  2 , kształt wymiarów:  torch.Size([5, 5]) typ danych torch.float32
 
-# tensor wypełniony jedynkami
-oneTensor = torch.ones(size=(5, 5))
-print(oneTensor)
+print('....................... tensor wypełniony jedynkami')
+Tensor = torch.ones(size=(5, 5))
+print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)
 # tensor([[1., 1., 1., 1., 1.],
 #         [1., 1., 1., 1., 1.],
 #         [1., 1., 1., 1., 1.],
 #         [1., 1., 1., 1., 1.],
-#         [1., 1., 1., 1., 1.]])
-print(oneTensor.dtype) # odczytanie typu danych w tensor
+#         [1., 1., 1., 1., 1.]]), ilość wymiarów:  2 , kształt wymiarów:  torch.Size([5, 5]) typ danych torch.float32
 
+'''
 print('.......................range - tensor w zakresie')
 print(torch.arange(0, 10)) # int 
 # tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
