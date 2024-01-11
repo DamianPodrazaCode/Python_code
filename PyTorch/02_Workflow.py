@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-print(torch.__version__)
+#print(torch.__version__)
 # 2.1.2+cu121
 
 print('\n-------------------------------------------------------------------------------')
@@ -30,3 +30,16 @@ X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do na
 #print(X_train, y_train)
 X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do testu
 #print(X_test, y_test)
+
+print('....................... wizualizacja danych')
+
+def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_test, test_label = y_test, predictions = None) :
+    plt.figure(figsize=(10, 7))
+    plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
+    plt.scatter(test_data, test_label, c="g", s=4, label="Testing data")
+    if predictions is not None :
+        plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
+    plt.legend(prop={"size": 14})
+    plt.show()            
+    
+plot_predictons()
