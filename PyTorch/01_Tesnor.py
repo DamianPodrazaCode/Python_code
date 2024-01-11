@@ -23,7 +23,7 @@ print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Te
 # tensor([[1, 2],
 #         [3, 4]]) , ilość wymiarów:  2 , kształt wymiarów:  torch.Size([2, 2])
 
-print('....................... trój wymiarowy')
+print('....................... trójwymiarowy')
 Tensor = torch.tensor([[[1, 2, 3],
                         [4, 5, 6],
                         [7, 8, 9]]])
@@ -64,7 +64,7 @@ print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Te
 #         [0.1806, 0.2670, 0.8709, 0.2166],
 #         [0.4721, 0.1201, 0.9758, 0.1681]]) , ilość wymiarów:  2 , kształt wymiarów:  torch.Size([3, 4]) typ danych torch.float32
 
-# Tensor = torch.rand(size = (224, 224, 3)) 
+# Tensor = torch.rand(size = (224, 224, 3)) # może to być bitmapa (x, y, kolor)
 # print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)  
 
 print('....................... tensor wypełniony zerami')
@@ -85,7 +85,7 @@ print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Te
 #         [1., 1., 1., 1., 1.],
 #         [1., 1., 1., 1., 1.]]), ilość wymiarów:  2 , kształt wymiarów:  torch.Size([5, 5]) typ danych torch.float32
 
-print('.......................arange - tensor w zakresie')
+print('.......................arange - generowanie tensora w zakresie liczbowym')
 Tensor = torch.arange(0, 10) # int 
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape, 'typ danych', Tensor.dtype)
 # tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) , ilość wymiarów:  1 , kształt wymiarów:  torch.Size([10]) typ danych torch.int64
@@ -154,7 +154,7 @@ print(torch.matmul(mA, mB))
 # print(mA * mB) # będzie błąd bo nie widzi tego jako macierze
 
 print('.......................zasady mnożenie macierzy')
-# Dwie główne zasady mnożenia macierzy
+# Dwie główne zasady mnożenia macierzy:
 # 1. Zewnęterzne wymiary muszą być takie same
 # (3, 2) @ (3, 2) nie będzie pasować
 # (3, 2) @ (2, 3) będzie pasować
@@ -170,7 +170,7 @@ print('mA * mB', torch.matmul(mA, mB))
 
 
 print('\n-------------------------------------------------------------------------------')
-print('.......................przewrócenie macierzy - Transpose')
+print('.......................przewrócenie macierzy pomoc do mnożenia - Transpose')
 Tensor = torch.randint(0, 10, size = (3, 2))
 print(Tensor)
 # tensor([[3, 3],
@@ -182,8 +182,8 @@ print(Tensor.T) # przewrócenie macierzy
 
 print('.......................tensor aggregation -> min, max, mean, sum')
 Tensor = torch.randint(low = 0, high = 100, size = ([10])) 
-print(Tensor)
-# tensor([20, 79, 81, 67, 98, 66, 14, 44,  8, 84])
+print(Tensor, Tensor.dtype)
+# tensor([20, 79, 81, 67, 98, 66, 14, 44,  8, 84]) torch.int64
 print(torch.min(Tensor), Tensor.min()) # dwa wykonania tej samej funkcji
 # tensor(8) tensor(8)
 print(torch.max(Tensor), Tensor.max())
@@ -311,3 +311,13 @@ array = array + 0 # jak dodamy, to zmiana w array nie wpłynie na tensor,
 array[0] = 12 # a to wpłynie na obydwie tablice jak nie będzie operacji wyżej ????????????
 print(array)
 print(Tensor)
+
+print('\n-------------------------------------------------------------------------------')
+print('....................... odtwarzalność random (reproducibility)')
+RANDOM_SEED = 42 # liczba startowa randoma, można ją ustalić dzieki czemu drandom będzie startowa zawsze z tego samego miejsca, może być dowolna
+torch.manual_seed(RANDOM_SEED) # startuje od tej liczby randoma, jeżeli potrzeba gdzieś w kodzie znowu wystartować od tej liczby, to tżeba to powtórzyć
+Tensor = torch.rand(3, 4)
+print(Tensor)
+# tensor([[0.8823, 0.9150, 0.3829, 0.9593],
+#         [0.3904, 0.6009, 0.2566, 0.7936],
+#         [0.9408, 0.1332, 0.9346, 0.5936]])
