@@ -16,53 +16,49 @@ Tensor = torch.tensor([1, 3])
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
 # tensor([1, 3])  -  1  -  torch.Size([2])
 
-print('.......................tensor matrix')
+print('.......................tensor matrix, dwu wymiarowy')
 Tensor = torch.tensor([[1,2],
                        [3,4]])
 print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
 # tensor([[1, 2],
 #         [3, 4]])  -  2  -  torch.Size([2, 2])
 
-print('....................... dostęp do danych')
-print(Tensor[0])
-# tensor([1, 2])
-print(Tensor[1])
-# tensor([3, 4])
-print(Tensor[0][0])
-# lub
-print(Tensor[0, 0])
-# tensor(1)
-
-'''
-# tensor wielowymarowy
-#dwu wymiarowy
-dataTensor = torch.tensor([[1,2,3], 
-                           [4,5,6],
-                           [7,8,9]])
-print(dataTensor, ' - ', dataTensor.ndim, ' - ', dataTensor.shape) 
-# tensor([[1, 2, 3],
-#         [4, 5, 6],
-#         [7, 8, 9]])  -  2  -  torch.Size([3, 3])
-# trój wymiarowy
-dataTensor = torch.tensor([[[1,2,3],
-                            [4,5,6],
-                            [7,8,9]]])
-print(dataTensor, ' - ', dataTensor.ndim, ' - ', dataTensor.shape) 
+print('....................... trój wymiarowy')
+Tensor = torch.tensor([[[1,2,3],
+                        [4,5,6],
+                        [7,8,9]]])
+print(Tensor, ', ilość wymiarów: ', Tensor.ndim, ', kształt wymiarów: ', Tensor.shape)  
 # tensor([[[1, 2, 3],
 #          [4, 5, 6],
 #          [7, 8, 9]]])  -  3  -  torch.Size([1, 3, 3])
 
-# dostęp
-print(dataTensor[0])
+print('....................... dostęp do danych przez indexing')
+print(Tensor[0], Tensor[0].shape)
 # tensor([[1, 2, 3],
 #         [4, 5, 6],
-#         [7, 8, 9]]) 
-print(dataTensor[0][0])
-# tensor([1, 2, 3])
-print(dataTensor[0][0][0])
-# tensor(1)
+#         [7, 8, 9]]) torch.Size([3, 3]) - wynikiem jest pierwsza tablica dwuwymiarowa
 
-# random tensors
+print(Tensor[0][0], Tensor[0][0].shape) # lub print(Tensor[0, 0])
+# tensor([1, 2, 3]) torch.Size([3]) - wynikiem jest pierwsza tablica jednomwymiarowa z pierwszej tablicy dwuwymiarowej
+
+print(Tensor[0][0][0], Tensor[0][0][0].shape) # lub print(Tensor[0, 0, 0])
+# tensor(1) torch.Size([]) - wynikiem nie jest tablica tylko element
+
+# Można urzyć ":" żeby mieć dostęp do całego wymiaru
+print(Tensor.shape)
+# torch.Size([1, 3, 3])
+print(Tensor[:, :, 0]) # z całego wymiaru trzeciego, z całego wymiaru x, z lini 0 y
+# tensor([[1, 4, 7]])
+print(Tensor[:, 0]) # z całego wymiaru trzeciego, z lini 0 x
+# tensor([[1, 2, 3]])
+print(Tensor[:, 1, 1]) # z całego wymiaru trzeciego, z wiersza x = 1, z lini y = 1, tensor w postaci jednowymiarowej a nie elementu
+# tensor([5])
+print(Tensor[0, 0, :]) # z całego wymiaru trzeciego, z lini 0 x
+# tensor([1, 2, 3])
+
+print('.............................................................................')
+
+print('....................... random tensors')
 randTensorFloat = torch.rand(3, 4) # tu podajemy wymiary tensora
 print(randTensorFloat)
 # tensor([[0.9781, 0.4199, 0.5948, 0.1169],
@@ -72,7 +68,8 @@ print(randTensorFloat)
 randRTensorIMG = torch.rand(size = (224, 224, 3)) 
 print(randRTensorIMG, ' - ', randRTensorIMG.ndim, ' - ', randRTensorIMG.shape) 
 
-# tensor wypełniony zerami 
+
+print('....................... tensor wypełniony zerami')
 zeroTensor = torch.zeros(size=(5, 5))
 print(zeroTensor)
 # tensor([[0., 0., 0., 0., 0.],
@@ -280,33 +277,7 @@ print(img, img.shape)
 imgp = img.permute(2,0,1) #przestawia w kształcie pole 2(3) nz pole 0, pole 0(100) na pole 1, pole 1(80) na pole 2, czyli (3,100,80)
 print(imgp, imgp.shape)
 
-# dostęp do danych przez indexing
-x = torch.arange(1, 10).reshape(1, 3, 3)
-print(x, x.shape)
-# tensor([[[1, 2, 3],
-#          [4, 5, 6],
-#          [7, 8, 9]]]) torch.Size([1, 3, 3])
 
-print(x[0]) # pierwszy wymiar
-# tensor([[1, 2, 3],
-#         [4, 5, 6],
-#         [7, 8, 9]])
-
-print(x[0][0]) # można też tak print(x[0, 0])
-# tensor([1, 2, 3])
-
-print(x[0][0][0])
-# tensor(1)
-
-# Można urzyć ":" żeby mieć dostęp do całego wymiaru
-print(x[:, :, 0])
-# tensor([[1, 4, 7]])
-print(x[:, 0])
-# tensor([[1, 2, 3]])
-print(x[:, 1, 1])
-# tensor([5])
-print(x[0, 0, :])
-# tensor([1, 2, 3])
 
 # NumPy to tensor
 array = np.arange(1., 8.)
