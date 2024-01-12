@@ -8,7 +8,7 @@ import numpy as np
 # 2.1.2+cu121
 
 print('\n-------------------------------------------------------------------------------')
-print('.......................  stworzenie danych wszystkich')
+print('....................... stworzenie danych wszystkich (uczenia i testowych)')
 weight = 0.7
 bias = 0.3
 start  = 0
@@ -23,7 +23,7 @@ print(X[:10], X.shape, len(X), '\n',
       y[:10], y.shape, len(y), '\n')
 
 print('....................... rozdzielenie danych do uczenia i danych do testowania')
-train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X
+train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X (uczenia)
 print(train_split)
 # 40
 X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do nauki
@@ -43,3 +43,18 @@ def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_
     plt.show()            
     
 plot_predictons()
+
+print('....................... zbudowanie modelu uczenia linear regression')
+class LinearRegressionModel(nn.Module) : # <- nn.Module - klasa bazowa PyTorch dla sieci neuronowych
+    def __init__(self) :
+        super().__init__()
+       
+        # inicjalizacja parametrów modelu 
+        self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+    
+    # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
+    def forward(self, x: torch.Tensor) -> torch.Tensor :
+        return self.weights * x + self.bias
+        
+        
