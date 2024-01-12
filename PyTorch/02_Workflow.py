@@ -9,8 +9,11 @@ import numpy as np
 
 print('\n-------------------------------------------------------------------------------')
 print('....................... stworzenie danych wszystkich (uczenia i testowych)')
+
+# te wartości teraz są danr tylko w przykładzie, normalnie są to poszukiwane wagi
 weight = 0.7
 bias = 0.3
+
 start  = 0
 end = 1
 step = 0.02
@@ -49,7 +52,7 @@ class LinearRegressionModel(nn.Module) : # <- nn.Module - klasa bazowa PyTorch d
     def __init__(self) :
         super().__init__()
        
-        # inicjalizacja parametrów modelu 
+        # inicjalizacja parametrów modelu, inicjalizacja random-amim ,te wagi będą się ustalać w trakcie uczenia
         self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
         self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
     
@@ -58,6 +61,46 @@ class LinearRegressionModel(nn.Module) : # <- nn.Module - klasa bazowa PyTorch d
         return self.weights * x + self.bias
         
         
+print('....................... tworzenie modelu')        
+        
 torch.manual_seed(42)
 model_0 = LinearRegressionModel()
-print(model_0)
+
+print(list(model_0.parameters())) # lista parametrów
+# tensor([0.3367], requires_grad=True), Parameter containing:
+# tensor([0.1288], requires_grad=True)]
+print(model_0.state_dict()) # lista nazw parametrów
+# OrderedDict([('weights', tensor([0.3367])), ('bias', tensor([0.1288]))])
+
+print('....................... predicton model')        
+with torch.inference_mode() :
+    y_preds = model_0(X_test)
+
+print(y_test, '\n', y_preds)
+#plot_predictons(predictions=y_preds)
+
+print('.......................  minimalizacja błędu modelu przewidywania')
+# loss fonction 
+loss_fn = nn.L1Loss() # backpropagation
+# optimizer - gradient descent
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01) # lr = lerning parameter, należy go uzależnić o dokładności parametrów
+
+print('....................... train loop') 
+# epoch - jeden przebieg pętli z danymi, jest to hyperparameter bo ustalamy go sami
+epochs = 10
+
+for epoch in range(epochs):
+    model_0.train()
+    #1. Forward pass
+    y_pred = model_0(X_train)
+    #2. Calculate loss
+    loss = loss_fn(y_pred, y_train)
+    #3. Optimizer zero grad
+    optimizer.zero_grad()
+    #4. Backpropagation
+    loss.backward()
+    #5. Optimizer
+    optimizer.step()
+    
+    # testing
+    model_0.eval()
