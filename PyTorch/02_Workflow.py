@@ -42,7 +42,7 @@ def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_
     plt.legend(prop={"size": 14})
     plt.show()            
     
-plot_predictons()
+# plot_predictons()
 
 print('....................... zbudowanie modelu uczenia linear regression')
 class LinearRegressionModel(nn.Module) : # <- nn.Module - klasa bazowa PyTorch dla sieci neuronowych
@@ -58,3 +58,6 @@ class LinearRegressionModel(nn.Module) : # <- nn.Module - klasa bazowa PyTorch d
         return self.weights * x + self.bias
         
         
+torch.manual_seed(42)
+model_0 = LinearRegressionModel()
+print(model_0)
