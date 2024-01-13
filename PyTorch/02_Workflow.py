@@ -47,6 +47,7 @@ def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_
     if predictions is not None :
         plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
     plt.legend(prop={"size": 14})
+    
     plt.show()            
 
 print(X_train, y_train) # domyślne dane wejściowe do plot_predictons()
@@ -84,8 +85,7 @@ with torch.inference_mode(): # uruchomienie przetwarzania danych w modelu bez re
     y_preds = model_0(X_test) # przy pomocy danych testowych oraz wygenerowanych (random) parametrów, tworzony jest tensor wyjściowy
     # jeżeli, przechodzą dane przez model (model_0(X_test)) tak naprawde jest uruchamiana funkcja forward()
 print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds jakie są przewidywane
-#plot_predictons(train_labels=None, predictions=y_preds)
-#plot_predictons(predictions=y_preds) # porównanie zielonych kropek y_test(prawidłowych) a czerwonych kropek(prognozowanych)
+plot_predictons(predictions=y_preds) # porównanie zielonych kropek y_test(prawidłowych) a czerwonych kropek(prognozowanych)
 
 # starsza metoda, ale prawie taka sama, w tym przypadku będzie taki sam skutek, ta pierwsza jest zalecana przez PyTorch
 # with torch.no_grad():    
@@ -98,31 +98,62 @@ print('....................... minimalizacja błędu modelu przewidywania')
 # loss function - pomiar jaki jest błąd między prognozowaniem a wyjściem z danymi prawidłowymi, czym mniejszy błąd tym lepiej
 loss_fn = nn.L1Loss() # algorytmy oblicznia strat https://pytorch.org/docs/stable/nn.html#loss-functions
 # optimizer - gradient descent - bierze dane obliczone z loss function reguluje parametry modelu
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.001) # lr = lerning rate, należy go uzależnić w zależności od dokładności danych wejściowych
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01) # lr = lerning rate, należy go uzależnić w zależności od dokładności danych wejściowych
+# lr jest uzależnione od tego jaką dokładność uczenia chcemy uzyskać, jeżeli paramerty mają być z dokładnością 0.001 to tak trzeba ustawić lr
 # algorytmy optymalizacji - https://pytorch.org/docs/stable/optim.html#algorithms
 # loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko inicjalizowane
             
-print('....................... uczenie - train loop') 
+print('....................... uczenie i testowanie') 
 # epoch - jeden przebieg pętli z danymi
-epochs = 2000 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami, przy tych ustawieniach moje spostrzeżenie to (1/lr) * 2
+epochs = 200 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami, przy tych ustawieniach moje spostrzeżenie to (1/lr) * 2
+
+# dane które śledzimy
+epoch_count = []
+loss_values = []
+test_loss_values = []
 
 for epoch in range(epochs):
+    # uczenie    
     model_0.train()
     #1. Forward() z obiektu model_0, dane przechodzą przez model i są aktualizowane zgodnie z parametrami, które się aktualizują niżej w pętli
     y_pred = model_0(X_train) # wynikiem są dane coraz bliższe do rzeczywistych
-    #2. obliczenie strat (loss function)
+    #2. obliczenie strat (loss function) czyli błędu (różnicy między orginałem)
     loss = loss_fn(y_pred, y_train)
-    #3. Optimizer zero grad
+    #3. Przywrócenie ustawień optymilizataora na default, że by później obliczyć nową optymalizacje
     optimizer.zero_grad()
-    #4. Backpropagation (loss backward), obliczanie strat do tyłu w sieci żeby obliczyć gradient każdego parametru
-    loss.backward()
-    #5. Optymalizacja parametrów modelu, wyregulowanie ich
+    #4. Backpropagation, obliczanie strat do tyłu w sieci żeby obliczyć gradient każdego parametru, żeby zbliżyć się do strat na poziomie zero
+    loss.backward() 
+    #5. Optymalizacja parametrów modelu, wyregulowanie ich (gradient descent)
     optimizer.step()
-    
-    print(epoch, loss, model_0.state_dict()) # parametry, tu widać jak parametry się zbliżają do tych prawidłowych
-    
-    # testing
-    # model_0.eval()
 
-y_out = torch.tensor(y_pred)
-plot_predictons(train_data=X_train, train_labels=y_out)
+    # testy
+    # testing wyłącza różne ustawienia w modelu które nie są potrzebne do testowania, pprzyspiesza to testowanie
+    model_0.eval()
+    with torch.inference_mode(): # wyłacza np, obliczanie gradientu, przyspiesza testowanie
+        # 1. obliczenia forward()
+        test_pred = model_0(X_test)
+        # 2. straty
+        test_loss = loss_fn(test_pred, y_test)
+
+    if epoch % 10 == 0:
+        epoch_count.append(epoch)
+        loss_values.append(loss)
+        test_loss_values.append(test_loss)
+        # print(epoch, loss, test_loss)
+        # print(model_0.state_dict())
+
+# krzywe strat
+plt.figure(1)
+plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Train loss")  
+plt.plot(epoch_count, test_loss_values, label="Test loss")  
+plt.title("Training and test loss curves")
+plt.ylabel("Loss")
+plt.xlabel("Epochs")
+plt.legend()
+plt.show(block=False)
+
+# prognozy po nauce    
+print(model_0.state_dict()) # obliczone parametry
+with torch.inference_mode(): 
+    y_preds = model_0(X_test)
+plot_predictons(predictions=y_preds)    
