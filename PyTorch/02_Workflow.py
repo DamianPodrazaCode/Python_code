@@ -35,9 +35,7 @@ train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X (tensor 
 print(train_split)
 # 40 - ilość danych uczenia
 X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do nauki
-print(X_train, y_train)
 X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do testu
-print(X_test, y_test)
 
 #print('....................... wizualizacja danych')
 def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_test, test_label = y_test, predictions = None) :
@@ -48,6 +46,9 @@ def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_
         plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
     plt.legend(prop={"size": 14})
     plt.show()            
+
+print(X_train, y_train) # domyślne dane wejściowe do plot_predictons()
+print(X_test, y_test)
 #plot_predictons()
 
 print('....................... zbudowanie klasy modelu uczenia LinearRegressionModel')
@@ -60,7 +61,7 @@ class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dl
     # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
     # funkcja która oblicza wszystko w modelu
     def forward(self, x: torch.Tensor) -> torch.Tensor :
-        return self.weights * x + self.bias
+        return self.weights * x + self.bias # y = ax + b -> a = dy/dx, b miejsce przecięcia osi y
         
 print('....................... tworzenie objektu modelu')        
 torch.manual_seed(42)  # parametr startowy random, po to żeby liczby startowe random były takie same przy każdym uruchomieniu, 
@@ -76,7 +77,8 @@ print(model_0.state_dict()) # mapa parametrów z wartościami i nazwami,
 
 print('....................... prognozowanie - predicton model')        
 with torch.inference_mode():
-    y_preds = model_0(X_test)
+    y_preds = model_0(X_test) # przy pomocy danych testowych oraz wygenerowanych (random) parametrów, tworzony jest tensor wyjściowy
+    # jeżeli, przechodzą dane przez model (model_0(X_test)) tak naprawde jest uruchamiana funkcja forward()
 print(y_test, '\n', y_preds)
 #plot_predictons(predictions=y_preds)
 
