@@ -58,10 +58,10 @@ class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dl
     def __init__(self) :
         super().__init__()
         # inicjalizacja parametrów modelu, inicjalizacja random-ami ,te wagi będą się ustalać w trakcie uczenia, mają dążyć do zmiennych weights i bias z początku kodu
-        # self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        # self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        self.weights = nn.Parameter(torch.tensor(0.0))
-        self.bias = nn.Parameter(torch.tensor(0.0))
+        self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        # self.weights = nn.Parameter(torch.tensor(0.0))
+        # self.bias = nn.Parameter(torch.tensor(0.0))
     # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
     # funkcja która oblicza wszystko w modelu
     def forward(self, x: torch.Tensor) -> torch.Tensor :
@@ -96,15 +96,15 @@ print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds
 print('....................... minimalizacja błędu modelu przewidywania')
 # wskazanie jakie metody będą używane dla obliczeń strat i optymalizacji
 # loss function - pomiar jaki jest błąd między prognozowaniem a wyjściem z danymi prawidłowymi, czym mniejszy błąd tym lepiej
-loss_fn = nn.L1Loss() # jest kilka funkcji loss https://pytorch.org/docs/stable/nn.html#loss-functions
+loss_fn = nn.L1Loss() # algorytmy oblicznia strat https://pytorch.org/docs/stable/nn.html#loss-functions
 # optimizer - gradient descent - bierze dane obliczone z loss function reguluje parametry modelu
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.1) # lr = lerning parameter, należy go uzależnić wzależności od dokładności danych wejściowych
-# https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.001) # lr = lerning rate, należy go uzależnić wzależności od dokładności danych wejściowych
+# algorytmy optymalizacji - https://pytorch.org/docs/stable/optim.html#algorithms
 # loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko inicjalizowane
             
 print('....................... uczenie - train loop') 
 # epoch - jeden przebieg pętli z danymi
-epochs = 400 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami
+epochs = 3000 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami
 
 for epoch in range(epochs):
     model_0.train()
@@ -124,3 +124,5 @@ for epoch in range(epochs):
     # testing
     # model_0.eval()
 
+y_out = torch.tensor(y_pred)
+plot_predictons(train_data=X_train, train_labels=y_out)
