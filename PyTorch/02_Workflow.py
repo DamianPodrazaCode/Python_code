@@ -10,7 +10,7 @@ import numpy as np
 print('\n-------------------------------------------------------------------------------')
 print('....................... stworzenie danych wszystkich (uczenia i testowych)')
 
-# te wartości teraz są dane tylko do stworzenia przykładu, normalnie są to poszukiwane wagi
+# te parametry teraz są dane tylko do stworzenia przykładu, normalnie są to poszukiwane wagi, i cały model będzie dążył do ty parametrów
 weight = 0.7
 bias = 0.3
 
@@ -40,8 +40,10 @@ X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do test
 #print('....................... wizualizacja danych')
 def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_test, test_label = y_test, predictions = None) :
     plt.figure(figsize=(10, 7))
-    plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
-    plt.scatter(test_data, test_label, c="g", s=4, label="Testing data")
+    if train_labels is not None :
+        plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
+    if test_label is not None :
+        plt.scatter(test_data, test_label, c="g", s=4, label="Testing data")
     if predictions is not None :
         plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
     plt.legend(prop={"size": 14})
@@ -56,12 +58,14 @@ class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dl
     def __init__(self) :
         super().__init__()
         # inicjalizacja parametrów modelu, inicjalizacja random-ami ,te wagi będą się ustalać w trakcie uczenia, mają dążyć do zmiennych weights i bias z początku kodu
-        self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        # self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        # self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        self.weights = nn.Parameter(torch.tensor(0.0))
+        self.bias = nn.Parameter(torch.tensor(0.0))
     # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
     # funkcja która oblicza wszystko w modelu
     def forward(self, x: torch.Tensor) -> torch.Tensor :
-        return self.weights * x + self.bias # y = ax + b -> a = dy/dx, b miejsce przecięcia osi y
+        return self.weights * x + self.bias # y = ax + b -> a = dy / dx, b miejsce przecięcia osi y
         
 print('....................... tworzenie objektu modelu')        
 torch.manual_seed(42)  # parametr startowy random, po to żeby liczby startowe random były takie same przy każdym uruchomieniu, 
@@ -72,31 +76,41 @@ model_0 = LinearRegressionModel()  # wewnętrzna inicjalizacja modelu, utworzeni
 print(list(model_0.parameters())) # lista parametrów, tych z klasy
 # [Parameter containing: tensor([0.3367], requires_grad=True), 
 #  Parameter containing: tensor([0.1288], requires_grad=True)]
-print(model_0.state_dict()) # mapa parametrów z wartościami i nazwami, 
+print(model_0.state_dict()) # mapa parametrów z wartościami i nazwami
 # OrderedDict([('weights', tensor([0.3367])), ('bias', tensor([0.1288]))])
 
 print('....................... prognozowanie - predicton model')        
-with torch.inference_mode():
+with torch.inference_mode(): # uruchomienie przetwarzania danych w modelu bez reszty modelu, zostaną tylko przetworzone dane wejściowe
     y_preds = model_0(X_test) # przy pomocy danych testowych oraz wygenerowanych (random) parametrów, tworzony jest tensor wyjściowy
     # jeżeli, przechodzą dane przez model (model_0(X_test)) tak naprawde jest uruchamiana funkcja forward()
-print(y_test, '\n', y_preds)
-#plot_predictons(predictions=y_preds)
+print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds jakie są przewidywane
+#plot_predictons(train_labels=None, predictions=y_preds)
+#plot_predictons(predictions=y_preds) # porównanie zielonych kropek y_test(prawidłowych) a czerwonych kropek(prognozowanych)
 
-print('.......................  minimalizacja błędu modelu przewidywania')
-# loss fonction 
-loss_fn = nn.L1Loss() # backpropagation
-# optimizer - gradient descent
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01) # lr = lerning parameter, należy go uzależnić o dokładności parametrów
+# starsza metoda, ale prawie taka sama, w tym przypadku będzie taki sam skutek, ta pierwsza jest zalecana przez PyTorch
+# with torch.no_grad():    
+#     y_preds = model_0(X_test)
+# print(y_test, '\n', y_preds)
+# plot_predictons(predictions=y_preds)
 
-print('....................... train loop') 
-# epoch - jeden przebieg pętli z danymi, jest to hyperparameter bo ustalamy go sami
-epochs = 10
+print('....................... minimalizacja błędu modelu przewidywania')
+# wskazanie jakie metody będą używane dla obliczeń strat i optymalizacji
+# loss function - pomiar jaki jest błąd między prognozowaniem a wyjściem z danymi prawidłowymi, czym mniejszy błąd tym lepiej
+loss_fn = nn.L1Loss() # jest kilka funkcji loss https://pytorch.org/docs/stable/nn.html#loss-functions
+# optimizer - gradient descent - bierze dane obliczone z loss function reguluje parametry modelu
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.1) # lr = lerning parameter, należy go uzależnić wzależności od dokładności danych wejściowych
+# https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer
+# loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko inicjalizowane
+            
+print('....................... uczenie - train loop') 
+# epoch - jeden przebieg pętli z danymi
+epochs = 400 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami
 
 for epoch in range(epochs):
     model_0.train()
-    #1. Forward pass
+    #1. uruchomienie funkcji Forward() z obiektu model_0
     y_pred = model_0(X_train)
-    #2. Calculate loss
+    #2. obliczenie strat loss function
     loss = loss_fn(y_pred, y_train)
     #3. Optimizer zero grad
     optimizer.zero_grad()
@@ -105,5 +119,8 @@ for epoch in range(epochs):
     #5. Optimizer
     optimizer.step()
     
+    print(epoch, loss, model_0.state_dict()) # parametry, tu widać jak parametry się zbliżają do tych prawidłowych
+    
     # testing
-    model_0.eval()
+    # model_0.eval()
+
