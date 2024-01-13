@@ -63,8 +63,8 @@ class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dl
         # self.weights = nn.Parameter(torch.tensor(0.0))
         # self.bias = nn.Parameter(torch.tensor(0.0))
     # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
-    # funkcja która oblicza wszystko w modelu
-    def forward(self, x: torch.Tensor) -> torch.Tensor :
+    # funkcja która oblicza wszystko w modelu, przez nią w każdym etapie modelowania oraz testu przechodząś dane
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.weights * x + self.bias # y = ax + b -> a = dy / dx, b miejsce przecięcia osi y
         
 print('....................... tworzenie objektu modelu')        
@@ -98,25 +98,25 @@ print('....................... minimalizacja błędu modelu przewidywania')
 # loss function - pomiar jaki jest błąd między prognozowaniem a wyjściem z danymi prawidłowymi, czym mniejszy błąd tym lepiej
 loss_fn = nn.L1Loss() # algorytmy oblicznia strat https://pytorch.org/docs/stable/nn.html#loss-functions
 # optimizer - gradient descent - bierze dane obliczone z loss function reguluje parametry modelu
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.001) # lr = lerning rate, należy go uzależnić wzależności od dokładności danych wejściowych
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.001) # lr = lerning rate, należy go uzależnić w zależności od dokładności danych wejściowych
 # algorytmy optymalizacji - https://pytorch.org/docs/stable/optim.html#algorithms
 # loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko inicjalizowane
             
 print('....................... uczenie - train loop') 
 # epoch - jeden przebieg pętli z danymi
-epochs = 3000 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami
+epochs = 2000 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami, przy tych ustawieniach moje spostrzeżenie to (1/lr) * 2
 
 for epoch in range(epochs):
     model_0.train()
-    #1. uruchomienie funkcji Forward() z obiektu model_0
-    y_pred = model_0(X_train)
-    #2. obliczenie strat loss function
+    #1. Forward() z obiektu model_0, dane przechodzą przez model i są aktualizowane zgodnie z parametrami, które się aktualizują niżej w pętli
+    y_pred = model_0(X_train) # wynikiem są dane coraz bliższe do rzeczywistych
+    #2. obliczenie strat (loss function)
     loss = loss_fn(y_pred, y_train)
     #3. Optimizer zero grad
     optimizer.zero_grad()
-    #4. Backpropagation
+    #4. Backpropagation (loss backward), obliczanie strat do tyłu w sieci żeby obliczyć gradient każdego parametru
     loss.backward()
-    #5. Optimizer
+    #5. Optymalizacja parametrów modelu, wyregulowanie ich
     optimizer.step()
     
     print(epoch, loss, model_0.state_dict()) # parametry, tu widać jak parametry się zbliżają do tych prawidłowych
