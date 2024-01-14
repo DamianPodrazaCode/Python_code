@@ -4,10 +4,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+# Ustawienie urządzenia którego będzie używał PyTorch ('cpu', 'cuda')
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print('Używam urządzenia:', device)
+
 # Model treningowy całkowicie liniowy, wszystkie dane leżą na lini:
-# 1. Stworzenie tensorów które mają wartościami idealne, znane są również parametry(wagi). Rozdzielenie danych na uczenia i testowe.
+# 1. Stworzenie tensorów które mają wartości idealne, znane są również parametry(wagi). Rozdzielenie danych na uczenia i testowe.
 # 2. Definicja klasy modelu uczenia LinearRegressionModel.
-# 3. Tworzenie objektu modelu.
+# 3. Tworzenie objekt modelu.
 # 4. Prognozowanie - predicton model.
 # 5. Konfiguracja minimalizacji błędu (loss, optimize).
 # 6. Uczenie i testowanie.
@@ -28,30 +32,45 @@ train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X (tensor 
 X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do uczenia od 0 do 39
 X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do testu od 40 do 49
 # wizualizacja
-plt.figure('1. Tensory wejściowe.')
-plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
-plt.scatter(X_test, y_test, c='y', s=2, label="test")  
-plt.legend()
-plt.show(block=False)
+# plt.figure('Tensory wejściowe.')
+# plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
+# plt.scatter(X_test, y_test, c='y', s=2, label="test")  
+# plt.legend()
+# plt.show(block=False)
 #plt.show(block=True)
 
 print('2 ....................... Definicja klasy modelu uczenia LinearRegressionModel')
 class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dla sieci neuronowych
     def __init__(self) :
         super().__init__()
-        # inicjalizacja parametrów modelu, inicjalizacja random-ami ,te wagi będą się ustalać w trakcie uczenia, 
-        # mają dążyć do zmiennych weights i bias z początku kodu, 
-        # można je ustalic liczbami np 0. wtedy parametry szukane zaczną od tych wartości, ale w praktyce robi się to na randomach
-        self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        # self.weights = nn.Parameter(torch.tensor(0.0), requires_grad=True, dtype=torch.float)
-        # self.bias = nn.Parameter(torch.tensor(0.0), requires_grad=True, dtype=torch.float)
-    # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
-    # funkcja która oblicza wszystko w modelu, przez nią w każdym etapie modelowania oraz testu przechodzą dane
+        # inicjalizacja parametrów modelu, inicjalizacja random-ami, te wagi będą się ustalać w trakcie uczenia, 
+        # mają dążyć do zmiennych weights i bias z początku kodu, można je ustalic liczbami np 0. wtedy parametry szukane zaczną od tych wartości, 
+        # ale w praktyce robi się to na randomach, teba pamiętać że przy ustawieniu 0 prawdopodobnie uczenie będzie trwało dłużej
+        
+        # parametry startujące od random
+        # self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        # self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
+        
+        # parametry startujące od zera - przy tym samym czasie uczenia najgorszy wynik
+        # self.weights = nn.Parameter(torch.tensor(0.0), requires_grad=True)
+        # self.bias = nn.Parameter(torch.tensor(0.0), requires_grad=True)
+        
+        # parametry startujące od średniej danych wejściowych uczenia X - najlepszy wynik w tym przypadku
+        inData = float(X_train.type(torch.float32).mean())
+        self.weights = nn.Parameter(torch.tensor(inData), requires_grad=True)
+        self.bias = nn.Parameter(torch.tensor(inData), requires_grad=True)
+
+        # parametry startujące od średniej danych wejściowych uczenia y
+        # inData = float(y_train.type(torch.float32).mean())
+        # self.weights = nn.Parameter(torch.tensor(inData), requires_grad=True)
+        # self.bias = nn.Parameter(torch.tensor(inData), requires_grad=True)
+        
+    # forward (override) funkcja definiująca zachowanie obliczeń, konieczna jeżeli dziedziczy się po nn.Module
+    # funkcja która oblicza model, przez nią w każdym etapie modelowania oraz testu przechodzą dane
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.weights * x + self.bias # y = ax + b -> a = dy / dx, b miejsce przecięcia osi y
 
-print('3 ....................... Tworzenie objektu modelu')        
+print('3 ....................... Tworzenie objekt modelu')        
 torch.manual_seed(42)  # parametr startowy random, po to żeby random przy każdym uruchomieniu startował z tej samej liczby 
 # w parametrach(wagach) objektu klasy LinearRegressionModel, 42 to liczba którą możan znienić dowolnie, 
 # ten zabieg potrzebny jest do nauki o ML żeby porównywać dane, bo tak wygodniej
@@ -71,7 +90,7 @@ with torch.inference_mode():
     y_preds = model_0(X_test) 
 # print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds jakie są przewidywane
 # wizualizacja
-plt.figure('2. Prognozowanie przed uczeniem, parametry random.')
+plt.figure('Prognozowanie przed uczeniem, parametry random.')
 plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
 plt.scatter(X_test, y_test, c='y', s=2, label="test")  
 plt.scatter(X_test, y_preds, c='r', s=2, label="prognoza")  
@@ -125,7 +144,7 @@ for epoch in range(epochs):
     test_loss_values.append(test_loss)
 
 # wizualizacja
-plt.figure('3. Krzywe strat uczenia i testu.')
+plt.figure('Krzywe strat uczenia i testu.')
 plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")  # wymagany casting tensor->numpy
 plt.plot(epoch_count, test_loss_values, label="Starty test")  
 plt.ylabel("Starty")
@@ -137,7 +156,7 @@ print('7 ....................... Prognozowanie - po uczeniu.')
 with torch.inference_mode(): 
     y_preds = model_0(X_test)
 # wizualizacja
-plt.figure('4. Prognozowanie po uczeniu.')
+plt.figure('Prognozowanie po uczeniu.')
 plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
 plt.scatter(X_test, y_test, c='y', s=2, label="test")  
 plt.scatter(X_test, y_preds, c='r', s=2, label="prognoza")  
