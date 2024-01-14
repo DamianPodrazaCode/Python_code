@@ -4,156 +4,144 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-#print(torch.__version__)
-# 2.1.2+cu121
+# Model treningowy całkowicie liniowy, wszystkie dane leżą na lini:
+# 1. Stworzenie tensorów które mają wartościami idealne, znane są również parametry(wagi). Rozdzielenie danych na uczenia i testowe.
+# 2. Definicja klasy modelu uczenia LinearRegressionModel.
+# 3. Tworzenie objektu modelu.
+# 4. Prognozowanie - predicton model.
+# 5. Konfiguracja minimalizacji błędu (loss, optimize).
+# 6. Uczenie i testowanie.
+# 7. Prognozowanie - po uczeniu.
 
-print('\n-------------------------------------------------------------------------------')
-print('....................... stworzenie danych wszystkich (uczenia i testowych)')
-
-# te parametry teraz są dane tylko do stworzenia przykładu, normalnie są to poszukiwane wagi, i cały model będzie dążył do ty parametrów
+print('1 ....................... Stworzenie tensorów (uczenia i testowych)')
+# Te zmienne (weight, bias) to tylko dane do stworzenia tensorów (uczenia i testowania), 
+# normalnie są to poszukiwane wagi i w normalnym modelu są one nieznane, cały model będzie dążył do tych parametrów
 weight = 0.7
 bias = 0.3
+# wartości graniczne genertatora danych dla przykładu
+start, end, step  = 0, 1, 0.02
+# stworzenie tensorów (uczenia i testowe), dane idealne, ilość 50
+X = torch.arange(start, end, step).unsqueeze(dim = 1) # tensor z x-ami, konieczne poszerzenie o wymiar 
+y = weight * X + bias # tensor z y-ami
+# rozdzielenie danych do uczenia i danych do testowania
+train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X (tensor uczenia), uczenie 40 danych, test 10 danych
+X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do uczenia od 0 do 39
+X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do testu od 40 do 49
+# wizualizacja
+plt.figure('1. Tensory wejściowe.')
+plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
+plt.scatter(X_test, y_test, c='y', s=2, label="test")  
+plt.legend()
+plt.show(block=False)
+#plt.show(block=True)
 
-# wartości startowe genertatora danych dop przykładu
-start  = 0
-end = 1
-step = 0.02
-
-# stworzenie tensorów danych i poszerzenie wymiaru o 1, i obliczenie danych wyjściowych (dane treningowe i testowe X,y)
-X = torch.arange(start, end, step).unsqueeze(dim = 1) 
-y = weight * X + bias 
-
-# print(X[:10]) wyświetl pierwsze 10 elementów
-# print(X[10:]) wyświetl ostatnie 10 elementów
-
-# wszystkie dane 
-print(X[:10], X.shape, len(X), '\n', 
-      y[:10], y.shape, len(y), '\n')
-
-print('....................... rozdzielenie danych do uczenia i danych do testowania')
-train_split = int(0.8 * len(X)) # obliczenie 80% z długości tensora X (tensor uczenia)
-print(train_split)
-# 40 - ilość danych uczenia
-X_train, y_train = X[:train_split], y[:train_split] # stworzenie tensorów do nauki
-X_test, y_test = X[train_split:], y[train_split:] # stworzenie tensorów do testu
-
-#print('....................... wizualizacja danych')
-def plot_predictons(train_data = X_train, train_labels = y_train, test_data = X_test, test_label = y_test, predictions = None) :
-    plt.figure(figsize=(10, 7))
-    if train_labels is not None :
-        plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
-    if test_label is not None :
-        plt.scatter(test_data, test_label, c="g", s=4, label="Testing data")
-    if predictions is not None :
-        plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
-    plt.legend(prop={"size": 14})
-    
-    plt.show()            
-
-print(X_train, y_train) # domyślne dane wejściowe do plot_predictons()
-print(X_test, y_test)
-#plot_predictons()
-
-print('....................... zbudowanie klasy modelu uczenia LinearRegressionModel')
+print('2 ....................... Definicja klasy modelu uczenia LinearRegressionModel')
 class LinearRegressionModel(nn.Module): # <- nn.Module - klasa bazowa PyTorch dla sieci neuronowych
     def __init__(self) :
         super().__init__()
-        # inicjalizacja parametrów modelu, inicjalizacja random-ami ,te wagi będą się ustalać w trakcie uczenia, mają dążyć do zmiennych weights i bias z początku kodu
+        # inicjalizacja parametrów modelu, inicjalizacja random-ami ,te wagi będą się ustalać w trakcie uczenia, 
+        # mają dążyć do zmiennych weights i bias z początku kodu, 
+        # można je ustalic liczbami np 0. wtedy parametry szukane zaczną od tych wartości, ale w praktyce robi się to na randomach
         self.weights = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
         self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float))
-        # self.weights = nn.Parameter(torch.tensor(0.0))
-        # self.bias = nn.Parameter(torch.tensor(0.0))
+        # self.weights = nn.Parameter(torch.tensor(0.0), requires_grad=True, dtype=torch.float)
+        # self.bias = nn.Parameter(torch.tensor(0.0), requires_grad=True, dtype=torch.float)
     # forward (override) funkcja definiująca zachowanie obliczania, konieczna jeżeli dziedziczy się po nn.Module
-    # funkcja która oblicza wszystko w modelu, przez nią w każdym etapie modelowania oraz testu przechodząś dane
+    # funkcja która oblicza wszystko w modelu, przez nią w każdym etapie modelowania oraz testu przechodzą dane
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.weights * x + self.bias # y = ax + b -> a = dy / dx, b miejsce przecięcia osi y
-        
-print('....................... tworzenie objektu modelu')        
-torch.manual_seed(42)  # parametr startowy random, po to żeby liczby startowe random były takie same przy każdym uruchomieniu, 
-# 42 to liczba którą możan znienić dowolnie, potrzebne do nauki o ML żeby porównywać dane, bo tak wygodniej
-model_0 = LinearRegressionModel()  # wewnętrzna inicjalizacja modelu, utworzenie instancji, subklasa nn.Module
 
-# sprawdzenie co jest w parametrach modelu
-print(list(model_0.parameters())) # lista parametrów, tych z klasy
+print('3 ....................... Tworzenie objektu modelu')        
+torch.manual_seed(42)  # parametr startowy random, po to żeby random przy każdym uruchomieniu startował z tej samej liczby 
+# w parametrach(wagach) objektu klasy LinearRegressionModel, 42 to liczba którą możan znienić dowolnie, 
+# ten zabieg potrzebny jest do nauki o ML żeby porównywać dane, bo tak wygodniej
+model_0 = LinearRegressionModel()  # inicjalizacja modelu, utworzenie instancji(objektu), subklasa nn.Module
+# parametry modelu(wagi)
+# print(list(model_0.parameters())) # lista parametrów z wartościami, 
 # [Parameter containing: tensor([0.3367], requires_grad=True), 
 #  Parameter containing: tensor([0.1288], requires_grad=True)]
-print(model_0.state_dict()) # mapa parametrów z wartościami i nazwami
+# print(model_0.state_dict()) # mapa parametrów z nazwami i wartościami 
 # OrderedDict([('weights', tensor([0.3367])), ('bias', tensor([0.1288]))])
 
-print('....................... prognozowanie - predicton model')        
-with torch.inference_mode(): # uruchomienie przetwarzania danych w modelu bez reszty modelu, zostaną tylko przetworzone dane wejściowe
-    y_preds = model_0(X_test) # przy pomocy danych testowych oraz wygenerowanych (random) parametrów, tworzony jest tensor wyjściowy
-    # jeżeli, przechodzą dane przez model (model_0(X_test)) tak naprawde jest uruchamiana funkcja forward()
-print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds jakie są przewidywane
-plot_predictons(predictions=y_preds) # porównanie zielonych kropek y_test(prawidłowych) a czerwonych kropek(prognozowanych)
+print('4 ....................... Prognozowanie - predicton model')        
+# prognozowanie ma na celu sprawdzenie danych testowych na podstrawie parametrów(wag), bez gradientu i innych ustawień, 
+# jest to szybkie sprawdzenie danych, poprostu dane przechodzą przez model(funkcja forward())
+with torch.inference_mode(): 
+# with torch.no_grad(): # starsza metoda, prawie taka sama, wyłącza tylko gradient, ta pierwsza jest zalecana przez PyTorch   
+    y_preds = model_0(X_test) 
+# print(y_test, '\n', y_preds) # dane y_test to dane jakie powinny być, a y_preds jakie są przewidywane
+# wizualizacja
+plt.figure('2. Prognozowanie przed uczeniem, parametry random.')
+plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
+plt.scatter(X_test, y_test, c='y', s=2, label="test")  
+plt.scatter(X_test, y_preds, c='r', s=2, label="prognoza")  
+plt.legend()
+plt.show(block=False)
+#plt.show(block=True)
 
-# starsza metoda, ale prawie taka sama, w tym przypadku będzie taki sam skutek, ta pierwsza jest zalecana przez PyTorch
-# with torch.no_grad():    
-#     y_preds = model_0(X_test)
-# print(y_test, '\n', y_preds)
-# plot_predictons(predictions=y_preds)
-
-print('....................... minimalizacja błędu modelu przewidywania')
+print('5 ....................... Konfiguracja minimalizacji błędu (loss, optimize)')
 # wskazanie jakie metody będą używane dla obliczeń strat i optymalizacji
-# loss function - pomiar jaki jest błąd między prognozowaniem a wyjściem z danymi prawidłowymi, czym mniejszy błąd tym lepiej
-loss_fn = nn.L1Loss() # algorytmy oblicznia strat https://pytorch.org/docs/stable/nn.html#loss-functions
-# optimizer - gradient descent - bierze dane obliczone z loss function reguluje parametry modelu
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01) # lr = lerning rate, należy go uzależnić w zależności od dokładności danych wejściowych
-# lr jest uzależnione od tego jaką dokładność uczenia chcemy uzyskać, jeżeli paramerty mają być z dokładnością 0.001 to tak trzeba ustawić lr
+# loss function - pomiar pomiędzy prognozowaniem a danymi testowymi, czym mniejszy błąd tym lepiej
+# algorytmy oblicznia strat https://pytorch.org/docs/stable/nn.html#loss-functions
+loss_fn = nn.L1Loss() 
+# optimizer - bierze dane obliczone z loss function i reguluje parametry modelu
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01) 
+# lr = lerning rate, jest uzależnione od tego jaką dokładność uczenia chcemy uzyskać, 
+# jeżeli paramerty mają być z dokładnością 0.001 to tak trzeba ustawić lr
 # algorytmy optymalizacji - https://pytorch.org/docs/stable/optim.html#algorithms
-# loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko inicjalizowane
-            
-print('....................... uczenie i testowanie') 
-# epoch - jeden przebieg pętli z danymi
-epochs = 200 # ilość przebiegów pętli nauki, jest to hyperparameter, ustalamy go sami, przy tych ustawieniach moje spostrzeżenie to (1/lr) * 2
+# loss function i optimazer będą używane w pętli treningu i tam dopiero dadzą efekt, teraz są tylko wybierane
+      
+print('6 ....................... Uczenie i testowanie') 
+# Pętla w której uczymy i testujemy model, objekt automatycznie oblicza straty i optymalizuje parametry(wagi).
+epochs = 200 # ilość przebiegów pętli nauki i testowania, jest to hyperparameter i ustalamy go sami, 
+# wstępnie wartość tego parametru przy regresji liniowej ustalam wg wzoru epochs = (1/lr) * 2 gdzie lr jest wartością ustalaną w optymizerze
 
-# dane które śledzimy
+# listy do wizualizacji strat, uzupełniane w trakcie uczenia i testowania
 epoch_count = []
 loss_values = []
 test_loss_values = []
 
 for epoch in range(epochs):
-    # uczenie    
-    model_0.train()
-    #1. Forward() z obiektu model_0, dane przechodzą przez model i są aktualizowane zgodnie z parametrami, które się aktualizują niżej w pętli
-    y_pred = model_0(X_train) # wynikiem są dane coraz bliższe do rzeczywistych
-    #2. obliczenie strat (loss function) czyli błędu (różnicy między orginałem)
+    
+    model_0.train() # włączenie uczenia
+    #1. Forward() z obiektu model_0, dane przechodzą przez model i są aktualizowane zgodnie z parametrami(wagami), wynikiem są dane coraz bliższe do rzeczywistych
+    y_pred = model_0(X_train)
+    #2. Obliczenie strat (loss function) czyli błędu (różnicy między danymi testowymi a danymi obliczonymi wg aktualnych parametrów)
     loss = loss_fn(y_pred, y_train)
-    #3. Przywrócenie ustawień optymilizataora na default, że by później obliczyć nową optymalizacje
+    #3. Prezejście wstecz gradientu
     optimizer.zero_grad()
     #4. Backpropagation, obliczanie strat do tyłu w sieci żeby obliczyć gradient każdego parametru, żeby zbliżyć się do strat na poziomie zero
     loss.backward() 
     #5. Optymalizacja parametrów modelu, wyregulowanie ich (gradient descent)
     optimizer.step()
 
-    # testy
-    # testing wyłącza różne ustawienia w modelu które nie są potrzebne do testowania, pprzyspiesza to testowanie
-    model_0.eval()
-    with torch.inference_mode(): # wyłacza np, obliczanie gradientu, przyspiesza testowanie
-        # 1. obliczenia forward()
-        test_pred = model_0(X_test)
-        # 2. straty
-        test_loss = loss_fn(test_pred, y_test)
+    model_0.eval() # włączenie testowania, wyłącza różne ustawienia w modelu które nie są potrzebne do testowania, przyspiesza to testowanie
+    with torch.inference_mode(): # wyłącza np: obliczanie gradientu, przyspiesza testowanie
+        test_pred = model_0(X_test) # forward()
+        test_loss = loss_fn(test_pred, y_test) # straty
 
-    if epoch % 10 == 0:
-        epoch_count.append(epoch)
-        loss_values.append(loss)
-        test_loss_values.append(test_loss)
-        # print(epoch, loss, test_loss)
-        # print(model_0.state_dict())
+    epoch_count.append(epoch)
+    loss_values.append(loss)
+    test_loss_values.append(test_loss)
 
-# krzywe strat
-plt.figure(1)
-plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Train loss")  
-plt.plot(epoch_count, test_loss_values, label="Test loss")  
-plt.title("Training and test loss curves")
-plt.ylabel("Loss")
-plt.xlabel("Epochs")
+# wizualizacja
+plt.figure('3. Krzywe strat uczenia i testu.')
+plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")  # wymagany casting tensor->numpy
+plt.plot(epoch_count, test_loss_values, label="Starty test")  
+plt.ylabel("Starty")
 plt.legend()
 plt.show(block=False)
+#plt.show(block=True)
 
-# prognozy po nauce    
-print(model_0.state_dict()) # obliczone parametry
+print('7 ....................... Prognozowanie - po uczeniu.')  
 with torch.inference_mode(): 
     y_preds = model_0(X_test)
-plot_predictons(predictions=y_preds)    
+# wizualizacja
+plt.figure('4. Prognozowanie po uczeniu.')
+plt.scatter(X_train, y_train, c='b', s=2, label="uczenie")  
+plt.scatter(X_test, y_test, c='y', s=2, label="test")  
+plt.scatter(X_test, y_preds, c='r', s=2, label="prognoza")  
+plt.legend()
+#plt.show(block=False)
+plt.show(block=True)
+
