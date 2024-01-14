@@ -27,7 +27,7 @@ class LinearRegressionModel(nn.Module):
     def __init__(self) :
         super().__init__()
         self.linear_layer = nn.Linear(in_features=1, out_features=1) 
-
+        
     def forward(self, x: torch.Tensor) -> torch.Tensor:
        return self.linear_layer(x)       
 
@@ -44,7 +44,8 @@ loss_fn = nn.L1Loss()
 optimizer = torch.optim.SGD(params=model_1.parameters(), lr=0.01) 
 print('Parametry modelu przed uczeniem, idealne to (0.7, 0.3)', model_1.state_dict()) # sprawdzenie parametrów modelu
 
-print('4 ....................... Wizualizacja przed uczeniem')        
+print('4 ....................... Wizualizacja przed uczeniem')      
+model_1.eval()  
 with torch.inference_mode(): 
     y_preds = model_1(X_test) 
 # wizualizacja
@@ -58,7 +59,6 @@ plt.show(block=False)
 
 print('5 ....................... Uczenie i testowanie') 
 epochs = 200 
-
 epoch_count = []
 loss_values = []
 test_loss_values = []
@@ -93,6 +93,7 @@ plt.show(block=False)
 #plt.show(block=True)
 
 print('6 ....................... Prognozowanie - po uczeniu.')  
+model_1.eval()  
 with torch.inference_mode(): 
     y_preds = model_1(X_test) 
 # wizualizacja
