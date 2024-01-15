@@ -58,7 +58,7 @@ plt.show(block=False)
 #plt.show(block=True)
 
 print('5 ....................... Uczenie i testowanie') 
-epochs = 200 
+epochs = 200
 epoch_count = []
 loss_values = []
 test_loss_values = []
