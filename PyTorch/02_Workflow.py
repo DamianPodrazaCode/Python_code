@@ -6,7 +6,7 @@ import numpy as np
 
 # Ustawienie urządzenia którego będzie używał PyTorch ('cpu', 'cuda')
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print('Używam urządzenia:', device)
+print('Używam urządzenia:', device) #
 
 # Model treningowy całkowicie liniowy, wszystkie dane leżą na lini:
 # 1. Stworzenie tensorów które mają wartości idealne, znane są również parametry(wagi). Rozdzielenie danych na uczenia i testowe.
