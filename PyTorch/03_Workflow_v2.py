@@ -29,7 +29,7 @@ class LinearRegressionModel(nn.Module):
         self.linear_layer = nn.Linear(in_features=1, out_features=1) 
         
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-       return self.linear_layer(x)       
+       return self.linear_layer(x)   # podaje się x a zwraca y (y=ax+b)    
 
 print('3 ....................... Stworzenie objekt modelu, konfiguracja strat i optymalizacji')        
 model_1 = LinearRegressionModel()  
