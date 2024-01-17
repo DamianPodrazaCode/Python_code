@@ -61,15 +61,17 @@ class CircleModelV0(nn.Module):
     def __init__(self):
         super().__init__()
         # tworzenie warstw sieci neuronowej 
-        self.layer_1 = nn.Linear(in_features=2, out_features=5) # in_features=2 - wejście do sieci -> dwie dane wejściowe z X, out_features=5 ukryte dwie sieci
-        self.layer_2 = nn.Linear(in_features=5, out_features=1) # in_features=5 - wejście z sieci ukrytej z poprzedniej warstwy, out_features=1 wyjście z odpowiedziami
+        self.layer_1 = nn.Linear(in_features=2, out_features=128) # in_features=2 - wejście do sieci -> dwie dane wejściowe z X, out_features=5 ukryte dwie sieci
+        self.layer_1_2 = nn.ReLU()
+        self.layer_2 = nn.Linear(in_features=128, out_features=1) # in_features=5 - wejście z sieci ukrytej z poprzedniej warstwy, out_features=1 wyjście z odpowiedziami
     
     # metoda kalkulacji sieci neuronowej        
     def forward(self, x):
-        return self.layer_2(self.layer_1(x)) # x wchodzi do warstwy 1, a warstwa 1 wchodzi do warstwy 2, z której wychodzą odpowiedzi
+        # return self.layer_2(self.layer_1(x)) # x wchodzi do warstwy 1, a warstwa 1 wchodzi do warstwy 2, z której wychodzą odpowiedzi
+        return self.layer_2(self.layer_1_2(self.layer_1(x))) 
     
 model_0 = CircleModelV0().to(device)
-print(model_0)
+# print(model_0)
 #print(model_0.state_dict())
 
 # print(next(model_0.parameters()).device) # info z jakiego urządzenia korzysta instancja
@@ -78,8 +80,9 @@ print(model_0)
 # stworzenie instancji modelu w najprostrzy sposób, to jest to samo co klasa wyżej, 
 # tylko w ten sposób dostaje się z automatu funkcje forward i nie można nic w niej zmienić
 # model_0 = nn.Sequential(
-#     nn.Linear(in_features=2, out_features=5),
-#     nn.Linear(in_features=5, out_features=1)
+#     nn.Linear(in_features=2, out_features=128),
+#     # nn.ReLU(),
+#     nn.Linear(in_features=128, out_features=1)
 # ).to(device)
 # print(model_0)
 # print(model_0.state_dict())
@@ -116,7 +119,8 @@ print(model_0)
 # optimizer - próbuje skorygować błąd zmierzony przez los function
 
 loss_fn = nn.BCEWithLogitsLoss() # sigmoid activation function build-in
-optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.03)
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.1)
+# optimizer = torch.optim.Adam(params=model_0.parameters(), lr=0.1)
 
 # Obliczanie dokładności - jaka jest poprawność modelu dla 100 próbek
 def accuracy_fn(y_true, y_pred):
@@ -132,7 +136,7 @@ y_test = y_test.to(device)
 
 # model uczenia
 torch.manual_seed(42)  
-epochs = 1000
+epochs = 100
 
 epoch_count = []
 loss_values = []
@@ -159,20 +163,19 @@ for epoch in range(epochs):
         test_pred = torch.round(torch.sigmoid(test_logits))
         test_loss = loss_fn(test_logits, y_test) 
         test_acc = accuracy_fn(y_true=y_test, y_pred=test_pred)
-        
+        # print(test_acc)
+           
     epoch_count.append(epoch)
     loss_values.append(loss)
     test_loss_values.append(test_loss)
-    print(test_acc)
-    
     
 # wizualizacja
-# plt.figure('Krzywe strat uczenia i testu.')
-# plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")  # wymagany casting tensor->numpy
-# plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test")  
-# plt.ylabel("Starty")
-# plt.legend()
-# plt.show(block=False)
+plt.figure('Krzywe strat uczenia i testu.')
+plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")  # wymagany casting tensor->numpy
+plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test")  
+plt.ylabel("Starty")
+plt.legend()
+plt.show(block=False)
 #plt.show(block=True)
 
 # wizualizacja
