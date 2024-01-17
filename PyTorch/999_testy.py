@@ -31,3 +31,6 @@ import numpy as np
     #     epoch_count.append(epoch)
     #     loss_values.append(loss)
     #     test_loss_values.append(test_loss)
+    
+lista = [[1,2,3], [4,5,6]]
+print(lista)
