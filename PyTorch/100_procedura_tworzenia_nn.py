@@ -1,3 +1,4 @@
+# 0. Ustalenie urządzenia obliczającego ('cpu', 'cuda', 'ROCm')
 # 1. Stworzyć lub wczytać dane do nauki i testu (generator lub z dysku).
 # 2. Przygotować w odpowiednim formacie (dane wejściowe pogrupowane, dane wyjściowe).
 # 3. Podzielić na dane uczenia i dane do testu.

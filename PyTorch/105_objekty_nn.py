@@ -32,7 +32,7 @@ model1 = nn.Sequential(
 # tworzona jest odrazu instancja sieci wraz z kolejnością jej działania, czyli ten zapis całkowicie zastępuje poprzedni, nie trzeba tworzyć klasy
 
 # ------------------------------------------------------------------------------------------------------------------
-# tworzenie klasy sieci nn nie liniowej
+# tworzenie klasy sieci nn nie liniowej (kombinacja sieci liniowych i nieliniowych funkcji w celu znalezienia wzorca)
 class LinearModel(nn.Module):
     def __init__(self):
         super().__init__()
