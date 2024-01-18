@@ -32,5 +32,7 @@ import numpy as np
     #     loss_values.append(loss)
     #     test_loss_values.append(test_loss)
     
+# print(next(model_0.parameters()).device) # info z jakiego urządzenia korzysta instancja    
+    
 lista = [[1,2,3], [4,5,6]]
 print(lista)
