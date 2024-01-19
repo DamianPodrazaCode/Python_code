@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_circles
 from sklearn.model_selection import train_test_split
 from helper_functions import plot_decision_boundary
+import numpy as np
 
 torch.manual_seed(42)  # ziarnistość random
 torch.cuda.manual_seed(42) # to samo tylko dla cuda
@@ -39,6 +40,10 @@ modelNN = nn.Sequential(
 loss_fn = nn.BCEWithLogitsLoss() 
 optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.2)
 
+epoch_count = []
+loss_values = []
+test_loss_values = []
+
 # pętla uczenia
 epochs = 500
 for epoch in range(epochs):
@@ -57,30 +62,60 @@ for epoch in range(epochs):
     # zaokrąglenie do 0 albo 1
     y_pred = torch.round(y_sigmoid) # tylko to prawidłowo zadziała ponieważ sigmoid jest w przedziale (0,1)
 
+    # test
+    modelNN.eval()
+    with torch.inference_mode():
+        test_out = modelNN(X_test).squeeze() 
+        test_loss = loss_fn(test_out, y_test)
+        test_sigmoid = torch.sigmoid(test_out)
+        test_pred = torch.round(test_sigmoid)
+        
+    epoch_count.append(epoch)
+    loss_values.append(loss)
+    test_loss_values.append(test_loss)        
+    
 #wizualizacja
 print(loss) # poziom strat
 
-plt.figure('Wizualizacja', figsize=(12, 8)) # tytuł i rozmiar plota
+plt.figure('Wizualizacja', figsize=(10, 10)) # tytuł i rozmiar plota
 plt.subplots_adjust(left=0.05, bottom=0.05, top=0.95, right=0.95) # dociągnięcie do ramek wykresów
 
-plt.subplot(2, 3, 1)
-plt.title("Podział obszarów, nauka.")
+plt.subplot(3, 3, 1)
+plt.title("Dane wejściowe")
+plt.scatter(x=X[:, 0].cpu(), y=X[:, 1].cpu(), c=y.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
+
+plt.subplot(3, 3, 2)
+plt.title("Podział obszarów, train.")
 plot_decision_boundary(modelNN, X_train, y_train)
 
-plt.subplot(2, 3, 2)
-plt.title("Gołe dane")
+plt.subplot(3, 3, 3)
+plt.title("Podział obszarów, test.")
+plot_decision_boundary(modelNN, X_test, y_test)
+
+plt.subplot(3, 3, 4)
+plt.title("Out, train.")
 plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_out.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
 
-plt.subplot(2, 3, 3)
-plt.title("Sigmoida")
+plt.subplot(3, 3, 5)
+plt.title("Sigmoida, train.")
 plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_sigmoid.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
 
-plt.subplot(2, 3, 4)
-plt.title("ReLU")
+plt.subplot(3, 3, 6)
+plt.title("ReLU, train.")
 plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_relu.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
 
-plt.subplot(2, 3, 5)
-plt.title("1 - 0")
+plt.subplot(3, 3, 7)
+plt.title("1 - 0 , train.")
 plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_pred.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
+
+plt.subplot(3, 3, 8)
+plt.title("1 - 0 , test.")
+plt.scatter(x=X_test[:, 0].cpu(), y=X_test[:, 1].cpu(), c=test_pred.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
+
+plt.subplot(3, 3, 9)
+plt.title("Straty.")
+plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")
+plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test") 
+plt.legend()
 
 plt.show()
