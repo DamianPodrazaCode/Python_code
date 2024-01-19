@@ -42,8 +42,8 @@ class LinearModel(nn.Module):
         # self.layer1 = nn.Linear(in_features=1, out_features=1) 
         
         # model weilowarstwowy
-        self.layer1 = nn.Linear(in_features=1, out_features=32)
-        self.layer2 = nn.Linear(in_features=32, out_features=1)
+        self.layer1 = nn.Linear(in_features=1, out_features=8)
+        self.layer2 = nn.Linear(in_features=8, out_features=1)
                 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
        #return self.layer1(x) 
@@ -58,8 +58,9 @@ modelNN = LinearModel().to(device)
 # ).to(device)
 
 # ------------------------------------------------------------- # 6. Skonfigurować funkcje strat i optymalizacji.
-loss_fn = nn.L1Loss() 
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.1) 
+# loss_fn = nn.L1Loss() 
+loss_fn = nn.MSELoss()
+optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.01) 
 
 # ------------------------------------------------------------- # 7. Pętla nauki i testów.
 # sprawdzenie sieci przed uczeniem
@@ -67,9 +68,9 @@ modelNN.eval()
 with torch.inference_mode(): 
     y_before = modelNN(X_test) 
 plt.subplot(2, 3, 1)
-plt.scatter(X_train.cpu(), y_train.cpu(), c='b', s=2, label="uczenie")  
-plt.scatter(X_test.cpu(), y_test.cpu(), c='y', s=2, label="test")  
-plt.scatter(X_test.cpu(), y_before.cpu(), c='r', s=2, label="nn przed uczeniem")  
+plt.scatter(X_train.cpu(), y_train.cpu(), c='b', s=2, label="Dane do uczenia.")  
+plt.scatter(X_test.cpu(), y_test.cpu(), c='y', s=2, label="Dane do testu.")  
+plt.scatter(X_test.cpu(), y_before.cpu(), c='r', s=2, label="Sieć nn przed uczeniem.")  
 plt.legend()
 
 # listy do wizualizacji
@@ -79,7 +80,7 @@ test_loss_values = []
 acc_values = []
 
 # pętla uczenia i testowania
-epochs = 100
+epochs = 600
 for epoch in range(epochs):
     
     # uczenie
@@ -95,36 +96,27 @@ for epoch in range(epochs):
     with torch.inference_mode(): 
         test_pred = modelNN(X_test) 
         test_loss = loss_fn(test_pred, y_test) 
-        test_acc = accuracy_fn(y_true=y_test, y_pred=test_pred)
 
     # uzupełnianie list
     epoch_count.append(epoch)
     loss_values.append(loss)
     test_loss_values.append(test_loss)
-    acc_values.append(test_acc)
 
-'''
-print('Parametry modelu po uczeniu, idealne to (0.7, 0.3)', model_1.state_dict()) # sprawdzenie parametrów modelu
+# ------------------------------------------------------------- # 8. Wizualiza i wnioski.
 
-# wizualizacja
-plt.figure('Krzywe strat uczenia i testu.')
-plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")  # wymagany casting tensor->numpy
-plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test")  
-plt.ylabel("Starty")
+plt.subplot(2, 3, 2)
+plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie.")  
+plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test.")  
 plt.legend()
-plt.show(block=False)
-#plt.show(block=True)
 
-print('6 ....................... Prognozowanie - po uczeniu.')  
-model_1.eval()  
+# sprawdzenie sieci po uczeniu
+modelNN.eval()  
 with torch.inference_mode(): 
-    y_preds = model_1(X_test) 
-# wizualizacja
-plt.figure('Prognozowanie po uczeniu.')
-plt.scatter(X_train.cpu(), y_train.cpu(), c='b', s=2, label="uczenie")  
-plt.scatter(X_test.cpu(), y_test.cpu(), c='y', s=2, label="test")  
-plt.scatter(X_test.cpu(), y_preds.cpu(), c='r', s=2, label="prognoza")  
+    y_after = modelNN(X_test) 
+plt.subplot(2, 3, 3)
+plt.scatter(X_train.cpu(), y_train.cpu(), c='b', s=2, label="Dane do uczenia.")  
+plt.scatter(X_test.cpu(), y_test.cpu(), c='y', s=2, label="Dane do test.")  
+plt.scatter(X_test.cpu(), y_after.cpu(), c='r', s=2, label="Sieć nn po uczeniu.")  
 plt.legend()
-#plt.show(block=False)
-'''
+
 plt.show()
