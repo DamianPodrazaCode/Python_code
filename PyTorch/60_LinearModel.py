@@ -20,12 +20,13 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # utworzenie lini prostej y = ax + b
 weight, bias = 0.7, 0.3
 start, end, step  = 0, 1, 0.02
+
 # ------------------------------------------------------------- # 2. Przygotować w odpowiednim formacie (dane wejściowe pogrupowane, dane wyjściowe).
 X = torch.arange(start, end, step).unsqueeze(dim = 1) 
 y = weight * X + bias 
 
 # ------------------------------------------------------------- # 3. Podzielić na dane uczenia i dane do testu.
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=None) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=None)                         # << hyperparameter
 
 # ------------------------------------------------------------- # 4. Przekonwertować do tensorów.
 X_train = X_train.to(device)
@@ -60,7 +61,7 @@ modelNN = LinearModel().to(device)
 # ------------------------------------------------------------- # 6. Skonfigurować funkcje strat i optymalizacji.
 # loss_fn = nn.L1Loss() 
 loss_fn = nn.MSELoss()
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.01) 
+optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.01)                                                           # << hyperparameter
 
 # ------------------------------------------------------------- # 7. Pętla nauki i testów.
 # sprawdzenie sieci przed uczeniem
@@ -77,10 +78,9 @@ plt.legend()
 epoch_count = []
 loss_values = []
 test_loss_values = []
-acc_values = []
 
 # pętla uczenia i testowania
-epochs = 600
+epochs = 500                                                                                                    # << hyperparameter
 for epoch in range(epochs):
     
     # uczenie
@@ -104,6 +104,7 @@ for epoch in range(epochs):
 
 # ------------------------------------------------------------- # 8. Wizualiza i wnioski.
 
+# wizualizacja strat
 plt.subplot(2, 3, 2)
 plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie.")  
 plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test.")  
