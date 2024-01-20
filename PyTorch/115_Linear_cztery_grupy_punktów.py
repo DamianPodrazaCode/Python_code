@@ -9,8 +9,8 @@ from helper_functions import plot_decision_boundary
 
 # ------------------------------------------------------------- Hiperparametry
 RANDOM_SEED = 42
-LEARNING_RATE = 0.01
-EPOCHS = 100
+LEARNING_RATE = 0.1
+EPOCHS = 300
 
 # ------------------------------------------------------------- Ziarnistość random
 torch.manual_seed(RANDOM_SEED)  
@@ -32,7 +32,7 @@ X = torch.from_numpy(X).type(torch.float)
 y = torch.from_numpy(y).type(torch.LongTensor)
 
 # rozdzielenie na dane uczenia i testu (test_size=0.3 to 30% testu i 70% uczenia)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=RANDOM_SEED) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42) 
 
 # ------------------------------------------------------------- Ustawienie danych na urządzenie
 X_train, y_train = X_train.to(device), y_train.to(device)
@@ -40,11 +40,9 @@ X_test, y_test = X_test.to(device), y_test.to(device)
 
 # ------------------------------------------------------------- Zdefiniowanie i stworzenie instancji modeluNN
 modelNN = nn.Sequential(
-    nn.Linear(in_features=2, out_features=64),
-    nn.ReLU(),
-    nn.Linear(in_features=64, out_features=64),
-    nn.ReLU(),
-    nn.Linear(in_features=64, out_features=4)
+    #nn.Linear(in_features=2, out_features=64),
+    #nn.Linear(in_features=64, out_features=64),
+    nn.Linear(in_features=2, out_features=4)
 ).to(device)
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
