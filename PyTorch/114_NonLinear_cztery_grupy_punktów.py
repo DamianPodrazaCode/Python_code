@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from sklearn.datasets import make_circles
+from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
@@ -9,8 +9,8 @@ from helper_functions import plot_decision_boundary
 
 # ------------------------------------------------------------- Hiperparametry
 RANDOM_SEED = 42
-LEARNING_RATE = 0.2
-EPOCHS = 500
+LEARNING_RATE = 0.01
+EPOCHS = 100
 
 # ------------------------------------------------------------- Ziarnistość random
 torch.manual_seed(RANDOM_SEED)  
@@ -22,11 +22,14 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # ------------------------------------------------------------- Stworzenie lub wczytanie danych, oraz podzielenie ich na: do uczenia, do testu
 # X - wejścia do sieci, y - wyjcie z sieci
-n_samples = 1000 
-X, y = make_circles(n_samples, noise=0.03, random_state=42) 
+NUM_SAMPLES = 1000 # ilość próbek
+NUM_FEATURES = 2 # ilość wymiarów (x,y)
+NUM_CENTERS = 4 # ilość blob
+X, y = make_blobs(n_samples=NUM_SAMPLES, n_features=NUM_FEATURES, centers=NUM_CENTERS, cluster_std=1.5, random_state=RANDOM_SEED)
 
+# cast na tensory
 X = torch.from_numpy(X).type(torch.float)
-y = torch.from_numpy(y).type(torch.float)
+y = torch.from_numpy(y).type(torch.LongTensor)
 
 # rozdzielenie na dane uczenia i testu (test_size=0.3 to 30% testu i 70% uczenia)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=RANDOM_SEED) 
@@ -37,22 +40,24 @@ X_test, y_test = X_test.to(device), y_test.to(device)
 
 # ------------------------------------------------------------- Zdefiniowanie i stworzenie instancji modeluNN
 modelNN = nn.Sequential(
-    nn.Linear(in_features=2, out_features=128),
+    nn.Linear(in_features=2, out_features=64),
     nn.ReLU(),
-    nn.Linear(in_features=128, out_features=128),
+    nn.Linear(in_features=64, out_features=64),
     nn.ReLU(),
-    nn.Linear(in_features=128, out_features=1)
+    nn.Linear(in_features=64, out_features=4)
 ).to(device)
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
-loss_fn = nn.BCEWithLogitsLoss() 
+loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()
 with torch.inference_mode():
-    test_out = modelNN(X_test).squeeze() 
-    test_pred = torch.sigmoid(test_out)
+    test_out = modelNN(X_test).squeeze()
+    test_pred = torch.softmax(test_out, dim=1) # (y_out, dim=1) oznacza weź z tablicy cały wymiar pierwszy
+    test_pred = torch.argmax(test_pred, dim=1)
+    
         
 plt.figure('Wizualizacja', figsize=(10, 10))
 plt.subplots_adjust(left=0.05, bottom=0.05, top=0.95, right=0.95) # dociągnięcie wykresó do ramek okna
@@ -86,21 +91,23 @@ for epoch in range(EPOCHS):
     loss.backward() 
     optimizer.step()
 
-    y_pred = torch.round(torch.sigmoid(y_out))
+    y_pred = torch.softmax(y_out, dim=1) # (y_out, dim=1) oznacza weź z tablicy cały wymiar pierwszy
+    y_pred = torch.argmax(y_pred, dim=1)
     
     # test
     modelNN.eval()
     with torch.inference_mode():
-        test_out = modelNN(X_test).squeeze()
+        test_out = modelNN(X_test).squeeze() 
         test_loss = loss_fn(test_out, y_test) 
-        test_pred = torch.round(torch.sigmoid(test_out))
+        test_pred = torch.softmax(test_out, dim=1) # (y_out, dim=1) oznacza weź z tablicy cały wymiar pierwszy
+        test_pred = torch.argmax(test_pred, dim=1)
+
     
     epoch_count.append(epoch)
     loss_values.append(loss)
     test_loss_values.append(test_loss)
     
 # ------------------------------------------------------------- Wizualizacja po uczeniu
-
 plt.subplot(3, 3, 4)
 plt.title("Model po uczeniu, train.")
 plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_pred.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
@@ -109,7 +116,7 @@ plt.subplot(3, 3, 5)
 plt.title("Model po uczeniu, test.")
 plt.scatter(x=X_test[:, 0].cpu(), y=X_test[:, 1].cpu(), c=test_pred.cpu().detach().numpy(), s=4, cmap=plt.cm.RdYlBu)
 
-plt.subplot(3, 3, 6)                        
+plt.subplot(3, 3, 6)
 plt.title("Straty.")
 plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")
 plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test") 
