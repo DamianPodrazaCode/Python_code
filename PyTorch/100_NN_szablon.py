@@ -9,6 +9,8 @@ from helper_functions import plot_decision_boundary
 
 # ------------------------------------------------------------- Hiperparametry
 RANDOM_SEED = 42
+LEARNING_RATE = 0.1
+EPOCHS = 100
 
 # ------------------------------------------------------------- Ziarnistość random
 torch.manual_seed(RANDOM_SEED)  
@@ -39,7 +41,7 @@ modelNN = nn.Sequential(
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = 
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.2)
+optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()
@@ -49,6 +51,8 @@ with torch.inference_mode():
         
 plt.figure('Wizualizacja', figsize=(12, 12))
 plt.subplots_adjust(left=0.05, bottom=0.05, top=0.95, right=0.95) # dociągnięcie wykresó do ramek okna
+mngr = plt.get_current_fig_manager()
+mngr.window.geometry("+0+0") 
 
 plt.subplot(3, 3, 1)
 plt.title("Dane wejściowe.")
@@ -67,8 +71,8 @@ plt.scatter(x=X_test[:, 0].cpu(), y=X_test[:, 1].cpu(), c=test_pred.cpu().detach
 epoch_count = []
 loss_values = []
 test_loss_values = []
-epochs = 500
-for epoch in range(epochs):
+
+for epoch in range(EPOCHS):
     
     # uczenie
     modelNN.train()

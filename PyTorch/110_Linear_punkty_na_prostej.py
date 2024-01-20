@@ -9,6 +9,8 @@ from helper_functions import plot_decision_boundary
 
 # ------------------------------------------------------------- Hiperparametry
 RANDOM_SEED = 412
+LEARNING_RATE = 0.01
+EPOCHS = 300
 
 # ------------------------------------------------------------- Ziarnistość random
 torch.manual_seed(RANDOM_SEED)  
@@ -40,7 +42,7 @@ modelNN = nn.Sequential(
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = nn.L1Loss()  
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=0.2)
+optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()
@@ -48,8 +50,10 @@ with torch.inference_mode():
     test_out = modelNN(X_test)
     test_pred = test_out
         
-plt.figure('Wizualizacja', figsize=(12, 12))
+plt.figure('Wizualizacja', figsize=(10, 10))
 plt.subplots_adjust(left=0.05, bottom=0.05, top=0.95, right=0.95) # dociągnięcie wykresó do ramek okna
+mngr = plt.get_current_fig_manager()
+mngr.window.geometry("+0+0")        
 
 plt.subplot(3, 3, 1)
 plt.title("Dane wejściowe.")
@@ -61,13 +65,12 @@ plt.scatter(x=X_train.cpu(), y=y_train.cpu(), c='r', s=4,  label="uczenie")
 plt.scatter(x=test_pred.cpu(), y=test_pred.cpu(), c='y', s=4,  label="test")
 plt.legend()
 
-'''
 # ------------------------------------------------------------- Pętla uczenia i testu
 epoch_count = []
 loss_values = []
 test_loss_values = []
-epochs = 500
-for epoch in range(epochs):
+
+for epoch in range(EPOCHS):
     
     # uczenie
     modelNN.train()
@@ -77,15 +80,14 @@ for epoch in range(epochs):
     loss.backward() 
     optimizer.step()
 
-    y_pred = 
-
+    y_pred = y_out # dodatkowa funkcja aktywacyjna niepotrzebna
     
     # test
     modelNN.eval()
     with torch.inference_mode():
         test_out = modelNN(X_test) 
         test_loss = loss_fn(test_out, y_test) 
-        test_pred = 
+        test_pred = test_out
     
     epoch_count.append(epoch)
     loss_values.append(loss)
@@ -93,26 +95,15 @@ for epoch in range(epochs):
     
 # ------------------------------------------------------------- Wizualizacja po uczeniu
 
-plt.subplot(3, 3, 4)
+plt.subplot(3, 3, 3)
 plt.title("Model po uczeniu, train.")
-plt.scatter(x=X_train[:, 0].cpu(), y=X_train[:, 1].cpu(), c=y_pred.cpu().detach().numpy(), s=4)#, cmap=plt.cm.RdYlBu)
+plt.scatter(x=X_train.cpu(), y=y_train.cpu(), c='r', s=4,  label="uczenie")
+plt.scatter(x=test_pred.cpu(), y=test_pred.cpu(), c='y', s=4,  label="test")
 
-plt.subplot(3, 3, 5)
-plt.title("Model po uczeniu, test.")
-plt.scatter(x=X_test[:, 0].cpu(), y=X_test[:, 1].cpu(), c=test_pred.cpu().detach().numpy(), s=4)#, cmap=plt.cm.RdYlBu)
-
-plt.subplot(3, 3, 6)
+plt.subplot(3, 3, 4)
 plt.title("Straty.")
 plt.plot(epoch_count, np.array(torch.tensor(loss_values).numpy()), label="Starty uczenie")
 plt.plot(epoch_count, np.array(torch.tensor(test_loss_values).numpy()), label="Starty test") 
 plt.legend()
 
-plt.subplot(3, 3, 7)
-plt.title("Obszary train")
-plot_decision_boundary(modelNN, X_train, y_train)
-
-plt.subplot(3, 3, 8)
-plt.title("Obszary test")
-plot_decision_boundary(modelNN, X_test, y_test)
-'''
 plt.show()
