@@ -214,7 +214,12 @@ print(d) # 9
 a = None
 print(a) # None
 
-# -------------- Dict # nieuporządkowana mapa para->wartość 
+lista = list()
+print(lista) # [] -> pusta lista
+lista.append('str')
+print(lista) # ['str']
+
+# -------------- Dict (słownik) # nieuporządkowana mapa para->wartość 
 print('Dictionary')
 mapa = {
     'a': 1,
@@ -232,9 +237,14 @@ lista = [
         'b': 'one',
         'c': True
     },
-        {
+    {
         'a': [4,5,6],
         'b': 'two',
+        'c': False
+    },
+    {
+        123: [4,5,6],  # klucze mogą być jakiekolwiek byle by niebyły możliwe do zmiany "unchangeable"
+        True: 'two',
         'c': False
     }
 ]
@@ -246,3 +256,40 @@ lista[0]['a'][1] = 34
 print(lista[0]) # {'a': [1, 34, 3], 'b': 'one', 'c': True}
 
 # -----------------
+mapa = {
+    'a': [1,2,3,4],
+    'b': 'hello'
+}
+print(mapa) # {'a': [1, 2, 3, 4], 'b': 'hello'}
+
+#print(mapa['c']) # error
+print(mapa.get('c')) # None
+print(mapa.get('c', 111)) # jeżeli nie ma pozycji 'c' to zwróć 111
+
+# ----------------
+print('a' in mapa.keys()) # True
+print('hello' in mapa.keys()) # False
+print('hello' in mapa.values()) # True
+print(mapa.items()) # dict_items([('a', [1, 2, 3, 4]), ('b', 'hello')])
+
+mapa2 = mapa.copy()
+mapa.clear()
+print(mapa) # {}
+print(mapa2) # {'a': [1, 2, 3, 4], 'b': 'hello'}
+mapa = mapa2.copy()
+print(mapa.pop('b')) # hello
+print(mapa) # {'a': [1, 2, 3, 4]}
+mapa = mapa2.copy()
+
+mapa.update({'a': 1234})
+print(mapa) # {'a': 1234, 'b': 'hello'}
+mapa.update({'aaa': 1234})
+print(mapa) # jeżeli niema pola do update to doda nowe {'a': 1234, 'b': 'hello', 'aaa': 1234}
+
+# ------------------ tuples () -> lista nie do edycji
+tLista = (1, 2, 3, 4, 5)
+print(tLista)
+print(tLista[4])
+
+
+
