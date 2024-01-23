@@ -214,6 +214,35 @@ print(d) # 9
 a = None
 print(a) # None
 
-# -------------- Dict
+# -------------- Dict # nieuporządkowana mapa para->wartość 
+print('Dictionary')
+mapa = {
+    'a': 1,
+    'b': 2,
+    'hex': 0x345a,
+    'lista': [1,2,3,4,5]
+}
 
+print(mapa['b']) # 2
+print(mapa) # {'a': 1, 'b': 2, 'hex': 13402, 'lista': [1, 2, 3, 4, 5]}
 
+lista = [
+    {
+        'a': [1,2,3],
+        'b': 'one',
+        'c': True
+    },
+        {
+        'a': [4,5,6],
+        'b': 'two',
+        'c': False
+    }
+]
+print(lista) # [{'a': [1, 2, 3], 'b': 'one', 'c': True}, {'a': [4, 5, 6], 'b': 'two', 'c': False}]
+print(lista[0]) # {'a': [1, 2, 3], 'b': 'one', 'c': True}
+print(lista[0]['b']) # 'one'
+print(lista[0]['a'][1]) # 2
+lista[0]['a'][1] = 34
+print(lista[0]) # {'a': [1, 34, 3], 'b': 'one', 'c': True}
+
+# -----------------
