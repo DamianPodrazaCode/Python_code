@@ -42,7 +42,7 @@ modelNN = nn.Sequential(
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = 
 optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
-
+#optimizer = torch.optim.Adam(params=modelNN.parameters(), lr=LEARNING_RATE)
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()
 with torch.inference_mode():

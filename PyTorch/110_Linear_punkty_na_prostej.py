@@ -19,6 +19,7 @@ torch.cuda.manual_seed(RANDOM_SEED)
 # ------------------------------------------------------------- Wybór urządzenia do obliczeń
 device = "cuda" if torch.cuda.is_available() else "cpu"
 #device = "cpu" # wymuszenie działania na procesorze
+print(device)
 
 # ------------------------------------------------------------- Stworzenie lub wczytanie danych, oraz podzielenie ich na: do uczenia, do testu
 # X - wejścia do sieci, y - wyjcie z sieci
@@ -42,6 +43,7 @@ modelNN = nn.Sequential(
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = nn.L1Loss()  
+# loss_fn = nn.MSELoss()  
 optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
@@ -52,12 +54,12 @@ with torch.inference_mode():
         
 plt.figure('Wizualizacja', figsize=(10, 10))
 plt.subplots_adjust(left=0.05, bottom=0.05, top=0.95, right=0.95) # dociągnięcie wykresó do ramek okna
-mngr = plt.get_current_fig_manager()
-mngr.window.geometry("+0+0")        
+# mngr = plt.get_current_fig_manager()
+# mngr.window.geometry("+0+0")        
 
 plt.subplot(3, 3, 1)
 plt.title("Dane wejściowe.")
-plt.scatter(x=X.cpu(), y=y.cpu(), c='b', s=4, cmap=plt.cm.RdYlBu)
+plt.scatter(x=X.cpu(), y=y.cpu(), c='b', s=4)#, cmap=plt.cm.RdYlBu)
 
 plt.subplot(3, 3, 2)
 plt.title("Model przed uczeniem.")

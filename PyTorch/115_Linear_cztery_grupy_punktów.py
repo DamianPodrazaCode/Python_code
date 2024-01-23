@@ -47,7 +47,8 @@ modelNN = nn.Sequential(
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
+#optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
+optimizer = torch.optim.Adam(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()

@@ -10,7 +10,7 @@ from helper_functions import plot_decision_boundary
 # ------------------------------------------------------------- Hiperparametry
 RANDOM_SEED = 42
 LEARNING_RATE = 0.2
-EPOCHS = 500
+EPOCHS = 100
 
 # ------------------------------------------------------------- Ziarnistość random
 torch.manual_seed(RANDOM_SEED)  
@@ -18,7 +18,7 @@ torch.cuda.manual_seed(RANDOM_SEED)
 
 # ------------------------------------------------------------- Wybór urządzenia do obliczeń
 device = "cuda" if torch.cuda.is_available() else "cpu"
-#device = "cpu" # wymuszenie działania na procesorze
+device = "cpu" # wymuszenie działania na procesorze
 
 # ------------------------------------------------------------- Stworzenie lub wczytanie danych, oraz podzielenie ich na: do uczenia, do testu
 # X - wejścia do sieci, y - wyjcie z sieci
@@ -46,7 +46,8 @@ modelNN = nn.Sequential(
 
 # ------------------------------------------------------------- Konfiguracja funkcji strat i optymalizacji
 loss_fn = nn.BCEWithLogitsLoss() 
-optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
+#optimizer = torch.optim.SGD(params=modelNN.parameters(), lr=LEARNING_RATE)
+optimizer = torch.optim.Adam(params=modelNN.parameters(), lr=LEARNING_RATE)
 
 # ------------------------------------------------------------- Wizualizacja przed uczeniem
 modelNN.eval()
@@ -98,7 +99,7 @@ for epoch in range(EPOCHS):
     epoch_count.append(epoch)
     loss_values.append(loss)
     test_loss_values.append(test_loss)
-    
+
 # ------------------------------------------------------------- Wizualizacja po uczeniu
 
 plt.subplot(3, 3, 4)
