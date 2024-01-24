@@ -286,7 +286,7 @@ dict = {key:value**2 for key,value in simple_dict.items() if value % 2 == 0}
 print(dict) # {'b': 4, 'd': 16}
 
 dict = {i:i*2 for i in [1,2,3,4]}
-print(dict)
+print(dict) # {1: 2, 2: 4, 3: 6, 4: 8}
 # --------------------------    
 # --------------------------    
 # --------------------------    
