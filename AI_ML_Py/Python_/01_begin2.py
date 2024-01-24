@@ -205,10 +205,31 @@ def fun():
 fun()    
 
 # --------------------------    
+# map
+lista = [1,2,3]
 
+def fun_x2(item):
+    return item*2
+
+print(list(map(fun_x2, lista))) # [2, 4, 6]
+print(lista) # [1, 2, 3]
 
 # --------------------------    
+# filter
+lista = [1,2,3]
+
+def fun_odd(item):
+    return item%2 != 0 # zwróci tylko te któresą większe od zera
+
+print(list(filter(fun_odd, lista))) # [1, 3]
+print(lista) # [1, 2, 3]
+
 # --------------------------    
+# zip
+lista1 = [1, 2, 3]
+lista2 = [10, 20, 30]
+print(list(zip(lista1,lista2))) # [(1, 10), (2, 20), (3, 30)]
+
 # --------------------------    
 # --------------------------    
 # --------------------------    
