@@ -175,9 +175,38 @@ def fun(*args, **kwargs):
 fun(1, 2, 3, 4, 5, param1='aaa', param2=12)
 
 #regóła: params, *args, default params, **kwargs
+# def fun(par1, par2, *args, par3='def', **kwargs):
+# --------------------------    
+# scope global
+total = 0
+
+def count():
+    global total #trzeba zadeklarować że będzie urzywane zmienna w zakresie wyższym, zmienna pobiera wartość ale nie zmieni wartości zmiennej zewnętrznej
+    total =+ 1 
+    # return total
+    
+count() 
+print(total)  # 1
+count()
+print(total)  # 1
+
+# scope  nonlocal
+def fun():
+    x = 0
+    def fun1():
+        nonlocal x #zmienna sie zmienia nie tylko lokalnie
+        x += 1
+        print('fun1', x)
+    fun1()
+    print('fun', x)        
+    fun1()
+    print('fun', x)        
+    
+fun()    
 
 # --------------------------    
-# --------------------------    
+
+
 # --------------------------    
 # --------------------------    
 # --------------------------    
