@@ -153,7 +153,29 @@ def fun_info():
 fun_info()
 print(fun_info.__doc__) # a to jest tekst pomocy
 
-# --------------------------    
+# --------------------------  
+# *args **kwargs
+
+def fun(*args):
+    print(*args) # 1 2 3 4 5  -> elementy po kolei
+    print(args) # (1, 2, 3, 4, 5) -> tuple elementów
+    return sum(args)
+print(fun(1, 2, 3, 4, 5)) # 15
+
+def fun(**kwargs):
+    print(*kwargs) # param1 param2 ->lista parametrów
+    print(kwargs) # {'param1': 'aaa', 'param2': 12} -> parametry i wartości w postaci dict
+fun(param1='aaa', param2=12)    
+
+def fun(*args, **kwargs):
+    print(*args) # 1 2 3 4 5  -> elementy po kolei
+    print(args) # (1, 2, 3, 4, 5) -> tuple elementów
+    print(*kwargs) # param1 param2 ->lista parametrów
+    print(kwargs) # {'param1': 'aaa', 'param2': 12} -> parametry i wartości w postaci dict
+fun(1, 2, 3, 4, 5, param1='aaa', param2=12)
+
+#regóła: params, *args, default params, **kwargs
+
 # --------------------------    
 # --------------------------    
 # --------------------------    
