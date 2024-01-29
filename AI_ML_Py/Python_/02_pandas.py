@@ -286,13 +286,88 @@ print(car_sales.groupby(['Colour']).mean(True))
 # Red      87899.000000  4.000000
 # White   113684.500000  4.000000
 
-# import matplotlib.pyplot as plt
-car_sales['Odometer (KM)'].plot()
-plt.show()
+import matplotlib.pyplot as plt
+#car_sales['Odometer (KM)'].plot()
+# car_sales['Odometer (KM)'].hist()
+# plt.show()
 
+car_sales['Price'] = car_sales['Price'].str.replace('$', '').str.replace(',', '').str.replace('.', '').astype(int)
+print(car_sales)
 
+#      Make Colour  Odometer (KM)  Doors    Price
+# 0  Toyota  White         150043      4   400000
+# 1   Honda    Red          87899      4   500000
+# 2  Toyota   Blue          32549      3   700000
+# 3     BMW  Black          11179      5  2200000
+# 4  Nissan  White         213095      4   350000
+# 5  Toyota  Green          99213      4   450000
+# 6   Honda   Blue          45698      4   750000
+# 7   Honda   Blue          54738      4   700000
+# 8  Toyota  White          60000      4   625000
+# 9  Nissan  White          31600      4   970000
+
+# car_sales['Price'].plot()
+# plt.show()
 
 # -----------------------------------------------------------------------------
+# MANIPULACJA DANYMI
+car_sales['Make'] = car_sales['Make'].str.lower()
+print(car_sales['Make'])
+# 0    toyota
+# 1     honda
+# 2    toyota
+# 3       bmw
+# 4    nissan
+# 5    toyota
+# 6     honda
+# 7     honda
+# 8    toyota
+# 9    nissan
+# Name: Make, dtype: object
+
+car_sales_missing = pd.read_csv('Python_/car-sales-missing-data.csv')
+print(car_sales_missing)
+#      Make Colour  Odometer (KM)  Doors       Price
+# 0  Toyota  White       150043.0    4.0   $4,000.00
+# 1   Honda    Red        87899.0    NaN   $5,000.00
+# 2  Toyota   Blue        32549.0    NaN   $7,000.00
+# 3     BMW    NaN        11179.0    5.0  $22,000.00
+# 4  Nissan  White       213095.0    4.0   $3,500.00
+# 5  Toyota  Green            NaN    4.0   $4,500.00
+# 6   Honda   Blue        45698.0    4.0   $7,500.00
+# 7   Honda   Blue        54738.0    4.0   $7,000.00
+# 8  Toyota  White        60000.0    4.0         NaN
+# 9  Nissan    NaN        31600.0    4.0   $9,700.00
+
+car_sales_missing['Odometer (KM)'] = car_sales_missing['Odometer (KM)'].fillna(car_sales_missing['Odometer (KM)'].mean()) # wypełnianie braku średnią z columny
+car_sales_missing['Odometer (KM)'] = car_sales_missing['Odometer (KM)'].round() 
+car_sales_missing['Doors'] = car_sales_missing['Doors'].fillna(car_sales_missing['Doors'].mean())
+car_sales_missing['Doors'] = car_sales_missing['Doors'].round(decimals=0)
+print(car_sales_missing)
+#      Make Colour  Odometer (KM)  Doors       Price
+# 0  Toyota  White       150043.0    4.0   $4,000.00
+# 1   Honda    Red        87899.0    4.1   $5,000.00
+# 2  Toyota   Blue        32549.0    4.1   $7,000.00
+# 3     BMW    NaN        11179.0    5.0  $22,000.00
+# 4  Nissan  White       213095.0    4.0   $3,500.00
+# 5  Toyota  Green        76311.0    4.0   $4,500.00
+# 6   Honda   Blue        45698.0    4.0   $7,500.00
+# 7   Honda   Blue        54738.0    4.0   $7,000.00
+# 8  Toyota  White        60000.0    4.0         NaN
+# 9  Nissan    NaN        31600.0    4.0   $9,700.00
+
+car_sales_missing = car_sales_missing.dropna() # porzuca wiersze które mają nan-y
+#car_sales_missing.dropna(inplace=True) # inplace=True powoduje przypisanie jak wyżej
+print(car_sales_missing)
+#      Make Colour  Odometer (KM)  Doors      Price
+# 0  Toyota  White       150043.0    4.0  $4,000.00
+# 1   Honda    Red        87899.0    4.0  $5,000.00
+# 2  Toyota   Blue        32549.0    4.0  $7,000.00
+# 4  Nissan  White       213095.0    4.0  $3,500.00
+# 5  Toyota  Green        76311.0    4.0  $4,500.00
+# 6   Honda   Blue        45698.0    4.0  $7,500.00
+# 7   Honda   Blue        54738.0    4.0  $7,000.00
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
