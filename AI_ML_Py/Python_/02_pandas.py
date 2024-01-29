@@ -88,7 +88,6 @@ print(car_sales.info())
 # memory usage: 532.0+ bytes
 # None
 
-# print(car_sales.mean()) 
 car_prices = pd.Series([3000, 1500, 111250])
 print(car_prices.mean())
 # 38583.333333333336
@@ -181,7 +180,118 @@ print(animals.loc[4])
 # 4    snake
 # dtype: object
 
+print(animals.loc[1]) # wskazanie po oznaczeniu indeksu
+# panda
+
+print(animals.iloc[1]) # wskazanie po rzeczywistej pozycji od 0
+# dog
+
+print(animals.iloc[:2])
+# 0    cat
+# 2    dog
+
+print(animals.iloc[1:4])
+# 2      dog
+# 4     bird
+# 1    panda
+
+print(car_sales.loc[2])
+# Make                Toyota
+# Colour                Blue
+# Odometer (KM)        32549
+# Doors                    3
+# Price            $7,000.00
+# Name: 2, dtype: object
+
+print(car_sales.loc[:2])
+#      Make Colour  Odometer (KM)  Doors      Price
+# 0  Toyota  White         150043      4  $4,000.00
+# 1   Honda    Red          87899      4  $5,000.00
+# 2  Toyota   Blue          32549      3  $7,000.00
+
+print(car_sales.loc[2:5])
+#      Make Colour  Odometer (KM)  Doors       Price
+# 2  Toyota   Blue          32549      3   $7,000.00
+# 3     BMW  Black          11179      5  $22,000.00
+# 4  Nissan  White         213095      4   $3,500.00
+# 5  Toyota  Green          99213      4   $4,500.00 
+
+print(car_sales['Make'])
+# 0    Toyota
+# 1     Honda
+# 2    Toyota
+# 3       BMW
+# 4    Nissan
+# 5    Toyota
+# 6     Honda
+# 7     Honda
+# 8    Toyota
+# 9    Nissan
+# Name: Make, dtype: object
+
+print(car_sales.Make) # to samo co wyżej tylko z tą różnicą że jak nazwa kolumny będzie ze spacją to niezadziała
+# 0    Toyota
+# 1     Honda
+# 2    Toyota
+# 3       BMW
+# 4    Nissan
+# 5    Toyota
+# 6     Honda
+# 7     Honda
+# 8    Toyota
+# 9    Nissan
+# Name: Make, dtype: object
+
+print(car_sales.Make.loc[2])
+# Toyota
+
+print(car_sales.Make[2])
+# Toyota
+
+print(car_sales[car_sales['Make'] == 'Toyota'])
+#      Make Colour  Odometer (KM)  Doors      Price
+# 0  Toyota  White         150043      4  $4,000.00
+# 2  Toyota   Blue          32549      3  $7,000.00
+# 5  Toyota  Green          99213      4  $4,500.00
+# 8  Toyota  White          60000      4  $6,250.00
+
+print(car_sales[car_sales["Odometer (KM)"] > 100000 ])
+#      Make Colour  Odometer (KM)  Doors      Price
+# 0  Toyota  White         150043      4  $4,000.00
+# 4  Nissan  White         213095      4  $3,500.00
+
 # -----------------------------------------------------------------------------
+
+print(pd.crosstab(car_sales['Make'], car_sales['Doors']))
+# Doors   3  4  5
+# Make
+# BMW     0  0  1
+# Honda   0  3  0
+# Nissan  0  2  0
+# Toyota  1  3  0
+
+print(car_sales.groupby(["Make"]).mean(True)) # grupuje kolumny te które może uśrednić (int, float), łączy wg. klucza, i uśrenia połączone
+#         Odometer (KM)  Doors
+# Make
+# BMW      11179.000000   5.00
+# Honda    62778.333333   4.00
+# Nissan  122347.500000   4.00
+# Toyota   85451.250000   3.75
+
+print(car_sales.groupby(['Colour']).mean(True))
+# Colour
+# Black    11179.000000  5.000000
+# Blue     44328.333333  3.666667
+# Green    99213.000000  4.000000
+# Red      87899.000000  4.000000
+# White   113684.500000  4.000000
+
+# import matplotlib.pyplot as plt
+car_sales['Odometer (KM)'].plot()
+plt.show()
+
+
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
