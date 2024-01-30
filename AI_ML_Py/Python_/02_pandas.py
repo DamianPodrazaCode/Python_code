@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+clear = lambda: os.system('cls')
 
 # -----------------------------------------------------------------------------
 
@@ -421,7 +423,104 @@ print(car_sales)
 # 8  toyota  White          60000      4   625000    5.0             9.1
 # 9  nissan  White          31600      4   970000    5.0             2.3
 
+car_sales['Total fuel used'] = car_sales['Odometer (KM)']/100 * car_sales['Fuel per 100KM']
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800
+
+car_sales['Zeros'] = 0 # kolumna z zerami
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Zeros
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225      0
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708      0
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450      0
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184      0
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265      0
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242      0
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088      0
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564      0
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000      0
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800      0
+
+#clear()
+car_sales['Bools'] = True # kolumna z prawda/fałsz
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Zeros  Bools
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225      0   True
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708      0   True
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450      0   True
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184      0   True
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265      0   True
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242      0   True
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088      0   True
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564      0   True
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000      0   True
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800      0   True
+
+print(car_sales.dtypes)
+# Make                object
+# Colour              object
+# Odometer (KM)        int64
+# Doors                int64
+# Price                int32
+# Seats              float64
+# Fuel per 100KM     float64
+# Total fuel used    float64
+# Zeros                int64
+# Bools                 bool
+# dtype: object
+
+# usuwanie kolumny
+
+car_sales.drop('Zeros', axis=1, inplace=True) # axis=1 oznacza że to kolumna a nie jej index, nr kolumny jest wybierany po nazwie
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708   True
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088   True
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564   True
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000   True
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800   True
+
 # -----------------------------------------------------------------------------
+
+# pobranie randomowo określoną ilość wierszy, np jak mamu sampli 2 000 000, to testy łatwiej jest robić na 200 samplach
+print(car_sales.sample(frac=0.3)) # frac to procent od 0 - 1 -> 0% - 100%
+#      Make Colour  Odometer (KM)  Doors   Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 6   honda   Blue          45698      4  750000    5.0             5.6         2559.088   True
+# 9  nissan  White          31600      4  970000    5.0             4.3         1358.800   True
+# 8  toyota  White          60000      4  625000    5.0             9.1         5460.000   True
+
+# ta metoda miesza wierszami, więc można ją urzyć do wymieszania wierszy tabeli
+car_sales_shufflet = car_sales.sample(frac=1) # frac to procent od 0 - 1 -> 0% - 100%
+print(car_sales_shufflet)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800   True
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708   True
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088   True
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564   True
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000   True
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
+
+
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
