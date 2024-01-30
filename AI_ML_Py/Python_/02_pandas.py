@@ -508,16 +508,59 @@ print(car_sales.sample(frac=0.3)) # frac to procent od 0 - 1 -> 0% - 100%
 car_sales_shufflet = car_sales.sample(frac=1) # frac to procent od 0 - 1 -> 0% - 100%
 print(car_sales_shufflet)
 #      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
-# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
 # 9  nissan  White          31600      4   970000    5.0             4.3         1358.800   True
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
+# 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564   True
+# 8  toyota  White          60000      4   625000    5.0             9.1         5460.000   True
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
 # 1   honda    Red          87899      4   500000    5.0             9.2         8086.708   True
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
+# 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088   True
+
+car_sales_shufflet.reset_index(drop=True, inplace=True) # resetuje index, nie sortuje, drop usuwa stary index
+print(car_sales_shufflet)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 0  nissan  White          31600      4   970000    5.0             4.3         1358.800   True
+# 1  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
+# 2  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
+# 3   honda   Blue          54738      4   700000    5.0             7.8         4269.564   True
+# 4  toyota  White          60000      4   625000    5.0             9.1         5460.000   True
+# 5  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
+# 6   honda    Red          87899      4   500000    5.0             9.2         8086.708   True
+# 7     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
+# 8  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
+# 9   honda   Blue          45698      4   750000    5.0             5.6         2559.088   True
+
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 0  toyota  White         150043      4   400000    5.0             7.5        11253.225   True
+# 1   honda    Red          87899      4   500000    5.0             9.2         8086.708   True
+# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
+# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
+# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
+# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
 # 6   honda   Blue          45698      4   750000    5.0             5.6         2559.088   True
 # 7   honda   Blue          54738      4   700000    5.0             7.8         4269.564   True
-# 4  nissan  White         213095      4   350000    5.0             8.7        18539.265   True
-# 3     bmw  Black          11179      5  2200000    5.0             9.6         1073.184   True
 # 8  toyota  White          60000      4   625000    5.0             9.1         5460.000   True
-# 2  toyota   Blue          32549      3   700000    5.0             5.0         1627.450   True
-# 5  toyota  Green          99213      4   450000    5.0             3.4         3373.242   True
+# 9  nissan  White          31600      4   970000    5.0             4.3         1358.800   True
+
+# wykożystanie funkcji anonimowej lambda na cłej kolumnie (zamiana km na mile)
+
+car_sales['Odometer (KM)'] = car_sales['Odometer (KM)'].apply(lambda x: x / 1.6)
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM  Total fuel used  Bools
+# 0  toyota  White      93776.875      4   400000    5.0             7.5        11253.225   True
+# 1   honda    Red      54936.875      4   500000    5.0             9.2         8086.708   True
+# 2  toyota   Blue      20343.125      3   700000    5.0             5.0         1627.450   True
+# 3     bmw  Black       6986.875      5  2200000    5.0             9.6         1073.184   True
+# 4  nissan  White     133184.375      4   350000    5.0             8.7        18539.265   True
+# 5  toyota  Green      62008.125      4   450000    5.0             3.4         3373.242   True
+# 6   honda   Blue      28561.250      4   750000    5.0             5.6         2559.088   True
+# 7   honda   Blue      34211.250      4   700000    5.0             7.8         4269.564   True
+# 8  toyota  White      37500.000      4   625000    5.0             9.1         5460.000   True
+# 9  nissan  White      19750.000      4   970000    5.0             4.3         1358.800   True
 
 
 
