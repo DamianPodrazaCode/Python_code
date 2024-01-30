@@ -369,6 +369,58 @@ print(car_sales_missing)
 # 7   Honda   Blue        54738.0    4.0  $7,000.00
 
 # -----------------------------------------------------------------------------
+
+# Columny z serii
+
+# dodanie nowej kolumny
+
+seats_column = pd.Series([5,5,5,5,5]) # nowa seria, może mieć mniej pól niż tabela wierszy, reszta uzupełni się nan
+car_sales['Seats'] = seats_column
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats
+# 0  toyota  White         150043      4   400000    5.0
+# 1   honda    Red          87899      4   500000    5.0
+# 2  toyota   Blue          32549      3   700000    5.0
+# 3     bmw  Black          11179      5  2200000    5.0
+# 4  nissan  White         213095      4   350000    5.0
+# 5  toyota  Green          99213      4   450000    NaN
+# 6   honda   Blue          45698      4   750000    NaN
+# 7   honda   Blue          54738      4   700000    NaN
+# 8  toyota  White          60000      4   625000    NaN
+# 9  nissan  White          31600      4   970000    NaN
+
+car_sales['Seats'].fillna(5, inplace=True) # wypełnienie pustych, bez nadpisywania (inplace=True)
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats
+# 0  toyota  White         150043      4   400000    5.0
+# 1   honda    Red          87899      4   500000    5.0
+# 2  toyota   Blue          32549      3   700000    5.0
+# 3     bmw  Black          11179      5  2200000    5.0
+# 4  nissan  White         213095      4   350000    5.0
+# 5  toyota  Green          99213      4   450000    5.0
+# 6   honda   Blue          45698      4   750000    5.0
+# 7   honda   Blue          54738      4   700000    5.0
+# 8  toyota  White          60000      4   625000    5.0
+# 9  nissan  White          31600      4   970000    5.0
+
+# kolumny z list python-a
+
+fuel_economy = [7.5, 9.2, 5.0, 9.6, 8.7, 3.4, 5.6, 7.8, 9.1, 4.3] # lista musi mieć tyle pól ile tablica ma wierszy
+car_sales['Fuel per 100KM'] = fuel_economy
+# car_sales['Fuel per 100KM'] = pd.Series(fuel_economy) # jeżeli nie ma pełnej listy można konwertować do panda series
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors    Price  Seats  Fuel per 100KM
+# 0  toyota  White         150043      4   400000    5.0             7.5
+# 1   honda    Red          87899      4   500000    5.0             9.2
+# 2  toyota   Blue          32549      3   700000    5.0             5.0
+# 3     bmw  Black          11179      5  2200000    5.0             9.6
+# 4  nissan  White         213095      4   350000    5.0             8.7
+# 5  toyota  Green          99213      4   450000    5.0             3.4
+# 6   honda   Blue          45698      4   750000    5.0             5.6
+# 7   honda   Blue          54738      4   700000    5.0             7.8
+# 8  toyota  White          60000      4   625000    5.0             9.1
+# 9  nissan  White          31600      4   970000    5.0             2.3
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
