@@ -475,7 +475,81 @@ print(a3.T) # to co wyżej
 #   [ 9 18]]]
 
 # -----------------------------------------------------------------------------
+# "Element-wise multiplications"
+
+np.random.seed(0)
+
+mat1 = np.random.randint(10, size=(5, 3))
+mat2 = np.random.randint(10, size=(5, 3))
+print(mat1)
+# [[5 0 3]
+#  [3 7 9]
+#  [3 5 2]
+#  [4 7 6]
+#  [8 8 1]]
+
+print(mat2)
+# [[6 7 7]
+#  [8 1 5]
+#  [9 8 9]
+#  [4 3 0]
+#  [3 5 0]]
+
+print(mat1.shape, mat2.shape)
+# (5, 3) (5, 3)
+
+
+# "Element-wise multiplications" oznacza, że mnożenie odbywa się na odpowiadających sobie elementach dwóch tensorów.
+# W tym przypadku macierze muszą mieć tą samą liczbę elementów, jeżeli nie mają dopełnia się je przez reshaping jedynkami
+
+print(mat1 * mat2)
+# [[30  0 21]
+#  [24  7 45]
+#  [27 40 18]
+#  [16 21  0]
+#  [24 40  0]]
+
 # -----------------------------------------------------------------------------
+# Dot product (iloczyn skalarny)
+
+print(mat1)
+# [[5 0 3]
+#  [3 7 9]
+#  [3 5 2]
+#  [4 7 6]
+#  [8 8 1]]
+
+print(mat2)
+# [[6 7 7]
+#  [8 1 5]
+#  [9 8 9]
+#  [4 3 0]
+#  [3 5 0]]
+
+# Dot product (iloczyn skalarny) to operacja matematyczna, która ma zastosowanie w algebrze liniowej i analizie wektorowej.
+# Żeby można było wykonać iloczyn skalarny, to macieże powinny być odpowiednio ułożone, 
+# ilość kolumn w pierwszej musi się zgadzać z ilością wierszy w drugiej.
+
+mat3 = np.dot(mat1, mat2.T)
+
+print(mat2.T)
+# [[6 8 9 4 3]
+#  [7 1 8 3 5]
+#  [7 5 9 0 0]]
+
+print(mat3)
+# [[ 51  55  72  20  15]
+#  [130  76 164  33  44]
+#  [ 67  39  85  27  34]
+#  [115  69 146  37  47]
+#  [111  77 145  56  64]]
+
+print(mat1.shape, mat2.shape, mat3.shape)
+# (5, 3) (5, 3) (5, 5)
+
+# -----------------------------------------------------------------------------
+
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
