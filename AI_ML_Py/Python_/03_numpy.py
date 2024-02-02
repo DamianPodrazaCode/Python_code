@@ -98,7 +98,7 @@ print(np.random.random((5, 5)))
 #  [0.78331081 0.48316437 0.59691352 0.38285312 0.27722661]
 #  [0.40673424 0.29334718 0.03592001 0.75726255 0.91216435]]
 
-random_array_2 = np.random.rand(5, 5) # to samop co wyżej
+random_array_2 = np.random.rand(5, 5) # to samo co wyżej
 print(random_array_2)
 # [[0.82671193 0.84860283 0.49914845 0.04560998 0.9403263 ]
 #  [0.06681904 0.24817085 0.85349467 0.43214257 0.58841649]
@@ -124,7 +124,7 @@ print(random_array_3)
 # Pseudo-random numbers
 # Random Seed
 
-np.random.seed(seed=42) # stały random
+np.random.seed(seed=42) # stały start random
 random_array_4 = np.random.randint(10, size=(5, 3))
 print(random_array_4)
 # [[6 3 7]
@@ -143,7 +143,14 @@ print(random_array_5)
 
 # viewing arraus, matrices
 
-print(np.unique(random_array_4)) # wyświetlenie jakie są elementy w tablicy
+print(random_array_4) 
+# [[6 3 7]
+#  [4 6 9]
+#  [2 6 7]
+#  [4 3 7]
+#  [7 2 5]]
+
+print(np.unique(random_array_4)) # wyświetlenie jakie są niepowtarzalne elementy w tablicy
 # [2 3 4 5 6 7 9]
 
 print('\n', a1, '\n\n', a2, '\n\n', a3)
@@ -155,7 +162,7 @@ print('\n', a1, '\n\n', a2, '\n\n', a3)
 #  [[[ 1  2  3]
 #   [ 4  5  6]
 #   [ 7  8  9]]
-
+#
 #  [[10 11 12]
 #   [13 14 15]
 #   [16 17 18]]]
@@ -171,7 +178,7 @@ print(a3[0])
 #  [4 5 6]
 #  [7 8 9]]
 
-print(a3[:2, :2, :2])
+print(a3[:2, :2, :2]) # wyświetl do drugiej kolumny, drugiego wiersza i drugiego poziomu
 # [[[ 1  2]
 #   [ 4  5]]
 
@@ -277,7 +284,7 @@ print(a2 / a1)
 # [[1.         1.         1.06666667]
 #  [4.         2.5        2.13333333]]
 
-print(a2 // a1)  # dzielenie bez reszt (obcinanie do dołu)
+print(a2 // a1) # dzielenie bez reszt (obcinanie do dołu)
 # [[1. 1. 1.]
 #  [4. 2. 2.]]
 
@@ -319,7 +326,7 @@ print(sum(a1))
 # 6
 print(np.sum(a1))
 # 6
-# taki sam wynik, ale powinno się używać m,etod numpy na danych numpy, a metod pythona na danych pythona
+# taki sam wynik, ale powinno się używać metod numpy na danych numpy, a metod pythona na danych pythona
 
 # wielkie tablice
 massive_array = np.random.random(1000000)
@@ -352,7 +359,7 @@ print(a2)
 print(np.mean(a2)) # średnia tablicy
 # 3.6
 
-# Standard deviation to miara rozproszenia danych wokół ich średniej arytmetycznej. Jest to jedna z najczęściej używanych miar w statystyce.
+# Standard deviation (standardowe odchylenie) to miara rozproszenia danych wokół ich średniej arytmetycznej. Jest to jedna z najczęściej używanych miar w statystyce.
 # Standard deviation jest obliczane jako pierwiastek kwadratowy wariancji. 
 # Wariancja mierzy, jak bardzo dane różnią się od średniej, a standard deviation dostarcza miary tego rozrzutu w jednostkach oryginalnych danych.
 print(np.std(a2)) # standardowe odchylenie
@@ -500,7 +507,8 @@ print(mat1.shape, mat2.shape)
 
 
 # "Element-wise multiplications" oznacza, że mnożenie odbywa się na odpowiadających sobie elementach dwóch tensorów.
-# W tym przypadku macierze muszą mieć tą samą liczbę elementów, jeżeli nie mają dopełnia się je przez reshaping jedynkami
+# Macierze muszą mieć tą samą liczbę elementów, jeżeli nie mają dopełnia się je przez reshaping jedynkami.
+# Monoży się element przez element.
 
 print(mat1 * mat2)
 # [[30  0 21]
@@ -527,15 +535,22 @@ print(mat2)
 #  [3 5 0]]
 
 # Dot product (iloczyn skalarny) to operacja matematyczna, która ma zastosowanie w algebrze liniowej i analizie wektorowej.
-# Żeby można było wykonać iloczyn skalarny, to macieże powinny być odpowiednio ułożone, 
+# Żeby można było wykonać iloczyn skalarny, to macieże powinny być odpowiednio ułożone, i mieć odpowiedni shape,
 # ilość kolumn w pierwszej musi się zgadzać z ilością wierszy w drugiej.
 
-mat3 = np.dot(mat1, mat2.T)
+print(mat1)
+# [[5 0 3]
+#  [3 7 9]
+#  [3 5 2]
+#  [4 7 6]
+#  [8 8 1]]
 
 print(mat2.T)
 # [[6 8 9 4 3]
 #  [7 1 8 3 5]
 #  [7 5 9 0 0]]
+
+mat3 = np.dot(mat1, mat2.T)
 
 print(mat3)
 # [[ 51  55  72  20  15]
