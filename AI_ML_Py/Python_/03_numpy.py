@@ -563,19 +563,141 @@ print(mat1.shape, mat2.shape, mat3.shape)
 # (5, 3) (5, 3) (5, 5)
 
 # -----------------------------------------------------------------------------
+# Example dot product
 
+np.random.seed(0)
+sales_amounts = np.random.randint(20, size=(5, 3))
+print(sales_amounts)
+# [[12 15  0]
+#  [ 3  3  7]
+#  [ 9 19 18]
+#  [ 4  6 12]
+#  [ 1  6  7]]
+
+# produkty
+weekly_sales = pd.DataFrame(sales_amounts,
+                            index=['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'],
+                            columns=['Almond butter', 'Peanut butter', 'Cashew butter'])
+print(weekly_sales)
+#        Almond butter  Peanut butter  Cashew butter
+# Mon               12             15              0
+# Tues               3              3              7
+# Wed                9             19             18
+# Thurs              4              6             12
+# Fri                1              6              7
+
+# ceny
+prices = np.array([10, 8, 12])
+print(prices)
+# [10  8 12]
+
+butter_prices = pd.DataFrame(prices.reshape(1, 3),
+                             index=['Price'],
+                             columns=['Almond butter', 'Peanut butter', 'Cashew butter'])
+print(butter_prices)
+#        Almond butter  Peanut butter  Cashew butter
+# Price             10              8             12
+
+total_sales = prices.dot(sales_amounts.T)
+print(total_sales)
+# [240 138 458 232 142]
 
 # -----------------------------------------------------------------------------
+# comparison operators
+
+print(a1)
+# [1 2 3]
+
+print(a2)
+# [[1.  2.  3.2]
+#  [4.  5.  6.4]]
+
+print(a1 > a2)
+# [[False False False]
+#  [False False False]]
+
+print(a1 < a2)
+# [[False False  True]
+#  [ True  True  True]]
+
 # -----------------------------------------------------------------------------
+# sorting
+
+random_array = np.random.randint(10, size=(3, 5))
+print(random_array)
+# [[7 8 1 5 9]
+#  [8 9 4 3 0]
+#  [3 5 0 2 3]]
+
+# sortowanie w wierszach
+
+print(np.sort(random_array)) # sortowanie wartości
+# [[1 5 7 8 9]
+#  [0 3 4 8 9]
+#  [0 2 3 3 5]]
+
+print(np.argsort(random_array)) # wskazanie indexów po wielkościach
+# [[2 3 0 1 4]
+#  [4 3 2 0 1]
+#  [2 3 0 4 1]]
+
+print(a1)
+# [1 2 3]
+print(np.argmin(a1)) # index minimalnej wartości
+# 0
+print(np.argmax(a1)) # index maxymalnej wartości
+# 2
+
+print(random_array)
+# [[7 8 1 5 9]
+#  [8 9 4 3 0]
+#  [3 5 0 2 3]]
+
+print(np.argmax(random_array, axis=0)) # wartoś maxymalna w kolumnach, od góry w dół od 0
+# [1 1 1 0 0]
+print(np.argmax(random_array, axis=1)) # wartość maxymalna w wierszach, od lewej
+# [4 1 1]
+
 # -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
+
+# Example
+
+from matplotlib.image import imread
+
+panda = imread('Python_\images\panda.png')
+
+print(type(panda))
+# <class 'numpy.ndarray'>
+
+print(panda.size, panda.shape, panda.ndim)
+# 24465000 (2330, 3500, 3) 3
+
+print(panda[:1])
+# [[[0.05490196 0.10588235 0.06666667]
+#   [0.05490196 0.10588235 0.06666667]
+#   [0.05490196 0.10588235 0.06666667]
+#   ...
+#   [0.16470589 0.12941177 0.09411765]
+#   [0.16470589 0.12941177 0.09411765]
+#   [0.16470589 0.12941177 0.09411765]]]
+
+car = imread('Python_\images\car-photo.png')
+print(car[:1])
+# [[[0.5019608  0.50980395 0.4862745  1.        ]
+#   [0.3372549  0.34509805 0.30588236 1.        ]
+#   [0.20392157 0.21568628 0.14901961 1.        ]
+#   ...
+#   [0.64705884 0.7058824  0.54901963 1.        ]
+#   [0.59607846 0.63529414 0.45882353 1.        ]
+#   [0.44705883 0.47058824 0.3372549  1.        ]]]
+
+dog =  imread('Python_\images\dog-photo.png')
+print(dog[:1])
+# [[[0.70980394 0.80784315 0.88235295 1.        ]
+#   [0.72156864 0.8117647  0.8862745  1.        ]
+#   [0.7411765  0.8156863  0.8862745  1.        ]
+#   ...
+#   [0.49803922 0.6862745  0.8392157  1.        ]
+#   [0.49411765 0.68235296 0.8392157  1.        ]
+#   [0.49411765 0.68235296 0.8352941  1.        ]]]
+
