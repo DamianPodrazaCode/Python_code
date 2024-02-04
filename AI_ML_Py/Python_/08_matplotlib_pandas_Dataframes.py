@@ -50,8 +50,50 @@ print(car_sales)
 # 8  Toyota  White          60000      4   $6,250.00
 # 9  Nissan  White          31600      4   $9,700.00
 
-car_sales['Price'] = car_sales['Price'].str.replace('$', '').str.replace(',', '').str.replace('.', '')
+car_sales['Price'] = car_sales['Price'].str.replace('$', '').str.replace(',', '').str.replace('.00', '')
+# car_sales['Price'] = car_sales['Price'].str[:-2]
 print(car_sales)
+#      Make Colour  Odometer (KM)  Doors  Price
+# 0  Toyota  White         150043      4   4000
+# 1   Honda    Red          87899      4   5000
+# 2  Toyota   Blue          32549      3   7000
+# 3     BMW  Black          11179      5  22000
+# 4  Nissan  White         213095      4   3500
+# 5  Toyota  Green          99213      4   4500
+# 6   Honda   Blue          45698      4   7500
+# 7   Honda   Blue          54738      4   7000
+# 8  Toyota  White          60000      4   6250
+# 9  Nissan  White          31600      4   9700
+
+car_sales['Price'] = car_sales['Price'].astype(int) # zamiana z str na int
+car_sales['Sale Date'] = pd.date_range('1/1/2020', periods=len(car_sales))
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors  Price  Sale Date
+# 0  Toyota  White         150043      4   4000 2020-01-01
+# 1   Honda    Red          87899      4   5000 2020-01-02
+# 2  Toyota   Blue          32549      3   7000 2020-01-03
+# 3     BMW  Black          11179      5  22000 2020-01-04
+# 4  Nissan  White         213095      4   3500 2020-01-05
+# 5  Toyota  Green          99213      4   4500 2020-01-06
+# 6   Honda   Blue          45698      4   7500 2020-01-07
+# 7   Honda   Blue          54738      4   7000 2020-01-08
+# 8  Toyota  White          60000      4   6250 2020-01-09
+# 9  Nissan  White          31600      4   9700 2020-01-10
+
+car_sales['Total Sales'] = car_sales['Price'].cumsum()
+print(car_sales)
+#      Make Colour  Odometer (KM)  Doors  Price  Sale Date  Total Sales
+# 0  Toyota  White         150043      4   4000 2020-01-01         4000
+# 1   Honda    Red          87899      4   5000 2020-01-02         9000
+# 2  Toyota   Blue          32549      3   7000 2020-01-03        16000
+# 3     BMW  Black          11179      5  22000 2020-01-04        38000
+# 4  Nissan  White         213095      4   3500 2020-01-05        41500
+# 5  Toyota  Green          99213      4   4500 2020-01-06        46000
+# 6   Honda   Blue          45698      4   7500 2020-01-07        53500
+# 7   Honda   Blue          54738      4   7000 2020-01-08        60500
+# 8  Toyota  White          60000      4   6250 2020-01-09        66750
+# 9  Nissan  White          31600      4   9700 2020-01-10        76450
+
 
 
 # x = np.random.randn(1000)
