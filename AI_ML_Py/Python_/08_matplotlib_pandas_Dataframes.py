@@ -152,5 +152,66 @@ print(car_sales)
 # car_sales["Odometer (KM)"].plot.hist(bins=20) # ilość słupków
 # car_sales["Odometer (KM)"].plot.hist(bins=50)
 
+heart_disease = pd.read_csv('Python_\heart-disease.csv')
+print(heart_disease)
+#      age  sex  cp  trestbps  chol  fbs  restecg  thalach  exang  oldpeak  slope  ca  thal  target
+# 0     63    1   3       145   233    1        0      150      0      2.3      0   0     1       1
+# 1     37    1   2       130   250    0        1      187      0      3.5      0   0     2       1
+# 2     41    0   1       130   204    0        0      172      0      1.4      2   0     2       1
+# 3     56    1   1       120   236    0        1      178      0      0.8      2   0     2       1
+# 4     57    0   0       120   354    0        1      163      1      0.6      2   0     2       1
+# ..   ...  ...  ..       ...   ...  ...      ...      ...    ...      ...    ...  ..   ...     ...
+# 298   57    0   0       140   241    0        1      123      1      0.2      1   0     3       0
+# 299   45    1   3       110   264    0        1      132      0      1.2      1   0     3       0
+# 300   68    1   0       144   193    1        1      141      0      3.4      1   2     3       0
+# 301   57    1   0       130   131    0        1      115      1      1.2      1   1     3       0
+# 302   57    0   1       130   236    0        0      174      0      0.0      1   1     2       0
+
+# heart_disease['age'].plot.hist(bins=10)
+# heart_disease.plot.hist(figsize=(10,10), subplots=True) # wszystkie kolumny 
+
+over_50 = heart_disease[heart_disease['age'] > 50]
+print(over_50, len(over_50))
+# [303 rows x 14 columns]
+#      age  sex  cp  trestbps  chol  fbs  restecg  thalach  exang  oldpeak  slope  ca  thal  target
+# 0     63    1   3       145   233    1        0      150      0      2.3      0   0     1       1
+# 3     56    1   1       120   236    0        1      178      0      0.8      2   0     2       1
+# 4     57    0   0       120   354    0        1      163      1      0.6      2   0     2       1
+# 5     57    1   0       140   192    0        1      148      0      0.4      1   0     1       1
+# 6     56    0   1       140   294    0        0      153      0      1.3      1   0     2       1
+# ..   ...  ...  ..       ...   ...  ...      ...      ...    ...      ...    ...  ..   ...     ...
+# 297   59    1   0       164   176    1        0       90      0      1.0      1   2     1       0
+# 298   57    0   0       140   241    0        1      123      1      0.2      1   0     3       0
+# 300   68    1   0       144   193    1        1      141      0      3.4      1   2     3       0
+# 301   57    1   0       130   131    0        1      115      1      1.2      1   1     3       0
+# 302   57    0   1       130   236    0        0      174      0      0.0      1   1     2       0
+#
+# [208 rows x 14 columns] 208
+
+# Pyplot method - bezpośrednia metoda z pandas
+# over_50.plot(kind='scatter', x='age', y='chol', c='target')
+
+# OO method mix pyplod
+# fix, ax = plt.subplots(figsize=(10,6))
+# over_50.plot(kind='scatter', x='age', y='chol', c='target', ax=ax)
+# ax.set_xlim([45,100]) # ustawienie osi x na długość od 45 do 100 
+# ax.set_ylim([100,2000]) # ustawienie osi y na długość od 100 do 2000 
+
+# Object Oriented (OO) Method on scratch
+# fix, ax = plt.subplots(figsize=(10,6))
+
+# scatter = ax.scatter(x=over_50['age'],
+#                      y=over_50['chol'],
+#                      c=over_50['target'])
+
+# ax.set(title="Heart Disease and Cholesterol Levels",
+#        xlabel='Age',
+#        ylabel='Cholesterol')
+
+# ax.legend(*scatter.legend_elements(), title='Target')
+
+# # dodanie poziomej lini średniej
+# ax.axhline(over_50['chol'].mean(), linestyle='--')
+
 
 plt.show()
