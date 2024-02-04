@@ -3,31 +3,6 @@ import os
 clear = lambda: os.system('cls')
 
 # -----------------------------------------------------------------------------
-
-# Series są jednowymiarowe (1-dimensional)
-series = pd.Series(['bmw', 'toyota', 'honda'])
-print(series)
-# 0       bmw
-# 1    toyota
-# 2     honda
-# dtype: object
-
-colours = pd.Series(['red', 'green', 'blue'])
-print(colours)
-# 0      red
-# 1    green
-# 2     blue
-# dtype: object
-
-# DataFrame są dwuwymiarowe (2-dimensional) i są tworzone z serii
-car_data = pd.DataFrame({'car make':series, 'colour':colours})
-print(car_data)
-#   car make colour
-# 0      bmw    red
-# 1   toyota  green
-# 2    honda   blue
-
-# -----------------------------------------------------------------------------\
     
 # Import data *.CSV
 car_sales = pd.read_csv('Python_/car-sales.csv')
