@@ -12,7 +12,7 @@ RANDOM_SEED = 412
 LEARNING_RATE = 0.002
 EPOCHS = 300
 
-# ------------------------------------------------------------- Ziarnistość random
+# ------------------------------------------------------------- Start random
 torch.manual_seed(RANDOM_SEED)  
 torch.cuda.manual_seed(RANDOM_SEED)
 
@@ -22,7 +22,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(device)
 
 # ------------------------------------------------------------- Stworzenie lub wczytanie danych, oraz podzielenie ich na: do uczenia, do testu
-# X - wejścia do sieci, y - wyjcie z sieci
+# X - wejścia do sieci, y - wyjście z sieci
 weight, bias = 0.7, 0.3
 start, end, step  = 0, 1, 0.02
 X = torch.arange(start, end, step).unsqueeze(dim = 1) 
