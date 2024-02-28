@@ -42,8 +42,10 @@ def plot_decision_boundary(model: torch.nn.Module, X: torch.Tensor, y: torch.Ten
 
     Source - https://madewithml.com/courses/foundations/neural-networks/ (with modifications)
     """
-    # Put everything to CPU (works better with NumPy + Matplotlib)
     device = next(model.parameters()).device
+    plt.style.use('seaborn-v0_8-white')
+    
+    # Put everything to CPU (works better with NumPy + Matplotlib)
     model.to("cpu")
     X, y = X.to("cpu"), y.to("cpu")
 
@@ -77,22 +79,24 @@ def plot_decision_boundary(model: torch.nn.Module, X: torch.Tensor, y: torch.Ten
 # ---------------------------------------------------------------------------------------------
 # Plot linear data or training and test and predictions (optional)
 def plot_predictions(
-    train_data, train_labels, test_data, test_labels, predictions=None
+    train_data, train_labels, test_data, test_labels, predictions=None, title=""
 ):
     """
   Plots linear training data and test data and compares predictions.
   """
-    plt.figure(figsize=(10, 7))
-
+    plt.style.use('seaborn-v0_8-white')
+    plt.figure(figsize=(7, 4))
+    plt.title(title)
+    
     # Plot training data in blue
-    plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
+    plt.scatter(train_data.cpu(), train_labels.cpu(), c="b", s=25, label="Dane treningowe")
 
     # Plot test data in green
-    plt.scatter(test_data, test_labels, c="g", s=4, label="Testing data")
+    plt.scatter(test_data.cpu(), test_labels.cpu(), c="g", s=25, label="Dane testowe")
 
     if predictions is not None:
         # Plot the predictions in red (predictions were made on the test data)
-        plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
+        plt.scatter(test_data.cpu(), predictions.cpu(), c="r", s=4, label="Przewidywania")
 
     # Show the legend
     plt.legend(prop={"size": 14})
@@ -152,23 +156,26 @@ def plot_loss_curves(results):
 
     epochs = range(len(results["train_loss"]))
 
-    plt.figure(figsize=(15, 7))
+    plt.figure(figsize=(11, 5))
 
+    plt.style.use('seaborn-v0_8-whitegrid')
+    
     # Plot loss
     plt.subplot(1, 2, 1)
-    plt.plot(epochs, loss, label="train_loss")
-    plt.plot(epochs, test_loss, label="test_loss")
-    plt.title("Loss")
-    plt.xlabel("Epochs")
+    plt.plot(epochs, loss, label="trening")
+    plt.plot(epochs, test_loss, label="test")
+    plt.title("Funkcja loss")
+    # plt.xlabel("Epochs")
     plt.legend()
 
-    # Plot accuracy
-    plt.subplot(1, 2, 2)
-    plt.plot(epochs, accuracy, label="train_accuracy")
-    plt.plot(epochs, test_accuracy, label="test_accuracy")
-    plt.title("Accuracy")
-    plt.xlabel("Epochs")
-    plt.legend()
+    if accuracy is not None:
+        # Plot accuracy
+        plt.subplot(1, 2, 2)
+        plt.plot(epochs, accuracy, label="trening")
+        plt.plot(epochs, test_accuracy, label="test")
+        plt.title("Dokładność")
+        # plt.xlabel("Epochs")
+        plt.legend()
 
 # ---------------------------------------------------------------------------------------------
 # Pred and plot image function from notebook 04
