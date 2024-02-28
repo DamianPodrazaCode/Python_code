@@ -20,6 +20,7 @@ import requests
 # are in each subdirectory.
 import os
 
+# ---------------------------------------------------------------------------------------------
 def walk_through_dir(dir_path):
     """
     Walks through dir_path returning its contents.
@@ -35,12 +36,14 @@ def walk_through_dir(dir_path):
     for dirpath, dirnames, filenames in os.walk(dir_path):
         print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
 
+# ---------------------------------------------------------------------------------------------
 def plot_decision_boundary(model: torch.nn.Module, X: torch.Tensor, y: torch.Tensor):
     """Plots decision boundaries of model predicting on X in comparison to y.
 
     Source - https://madewithml.com/courses/foundations/neural-networks/ (with modifications)
     """
     # Put everything to CPU (works better with NumPy + Matplotlib)
+    device = next(model.parameters()).device
     model.to("cpu")
     X, y = X.to("cpu"), y.to("cpu")
 
@@ -69,8 +72,9 @@ def plot_decision_boundary(model: torch.nn.Module, X: torch.Tensor, y: torch.Ten
     plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.RdYlBu)
     plt.xlim(xx.min(), xx.max())
     plt.ylim(yy.min(), yy.max())
+    model.to(device)
 
-
+# ---------------------------------------------------------------------------------------------
 # Plot linear data or training and test and predictions (optional)
 def plot_predictions(
     train_data, train_labels, test_data, test_labels, predictions=None
@@ -94,6 +98,7 @@ def plot_predictions(
     plt.legend(prop={"size": 14})
 
 
+# ---------------------------------------------------------------------------------------------
 # Calculate accuracy (a classification metric)
 def accuracy_fn(y_true, y_pred):
     """Calculates accuracy between truth labels and predictions.
@@ -110,6 +115,7 @@ def accuracy_fn(y_true, y_pred):
     return acc
 
 
+# ---------------------------------------------------------------------------------------------
 def print_train_time(start, end, device=None):
     """Prints difference between start and end time.
 
@@ -126,6 +132,7 @@ def print_train_time(start, end, device=None):
     return total_time
 
 
+# ---------------------------------------------------------------------------------------------
 # Plot loss curves of a model
 def plot_loss_curves(results):
     """Plots training curves of a results dictionary.
@@ -163,7 +170,7 @@ def plot_loss_curves(results):
     plt.xlabel("Epochs")
     plt.legend()
 
-
+# ---------------------------------------------------------------------------------------------
 # Pred and plot image function from notebook 04
 # See creation: https://www.learnpytorch.io/04_pytorch_custom_datasets/#113-putting-custom-image-prediction-together-building-a-function
 from typing import List
@@ -236,6 +243,7 @@ def pred_and_plot_image(
     plt.title(title)
     plt.axis(False)
 
+# ---------------------------------------------------------------------------------------------
 def set_seeds(seed: int=42):
     """Sets random sets for torch operations.
 
@@ -247,6 +255,7 @@ def set_seeds(seed: int=42):
     # Set the seed for CUDA torch operations (ones that happen on the GPU)
     torch.cuda.manual_seed(seed)
 
+# ---------------------------------------------------------------------------------------------    
 def download_data(source: str, 
                   destination: str,
                   remove_source: bool = True) -> Path:
