@@ -2,20 +2,7 @@ print('---------------------------------------------operatory logiczne')
 x = True #typ bool
 y = False
 print(type(x))
-'''
-x != y
-x == y 
-x > y
-x < y
-x >= y
-x <= y
-x is y (==)
-x is not y (!=) 
-x and y
-x or y
-x not y
-'a' in 'abc' #sprawdza czy 'a' zawiera się stringu w 'abc' w tym przypadku to True
-'''
+
 
 print('---------------------------------------------instrukcja warunkowa')
 zm1 = 1

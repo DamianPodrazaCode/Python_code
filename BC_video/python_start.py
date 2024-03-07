@@ -1,19 +1,3 @@
-
-print(iVal + jVal)
-print(iVal * jVal)
-print(aVal + bVal)
-print(aVal * bVal)
-
-# operacje + - * /
-x = 3 ** 2  # ** pow
-print(x)
-x = 3 / 2
-print(x)
-x = 3 // 2  # // floor div
-print(x)
-x = 3 % 2  # % - modulo
-print(x)
-
 # Listy []
 # Lista nie musi zawierać elementów jednego typu
 x = ['asdf', 34, "asddf", 654, 45, 2.345, "ssdf", "3245234"]
@@ -224,13 +208,6 @@ print(s)
 strToList = s.split(',')  # podzielenie w miejscach ',', stworzenie listy
 print(strToList)
 
-x = int(strToList[0]) # casting string na int
-y = int(strToList[1])
-z = float(strToList[2]) # casting string na float
-v = complex(strToList[3]) # casting string na zespolone
-print(x + y)
-print(z)
-print(v)
 
 lista = [] #pusta lista, jeszcze nie określona
 item1 = [x,y] #stworzenie elementu listy który jest listą
