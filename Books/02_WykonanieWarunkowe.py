@@ -1,9 +1,3 @@
-print('---------------------------------------------operatory logiczne')
-x = True #typ bool
-y = False
-print(type(x))
-
-
 print('---------------------------------------------instrukcja warunkowa')
 zm1 = 1
 # w przypadku każdej instrukcji zakończonej ':' pod spodem jest albo pojedyncza instrukcjia albo blok instrukcji, 
