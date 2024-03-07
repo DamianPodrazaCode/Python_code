@@ -1,34 +1,7 @@
-# Listy []
-# Lista nie musi zawierać elementów jednego typu
-x = ['asdf', 34, "asddf", 654, 45, 2.345, "ssdf", "3245234"]
-print(x)
-print(x.index(34))      # zwraca indeks wg wartości
-print(x.index("asddf"))  # zwraca indeks wg wartości
-print(x[0])  # wartość po indeksie
-print(x[1])
-print(x[2])
-print(x[3])
+
+
 print(len(x))  # ilość elementów
 print(x[2:6])  # lista od elementu do elementu, taksamo ja w stringach
-
-y = []  # pusta lista
-y.append("asda")  # dodanie elementu do listy
-y.append(99)
-y.insert(1, "2222")  # dodanie od pozycji
-print(y)
-
-print(x)
-x.remove(34)  # usuwanie po wartości nie po indexie
-print(x)
-x.pop(2)  # usuwanie po indexie ze zwrotem stringa
-print(x)
-del x[3]  # usuwa po indexie ale niezwraca stringa
-print(x)
-
-z = x + y  # stworzenie nowej listy i dodawanie innych list
-print(z)
-x.extend(y)  # lista x rozszeżona o liste y
-print(x)
 
 # sortowanie
 x = ['wer', 'gfd', 'vcx', 'hgy', 'jhgf', 'fddde']
@@ -45,13 +18,6 @@ print(x)
 x.reverse()  # odwrucenie listy
 print(x)
 
-# kasowanie
-del z  # kasuje całą liste z pamięci i niemożna się do niej odwołać bo error
-# print(z) error
-print(y)
-y.clear()  # czyści listę, ale lista pusta jest dostępna do zapełnienia
-print(y)
-
 # listy list
 lista = [[1, 2, 3], ["asd", 34.32, 'qwe'], [43.76, 123.32, 65.23, 1, 2]]
 print(lista)  # wszystkie listy
@@ -60,11 +26,8 @@ print(lista[1])
 print(lista[2])
 print(lista[0][1])  # element w liście z listy
 
-# zmiana w liście
-lista = [1, 2, 3, 4, 5, 6, 71]
-print(lista)
-lista[2] = "sdfsd"
-print(lista)
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
 
 # sets {} , tablica z szybkim dostępem, samoukładająca, redukująca, do operacji na zbiorach danych, porównywanie zbiorów, AND OR XOR
 s = {1, 2, 3, 4, 56, 67, 3, 3}
@@ -103,6 +66,8 @@ print(z)
 x = 10
 print(x)
 
+# -------------------------------------------------------------------------------------------------------------------------------------------
+
 # dictionary {k:v, k:v} -> para: key - value
 # tworzenie 1
 d = {'asd': 'dsa', 'qwe': 'ewq', 1: 'jeden', 2: 'dwa', 'trzy': 3, "cztery": 4}
@@ -125,6 +90,9 @@ d['add'] = 'fgdsfgdfg'  # zmiana wartości
 print(d.items())
 del d['add']  # usuwanie pozycji
 print(d.items())
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
 
 # flow control
 

@@ -1,13 +1,5 @@
-# lists -> uporzadkowana sekwencjas objektów
-lista = [1, 2, 3, 4, 5]
-lista = [1.23, 2.34, 3.45]
-lista = ['str1', 'str2', 'str3','str4']
-print(lista[1])
-print(lista)
 print(lista[0:1])
 print(lista[0::2])
-lista[0] = 'trs0' # w przeciwieństwie do string tu można wszystko zmieniać
-print(lista)
 
 lista_copy = lista[:] # kopiuje tworząc nową liste z nowym miejscem w pamięci
 lista_copy[0] = 'copy'
@@ -18,43 +10,10 @@ lista_copy[0] = 'copy'
 print(lista, lista_copy) # ['copy', 'str2', 'str3', 'str4'] ['copy', 'str2', 'str3', 'str4']
 print(len(lista))
 
-print('lista adding')
-# adding
-lista.append('add1')
-print(lista) # ['copy', 'str2', 'insert', 'str3', 'str4', 'add1']
-lista.insert(2, 'insert')
-print(lista) #  ['copy', 'str2', 'insert', 'str3', 'str4', 'add1']
-lista.extend('extend') 
-print(lista) #  ['copy', 'str2', 'insert', 'str3', 'str4', 'add1', 'e', 'x', 't', 'e', 'n', 'd']
-lista.extend(['extend']) # dodaje liste ['copy', 'str2', 'insert', 'str3', 'str4', 'add1', 'e', 'x', 't', 'e', 'n', 'd', 'extend']
-print(lista)
-lista = [1, 2, 3, 4, 5]
-lista.append(10)
-print(lista) # [1, 2, 3, 4, 5, 10]
-lista.insert(2, 20)
-print(lista) # [1, 2, 20, 3, 4, 5, 10]
-lista.extend([30, 40])
-print(lista) # [1, 2, 20, 3, 4, 5, 10, 30, 40]
-
-print('list removing')
-# removing
-lista.pop() 
-print(lista) # usuwanie ostatniego [1, 2, 20, 3, 4, 5, 10, 30]
-lista.pop(0)
-print(lista) # po indeksie od 0 [2, 20, 3, 4, 5, 10, 30]
-lista.remove(20) 
-print(lista) # po wartości [2, 3, 4, 5, 10, 30]
-lista.clear()
-print(lista) # []
-
 # --------------
-lista = ['str1', 'str2', 'str3', 'str4']
-print(lista.index('str2')) # zwraca index stringa (1)
-print(lista.index('str1', 0, 2)) # w zakresie od indexu 0 do indexu 2 (0)
+lista = ['str1', 'str2', 'str3', 'str4']s
 print('str3' in lista) # sprawdzenie czy jest na liście
 print('str3' in 'asd fde rew str2 str3') # sprawdzenie w stringach
-lista.append('str2')
-print(lista) # ['str1', 'str2', 'str3', 'str4', 'str2']
 print(lista.count('str2')) # ilość wystąpień (2)
 
 # -------------
