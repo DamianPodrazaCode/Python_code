@@ -1,14 +1,3 @@
-# bool
-x = True
-# x = False
-print(x)
-print(x < 0)
-print(f'x = {x}')
-print('x =', x)
-print(f'out = {x == 0}')
-print(f'out = {x < 0}')
-print(f'out = {x != 0}')
-print(f'out = {x > 0}')
 
 print(iVal + jVal)
 print(iVal * jVal)
@@ -24,55 +13,6 @@ x = 3 // 2  # // floor div
 print(x)
 x = 3 % 2  # % - modulo
 print(x)
-
-# strings
-x = "ąćźćł"
-z = 'ąćźćł'  # obojętnie czy " " , ' '
-print(x)
-print(f'sdfgsdf {x} {y} {aVal} {bVal}')  # print z formatowaniem
-
-# wylistowanie znaków
-for y in 'asdfas':  # ze stringa
-    print(y, " ", ord(y))  # odr - numer utf8
-for y in x:  # ze stringa w zmiennej
-    print(y, " ", ord(y))  # odr - numer utf8
-
-# z numeru UTF8 na znak
-s1 = chr(104)
-s2 = chr(68)
-print(s1, s2)    # wyświetlanie jako znaków osobnych
-print(s1 + s2)   # łączenie w stringa
-
-# ze znaku na numer UTF8
-z1 = ord("a")
-z2 = ord("$")
-z3 = ord("ę")
-print(z1, z2, z3)
-
-# specjalne znaki
-print("1234\r\n5678")
-print(f'1234\r\n5678')
-print(f'2222{chr(13)+chr(10)}3333')
-print("asd\tasd")  # tab
-
-
-str = "jakiś string - napis czy cos..."
-print(len(str))  # długość
-print(str * 3)  # powielenie
-print(str.replace('.', '!'))  # zamiana
-print(str.replace('string', 'str'))  # zamiana
-print(str.split('-'))  # rozdzielenie d dwóch stringów
-print(str.startswith('j'))  # czy zaczyna się na
-print(str.startswith('.'))  # czy zaczyna się na
-print(str.endswith('.'))  # czy kończy się na
-print(str[2:10])  # wycinek od do
-print(str[2:])  # wycinek od do końca
-print(str[:10])  # wycinek od początku do
-print(str[-5:])  # wycinek ostatnich 5
-print(str.find(' '))   # -1 jak nie znajdzie
-print(str.find(' ', 6, 10))  # znajdź w wycinku, -1 jak nie znajdzie
-# print(str.index('#'))  # jak nieznajdzie to error
-# print(str.index(' ', 6, 10)) # znajdź w wycinku jak nieznajdzie to error
 
 # Listy []
 # Lista nie musi zawierać elementów jednego typu
