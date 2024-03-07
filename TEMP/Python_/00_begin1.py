@@ -1,4 +1,3 @@
-
 # lists -> uporzadkowana sekwencjas objektów
 lista = [1, 2, 3, 4, 5]
 lista = [1.23, 2.34, 3.45]

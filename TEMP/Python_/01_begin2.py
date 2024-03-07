@@ -8,10 +8,6 @@ elif war2:
 else:
     print('end')
     
-# --------------------------    
-# thernary operator
-print('ok') if (war1) else print('else')
-#"wykonaj" if "warunek" else "wykonaj to"
 
 # --------------------------    
 # and or not
