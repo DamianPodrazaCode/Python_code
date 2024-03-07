@@ -1,17 +1,3 @@
-# zmienne bez deklaracji, których typ można zmieniać w locie
-import sys  # https://docs.python.org/3/library/sys.html#sys.float_info
-x = 5 / 23  # automatyczny cast
-y = 'napis'
-print(x, y)
-y = 123.543  # zmiana typu ze string na float
-print(x, y)
-
-# komentarz jednoliniowy
-"""
-komentarz
-wieloliniowy
-"""
-
 # bool
 x = True
 # x = False
@@ -24,28 +10,10 @@ print(f'out = {x < 0}')
 print(f'out = {x != 0}')
 print(f'out = {x > 0}')
 
-# int
-iVal = 234
-print(iVal)
-
-# float
-iVal = 234.3425
-print(iVal)
-print(sys.float_info)
-
-# complex - liczby zespolone
-iVal = 3 + 6j
-jVal = 5 + 6j
-# lub
-aVal = complex(3, 6)
-bVal = complex(5, 6)
-# operacja na liczbach zespolonych
 print(iVal + jVal)
 print(iVal * jVal)
 print(aVal + bVal)
 print(aVal * bVal)
-# pobieranie i wyświetlanie części liczb zespolonych
-print(aVal.real, aVal.imag, iVal.real, iVal.imag)
 
 # operacje + - * /
 x = 3 ** 2  # ** pow
@@ -87,15 +55,6 @@ print(f'1234\r\n5678')
 print(f'2222{chr(13)+chr(10)}3333')
 print("asd\tasd")  # tab
 
-# formatowanie print
-sVal = "asdfg"
-iVal = 234
-# print(sVal + " " + iVal) error połączenia int z str
-# każda zmienna wyświetlana przedzielona przcinkiem
-print("napis", sVal, "int", iVal)
-print(f'napis {sVal} int {iVal}')  # sformatowany print python
-# sformatowany print podobny do printf z C
-print("napis %s int %i" % (sVal, iVal))
 
 str = "jakiś string - napis czy cos..."
 print(len(str))  # długość
