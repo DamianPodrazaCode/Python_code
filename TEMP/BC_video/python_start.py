@@ -1,12 +1,3 @@
-# listy list
-lista = [[1, 2, 3], ["asd", 34.32, 'qwe'], [43.76, 123.32, 65.23, 1, 2]]
-print(lista)  # wszystkie listy
-print(lista[0])  # poszczególna lista
-print(lista[1])
-print(lista[2])
-print(lista[0][1])  # element w liście z listy
-
-
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
 # sets {} , tablica z szybkim dostępem, samoukładająca, redukująca, do operacji na zbiorach danych, porównywanie zbiorów, AND OR XOR
