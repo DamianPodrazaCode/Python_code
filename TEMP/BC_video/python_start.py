@@ -184,3 +184,12 @@ lista.append(item1) #dodanie do listy elementu który jest listą
 lista.append(item2)
 print(lista)
 
+# Zasięg zmiennej.
+x = 'zmienna globalna'
+
+def myFunc():
+    x = 'zmienna lokalna'
+    print(x)
+
+myFunc()
+print(x)
