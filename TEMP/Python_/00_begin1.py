@@ -1,27 +1,7 @@
-print(lista[0:1])
-print(lista[0::2])
-
-lista_copy = lista[:] # kopiuje tworząc nową liste z nowym miejscem w pamięci
-lista_copy[0] = 'copy'
-print(lista, lista_copy) # ['trs0', 'str2', 'str3', 'str4'] ['copy', 'str2', 'str3', 'str4']
-
-lista_copy = lista # kopia wskaźników
-lista_copy[0] = 'copy' 
-print(lista, lista_copy) # ['copy', 'str2', 'str3', 'str4'] ['copy', 'str2', 'str3', 'str4']
-print(len(lista))
-
-# --------------
-lista = ['str1', 'str2', 'str3', 'str4']s
-print('str3' in lista) # sprawdzenie czy jest na liście
-print('str3' in 'asd fde rew str2 str3') # sprawdzenie w stringach
-print(lista.count('str2')) # ilość wystąpień (2)
-
 # -------------
 print('sort')
 lista.sort()
 print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4']
-lista.append('str1')
-print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4', 'str1']
 print(sorted(lista)) # zwraca posortowaną ale nie sortuje listy ['str1', 'str1', 'str2', 'str2', 'str3', 'str4']
 print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4', 'str1']
 lista_copy = sorted(lista)
@@ -40,9 +20,6 @@ print('reverse reverse')
 print(lista) # ['str4', 'str3', 'str2', 'str2', 'str1', 'str1', '111']
 lista.reverse()
 print(lista) # lista została odwrócona ['111', 'str1', 'str1', 'str2', 'str2', 'str3', 'str4']
-print(lista[::-1]) # lista została wyświetlona jako odwrócona ['str4', 'str3', 'str2', 'str2', 'str1', 'str1', '111']
-lista = lista[::-1]
-print(lista) # a teraz została dopiero przepisana ['str4', 'str3', 'str2', 'str2', 'str1', 'str1', '111']
 # ------------
 print('range')
 lista = list(range(10))

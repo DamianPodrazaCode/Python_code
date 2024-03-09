@@ -1,8 +1,3 @@
-
-
-print(len(x))  # ilość elementów
-print(x[2:6])  # lista od elementu do elementu, taksamo ja w stringach
-
 # sortowanie
 x = ['wer', 'gfd', 'vcx', 'hgy', 'jhgf', 'fddde']
 print(x)
