@@ -1,19 +1,3 @@
-# ------------
-print('range')
-lista = list(range(10))
-print(lista) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-lista = ['str1', 'str2', 'str3', 'str4']
-sentence = ';'
-lista_copy = sentence.join(lista)
-print(lista_copy) # string (str1;str2;str3;str4)
-napis = sentence.join(['asd', 'fgh', 'jkl'])
-print(napis) # string asd;fgh;jkl
-lista = napis.split(';')
-print(lista) #['asd', 'fgh', 'jkl']
-napis = ' '.join(lista)
-print(napis) # string 'asd fgh jkl'
-
 # -------------- None
 a = None
 print(a) # None
@@ -85,11 +69,6 @@ print(mapa) # {'a': 1234, 'b': 'hello'}
 mapa.update({'aaa': 1234})
 print(mapa) # jeżeli niema pola do update to doda nowe {'a': 1234, 'b': 'hello', 'aaa': 1234}
 
-# ------------------ tuples () -> lista nie do edycji
-tLista = (1, 2, 3, 4, 5)
-print(tLista)
-print(tLista[4])
-# wszystko co w liscie oprócz zapisu
 
 # ------------------ sets -> nieuporządkowana kolekcja objektów, do szybkich operacji na zbiorach
 mySet = {1,2,3,4,5}

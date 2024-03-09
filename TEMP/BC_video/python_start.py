@@ -19,23 +19,7 @@ s.remove('wer')  # po wartości jak nie ma to error
 print(s)
 # nie ma możliwości zmiany wartości
 
-# tuple () -> szybla lista const
-t = (1, 2, 3, 4, 5, 6, 7, 8)  # definicja
-print(t)
-print(t[0])  # dostęp do elementu
-print(t[3:])
-print(t[:6])
-print({3 in t})  # czy 3 jest w tuple t
-tt = ('sss', 3.45, "asdf", 123)
-print(tt)
-print({"asdf" in tt})  # czy "asdf" jest w tuple tt
-# przypisanie do zmiennych
-(x, y, z) = (1, 2, 3)
-print(x)
-print(y)
-print(z)
-x = 10
-print(x)
+
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
