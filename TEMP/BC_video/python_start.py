@@ -1,18 +1,3 @@
-# sortowanie
-x = ['wer', 'gfd', 'vcx', 'hgy', 'jhgf', 'fddde']
-print(x)
-x.sort()  # posortowanie, można sortować listy jednego typu wartości albo tylko stringi alb tylko liczby
-print(x)
-x.reverse()  # odwrócenie listy
-print(x)
-x = [5, 23, 0.7, 3, 56, 34, 7, 4, 2, 7, 9, 34,
-     23.45, 675.2, 1.3435, 67, 23, 12, 6, 78]
-print(x)
-x.sort()  # posortowanie, można sortować listy albo tylko stringi alb tylko liczby
-print(x)
-x.reverse()  # odwrucenie listy
-print(x)
-
 # listy list
 lista = [[1, 2, 3], ["asd", 34.32, 'qwe'], [43.76, 123.32, 65.23, 1, 2]]
 print(lista)  # wszystkie listy

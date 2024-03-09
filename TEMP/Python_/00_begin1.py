@@ -1,25 +1,3 @@
-# -------------
-print('sort')
-lista.sort()
-print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4']
-print(sorted(lista)) # zwraca posortowaną ale nie sortuje listy ['str1', 'str1', 'str2', 'str2', 'str3', 'str4']
-print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4', 'str1']
-lista_copy = sorted(lista)
-lista.append('111')
-print(lista_copy) # ['str1', 'str1', 'str2', 'str2', 'str3', 'str4']
-print(lista) # ['str1', 'str2', 'str2', 'str3', 'str4', 'str1', '111']
-lista_copy = lista.copy() # tosamo co lista_copy = lista[:]
-print(lista_copy) # ['str1', 'str2', 'str2', 'str3', 'str4', 'str1', '111']
-lista.reverse()
-print(lista) # ['111', 'str1', 'str4', 'str3', 'str2', 'str2', 'str1']
-lista.sort(reverse=True) # ['str4', 'str3', 'str2', 'str2', 'str1', 'str1', '111']
-print(lista)
-
-# -------------
-print('reverse reverse')
-print(lista) # ['str4', 'str3', 'str2', 'str2', 'str1', 'str1', '111']
-lista.reverse()
-print(lista) # lista została odwrócona ['111', 'str1', 'str1', 'str2', 'str2', 'str3', 'str4']
 # ------------
 print('range')
 lista = list(range(10))
@@ -36,34 +14,9 @@ print(lista) #['asd', 'fgh', 'jkl']
 napis = ' '.join(lista)
 print(napis) # string 'asd fgh jkl'
 
-# ------------
-lista = [1, 2, 3]
-a, b, c = [1, 2, 3]
-print(a) # 1
-print(b) # 2
-print(c) # 3
-
-a, b, c, *other = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(a) # 1
-print(b) # 2
-print(c) # 3
-print(other) # [4, 5, 6, 7, 8, 9]
-
-a, b, c, *other, d = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(a) # 1
-print(b) # 2
-print(c) # 3
-print(other) # [4, 5, 6, 7, 8]
-print(d) # 9
-
 # -------------- None
 a = None
 print(a) # None
-
-lista = list()
-print(lista) # [] -> pusta lista
-lista.append('str')
-print(lista) # ['str']
 
 # -------------- Dict (słownik) # nieuporządkowana mapa para->wartość 
 print('Dictionary')
