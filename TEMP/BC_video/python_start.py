@@ -3,32 +3,6 @@
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
-# dictionary {k:v, k:v} -> para: key - value
-# tworzenie 1
-d = {'asd': 'dsa', 'qwe': 'ewq', 1: 'jeden', 2: 'dwa', 'trzy': 3, "cztery": 4}
-print(d)
-print(d.items())
-# tworzenie 2
-d = dict(asd='dsa', qwe='ewq', jeden=1, dwa=2, trzy=3, cztery=4)
-print(d)
-
-print(d.items())  # wyświetlenie w formacie par
-print(d.keys())  # same klucze
-print(d.values())  # same wartości
-
-print(d['jeden'])  # odczyt po kluczu
-print(f'value {d["dwa"]}')  # to co wyżej tylko w sformatowanym stringu
-
-d['add'] = 'cvb'  # dodanie do map
-print(d.items())
-d['add'] = 'fgdsfgdfg'  # zmiana wartości
-print(d.items())
-del d['add']  # usuwanie pozycji
-print(d.items())
-
-
-# -------------------------------------------------------------------------------------------------------------------------------------------
-
 # flow control
 
 # przy if zamiast nawiasów{} są odsunięcia tabem
