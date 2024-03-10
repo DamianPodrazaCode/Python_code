@@ -1,23 +1,3 @@
-# -------------------------------------------------------------------------------------------------------------------------------------------
-
-# sets {} , tablica z szybkim dostępem, samoukładająca, redukująca, do operacji na zbiorach danych, porównywanie zbiorów, AND OR XOR
-s = {1, 2, 3, 4, 56, 67, 3, 3}
-print(s)
-l = ['asd', 'wer', 23, 34, 564]
-s = set(l)  # przepisanie listy do seta
-print(s)
-s.add(5634)  # doddanie do seta, nie ma gwarancji na której pozyvji wyląduje
-s.add('sdaf')
-s.update(l)  # dodanie całej listy
-# dodanie kilku elementów w postaci listy
-s.update(['dsfs', 345, 65.34, 'dfsdf'])
-print(s)
-s.discard(345)  # usunięcie po wartości
-print(s)
-# s.remove(1) # po indeksie jak nie ma to error
-s.remove('wer')  # po wartości jak nie ma to error
-print(s)
-# nie ma możliwości zmiany wartości
 
 
 
