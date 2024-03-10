@@ -1,35 +1,4 @@
 # --------------------------    
-# filter
-lista = [1,2,3]
-
-def fun_odd(item):
-    return item%2 != 0 # zwróci tylko te któresą większe od zera
-
-print(list(filter(fun_odd, lista))) # [1, 3]
-print(lista) # [1, 2, 3]
-
-# --------------------------    
-# zip
-lista1 = [1, 2, 3]
-lista2 = [10, 20, 30]
-print(list(zip(lista1,lista2))) # [(1, 10), (2, 20), (3, 30)]
-
-# --------------------------    
-# reduce
-from functools import reduce
-lista = [1,2,3]
-
-def accmulator(acc, item):  # acc po każdym returnie, dostaje wartość z returna
-    print(acc, item)
-    return acc + item
-
-print((reduce(accmulator, lista, 0)))
-# 0 1
-# 1 2
-# 3 3
-# 6
-
-# --------------------------    
 # List Comprehensions
 lista = [i for i in 'tekst']
 print(lista) # ['t', 'e', 'k', 's', 't']
