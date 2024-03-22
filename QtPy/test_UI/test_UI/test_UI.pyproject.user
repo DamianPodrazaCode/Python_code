@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.2, 2024-03-06T14:33:19. -->
+<!-- Written by QtCreator 12.0.2, 2024-03-20T19:51:17. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -101,7 +101,6 @@
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Python.PysideBuildStep</value>
-      <value type="QString" key="Python.PySideProjectTool">D:\__EnvPyQt6\Scripts\pyside6-project.exe</value>
      </valuemap>
      <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Budowanie</value>
@@ -149,10 +148,8 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.D:/__GitHub/python_basic/QtPy/test_UI/test_UI/mainwindow.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/__GitHub/python_basic/QtPy/test_UI/test_UI/mainwindow.py</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">D:\__GitHub\python_basic\QtPy\test_UI\test_UI\mainwindow.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/__GitHub/python_basic/QtPy/test_UI/test_UI</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
@@ -167,10 +164,8 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.D:/__GitHub/python_basic/QtPy/test_UI/test_UI/ui_form.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/__GitHub/python_basic/QtPy/test_UI/test_UI/ui_form.py</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">D:\__GitHub\python_basic\QtPy\test_UI\test_UI\ui_form.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/__GitHub/python_basic/QtPy/test_UI/test_UI</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">2</value>
   </valuemap>
