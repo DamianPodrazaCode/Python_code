@@ -6,11 +6,10 @@ loader = QUiLoader()
 
 app = QtWidgets.QApplication(sys.argv)
 window = loader.load('okno.ui', None)
+window.setWindowTitle('ok ok ok ...')
 
 def do_somthing():
     print(window.le_full_name.text(), 'is a ', window.le_occupation.text())
-
-window.setWindowTitle('ok ok ok ...')
 
 window.pb_submit.clicked.connect(do_somthing)
 window.show()
