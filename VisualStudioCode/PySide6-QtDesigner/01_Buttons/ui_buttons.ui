@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>272</width>
+    <height>122</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Buttons</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pb_lock">
+     <property name="text">
+      <string>Lock</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pb_exit">
+     <property name="text">
+      <string>Exit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QVBoxLayout" name="vl_choice">
+     <item>
+      <widget class="QRadioButton" name="rb_choice1">
+       <property name="text">
+        <string>Choice 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rb_choice2">
+       <property name="text">
+        <string>Choise 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rb_choice3">
+       <property name="text">
+        <string>Choise 3</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="vl_check">
+     <item>
+      <widget class="QCheckBox" name="cb_check1">
+       <property name="text">
+        <string>Check 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cb_check2">
+       <property name="text">
+        <string>Check 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cb_check3">
+       <property name="text">
+        <string>Check 3</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
