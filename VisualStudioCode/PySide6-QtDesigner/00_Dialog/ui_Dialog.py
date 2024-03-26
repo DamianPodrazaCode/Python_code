@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'form.ui'
+## Form generated from reading UI file 'designerguZrzE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.6.2
 ##
@@ -15,17 +15,13 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QPushButton, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QSizePolicy, QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(800, 600)
-        self.pushButton = QPushButton(Dialog)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(110, 90, 80, 24))
+        Dialog.resize(400, 300)
 
         self.retranslateUi(Dialog)
 
@@ -34,6 +30,5 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.pushButton.setText(QCoreApplication.translate("Dialog", u"PushButton", None))
     # retranslateUi
 
