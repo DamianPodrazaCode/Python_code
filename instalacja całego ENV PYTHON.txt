@@ -1,0 +1,29 @@
+(najlepiej do katalogu urzytkownika lub innego który nie wymaga praw admina)
+1. Zainstalowaæ MiniConda3
+2. Zainstalowaæ Visual Studio Code
+3. Zainstalowaæ QtDesigner
+4. Uruchomiæ Anaconda powerShell prompt
+5. Tworzenie nowego wirtualnego œrodowiska:
+   * conda create -n [nazwa] python=3.11 (z odpowiedni¹ wersj¹ pythona)
+   * conda create -n [nazwa] (z najnowsz¹ wersj¹ pythona)
+6. Wylistowanie œrodowisk:
+   * conda env list
+7. Prze³aczenie siê na wybeane œrodowisko:
+   * conda activate [nazwa]
+8. instalacja bibliotek:
+   * conda install [nazwa]
+https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+9. Przydatne biblioteki do machine learning i qt:
+   PySide6 -> QT (https://pypi.org/project/PySide6/)
+   munpy -> liczby (https://numpy.org/install/)
+   pandas -> tabele (https://pandas.pydata.org/docs/getting_started/install.html)
+   matplotlib -> wykresy (https://matplotlib.org/stable/install/index.html)
+   scikit-learn -> uczenie maszynowe (https://scikit-learn.org/1.5/install.html)
+   "pytorch" -> deep learning (https://pytorch.org/get-started/locally/)
+   "TesnorFlow" -> deep learning (https://www.tensorflow.org/install?hl=pl)
+10. Uruchomiæ VSC.
+11. Po lewej na dole zêbatka->profile, Nowy profil->na podstawie szablonu->Python, utwórz.
+12. Zêbatka->ustawienia, Funkcje->Terminal, External: Windows Exec ma byæ(C:\Windows\System32\cmd.exe)
+13. Terminal-> Integrated, Default profile ma byæ(Command Prompt)
+14. Na rozszerzeniu z wê¿ami pythona ustawiæ jako aktywne env (gwiazdka)
+15. Doinstalowaæ rozszerzenie Qt for Python (tu ewentualnie w uistawieniach tyrzeba bêdzie ustawiæ œcie¿kê do QtDesigner)

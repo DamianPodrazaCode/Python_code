@@ -6,3 +6,7 @@ class ButtonHolder(QMainWindow):
         self.setWindowTitle('My App')
         button = QPushButton("OK")
         self.setCentralWidget(button)
+        button.clicked.connect(self.doSomting)
+       
+    def doSomting(self):
+        print("ok!!!")
