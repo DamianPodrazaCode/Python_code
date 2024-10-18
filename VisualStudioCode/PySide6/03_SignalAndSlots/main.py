@@ -12,7 +12,7 @@
 # app.exec()        
 # -------------------------------------------------------------------
 
-# >>> wersja checkable
+# # >>> wersja checkable
 # import sys
 # from PySide6.QtWidgets import QApplication, QPushButton
 
