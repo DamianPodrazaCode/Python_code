@@ -7,19 +7,30 @@ class Widget(QWidget):
         self.setMinimumSize(500, 100)
 
         l_name = QLabel("Full name:")
-        le_name = QLineEdit()
-        le_name.setMinimumWidth(400)
+        self.le_name = QLineEdit()
+        self.le_name.setMinimumWidth(400)
 
         layout_name = QHBoxLayout()
         layout_name.addWidget(l_name)
-        layout_name.addWidget(le_name)
+        layout_name.addWidget(self.le_name)
 
         button = QPushButton("click")
-        l_out = QLabel("OUT")
+        self.l_out = QLabel("OUT")
 
         layout_all = QVBoxLayout()
         layout_all.addLayout(layout_name)
         layout_all.addWidget(button)
-        layout_all.addWidget(l_out)
+        layout_all.addWidget(self.l_out)
 
         self.setLayout(layout_all)
+
+        self.le_name.editingFinished.connect(self.le_name_editingFinished)
+        button.clicked.connect(self.btn_clicked)
+
+    def le_name_editingFinished(self) :
+        print("le_name_editingFinished")
+        self.l_out.setText(self.le_name.text())
+        self.le_name.setText("")
+        
+    def btn_clicked(self) :        
+        print("btn_clicked")
