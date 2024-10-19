@@ -1,4 +1,4 @@
-from PySide6 import QtCore, QtWidgets
+from PySide6 import QtCore, QtWidgets #noqa F401
 from PySide6.QtUiTools import QUiLoader
 
 loader = QUiLoader()

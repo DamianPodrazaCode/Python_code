@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt #noqa F401
 from PySide6.QtWidgets import QWidget
 from ui_okno import Ui_Widget
 
