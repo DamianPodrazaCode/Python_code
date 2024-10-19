@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>QT Designer QWidget</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -24,7 +24,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="le_name"/>
      </item>
     </layout>
    </item>
@@ -38,14 +38,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="le_occ"/>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="pb_submit">
      <property name="text">
-      <string>PushButton</string>
+      <string>Submit</string>
      </property>
     </widget>
    </item>

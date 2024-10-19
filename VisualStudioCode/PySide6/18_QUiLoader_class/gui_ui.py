@@ -22,7 +22,7 @@ class Ui_Widget(object):
     def setupUi(self, Widget):
         if not Widget.objectName():
             Widget.setObjectName(u"Widget")
-        Widget.resize(511, 121)
+        Widget.resize(239, 121)
         self.verticalLayout = QVBoxLayout(Widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
@@ -32,10 +32,10 @@ class Ui_Widget(object):
 
         self.horizontalLayout.addWidget(self.label)
 
-        self.lineEdit = QLineEdit(Widget)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.le_name = QLineEdit(Widget)
+        self.le_name.setObjectName(u"le_name")
 
-        self.horizontalLayout.addWidget(self.lineEdit)
+        self.horizontalLayout.addWidget(self.le_name)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -47,18 +47,18 @@ class Ui_Widget(object):
 
         self.horizontalLayout_2.addWidget(self.label_2)
 
-        self.lineEdit_2 = QLineEdit(Widget)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.le_occ = QLineEdit(Widget)
+        self.le_occ.setObjectName(u"le_occ")
 
-        self.horizontalLayout_2.addWidget(self.lineEdit_2)
+        self.horizontalLayout_2.addWidget(self.le_occ)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        self.pushButton = QPushButton(Widget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.pb_submit = QPushButton(Widget)
+        self.pb_submit.setObjectName(u"pb_submit")
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addWidget(self.pb_submit)
 
 
         self.retranslateUi(Widget)
@@ -67,9 +67,9 @@ class Ui_Widget(object):
     # setupUi
 
     def retranslateUi(self, Widget):
-        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Form", None))
+        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"QT Designer QWidget", None))
         self.label.setText(QCoreApplication.translate("Widget", u"Full name:", None))
         self.label_2.setText(QCoreApplication.translate("Widget", u"Occupation :", None))
-        self.pushButton.setText(QCoreApplication.translate("Widget", u"PushButton", None))
+        self.pb_submit.setText(QCoreApplication.translate("Widget", u"Submit", None))
     # retranslateUi
 
