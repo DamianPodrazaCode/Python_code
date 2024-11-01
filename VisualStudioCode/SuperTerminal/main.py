@@ -1,10 +1,10 @@
 from PySide6.QtWidgets import QApplication
-from ui_topForm import Ui_TopForm
+from topForm import mainWindow
 import sys
 
 app = QApplication(sys.argv)
 
-widget = Ui_TopForm()
+widget = mainWindow()
 widget.show()
 
 app.exec()

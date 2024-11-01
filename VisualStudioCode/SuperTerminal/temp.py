@@ -1,45 +1,37 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget, QMessageBox
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton
+
+class SecondWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Drugie Okno")
+        self.setGeometry(100, 100, 300, 200)
+        layout = QVBoxLayout()
+        layout.addWidget(QPushButton("Jestem w drugim oknie!"))
+        self.setLayout(layout)
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("QTreeWidget z Rozwijanymi Komórkami")
+        self.setWindowTitle("Główne Okno")
+        self.setGeometry(100, 100, 300, 200)
 
-        self.tree_widget = QTreeWidget()
-        self.tree_widget.setHeaderHidden(True)
-
-        # Dodawanie głównych elementów
-        item1 = QTreeWidgetItem(["Element 1"])
-        item2 = QTreeWidgetItem(["Element 2"])
-        item3 = QTreeWidgetItem(["Element 3"])
-
-        self.tree_widget.addTopLevelItem(item1)
-        self.tree_widget.addTopLevelItem(item2)
-        self.tree_widget.addTopLevelItem(item3)
-
-        # Dodawanie podpozycji
-        child1 = QTreeWidgetItem(["Podpozycja 1-1"])
-        child2 = QTreeWidgetItem(["Podpozycja 1-2"])
-        item1.addChild(child1)
-        item1.addChild(child2)
-
-        child3 = QTreeWidgetItem(["Podpozycja 2-1"])
-        item2.addChild(child3)
+        button = QPushButton("Otwórz Drugie Okno")
+        button.clicked.connect(self.open_second_window)
 
         layout = QVBoxLayout()
-        layout.addWidget(self.tree_widget)
-
+        layout.addWidget(button)
+        
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
 
-        # Połącz sygnał kliknięcia elementu z metodą wyświetlającą message box
-        self.tree_widget.itemClicked.connect(self.show_message_box)
+        self.windows = []
 
-    def show_message_box(self, item):
-        message = f"Kliknąłeś na: {item.text(0)}"
-        QMessageBox.information(self, "Informacja", message)
+    def open_second_window(self):
+        second_window = SecondWindow()
+        second_window.show()
+        self.windows.append(second_window)  # Przechowywanie odniesienia do okna
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -37,7 +37,13 @@
         </layout>
        </item>
        <item>
-        <widget class="QTreeWidget" name="twSerial"/>
+        <widget class="QTreeWidget" name="twSerial">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </item>
@@ -119,7 +125,13 @@
         </layout>
        </item>
        <item>
-        <widget class="QTreeWidget" name="twPort"/>
+        <widget class="QTreeWidget" name="twPort">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </item>

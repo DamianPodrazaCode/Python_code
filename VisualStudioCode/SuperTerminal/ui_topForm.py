@@ -47,6 +47,9 @@ class Ui_TopForm(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout)
 
         self.twSerial = QTreeWidget(TopForm)
+        __qtreewidgetitem = QTreeWidgetItem()
+        __qtreewidgetitem.setText(0, u"1");
+        self.twSerial.setHeaderItem(__qtreewidgetitem)
         self.twSerial.setObjectName(u"twSerial")
 
         self.verticalLayout_2.addWidget(self.twSerial)
@@ -108,6 +111,9 @@ class Ui_TopForm(object):
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
 
         self.twPort = QTreeWidget(TopForm)
+        __qtreewidgetitem1 = QTreeWidgetItem()
+        __qtreewidgetitem1.setText(0, u"1");
+        self.twPort.setHeaderItem(__qtreewidgetitem1)
         self.twPort.setObjectName(u"twPort")
 
         self.verticalLayout_3.addWidget(self.twPort)
