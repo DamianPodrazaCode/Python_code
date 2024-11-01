@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Widget</class>
- <widget class="QWidget" name="Widget">
+ <author>ZoMbiE</author>
+ <class>Gui</class>
+ <widget class="QWidget" name="Gui">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>239</width>
-    <height>121</height>
+    <width>265</width>
+    <height>137</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,4 +54,21 @@
  </widget>
  <resources/>
  <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
 </ui>
