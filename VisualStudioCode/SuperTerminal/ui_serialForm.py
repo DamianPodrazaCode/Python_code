@@ -29,6 +29,6 @@ class Ui_SerialForm(object):
     # setupUi
 
     def retranslateUi(self, SerialForm):
-        SerialForm.setWindowTitle(QCoreApplication.translate("SerialForm", u"Connected to serial port ###", None))
+        SerialForm.setWindowTitle(QCoreApplication.translate("SerialForm", u"COM ###", None))
     # retranslateUi
 

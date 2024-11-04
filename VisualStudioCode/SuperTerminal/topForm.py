@@ -1,15 +1,16 @@
 from PySide6.QtWidgets import QWidget, QTreeWidget, QTreeWidgetItem
 from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
 from PySide6.QtCore import QIODevice, Signal, Slot
+from sympy import false
 from ui_topForm import Ui_TopForm 
-from serialForm import serialPortWindow
+from connectForm import connectPortWindow
 
 class mainWindow(QWidget, Ui_TopForm) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self) # setup onka z designera
 
-        self.windowsSerial = [] # lista obiektów z nowym oknem
+        self.windowsConnect = [] # lista obiektów z nowym oknem
 
         self.twSerial.setHeaderLabels(["Port Name", "Description", "Manufacturer", "Serial Number", "System Location", "PID", "VID"])
         self.pbScanSerial_clicked()
@@ -35,16 +36,18 @@ class mainWindow(QWidget, Ui_TopForm) :
             self.twSerial.resizeColumnToContents(column)    
         if self.twSerial.topLevelItemCount() > 0 :
             self.twSerial.setCurrentItem(self.twSerial.topLevelItem(0))
-
+            self.pbConnectSerial.setEnabled(True)
+        else :
+            self.pbConnectSerial.setEnabled(False)
 
     def pbConnectSerial_clicked(self) :
-        serial = serialPortWindow(self.twSerial.currentItem().text(0))
-        serial.show()
-        self.windowsSerial.append(serial)
+        connect = connectPortWindow(self.twSerial.currentItem().text(0))
+        connect.show()
+        self.windowsConnect.append(connect)
         
     def closeEvent(self, event) :
         print("closeWindow")
-        self.windowsSerial.clear()        
+        self.windowsConnect.clear()        
 
     def treeItem(self, itemIndex) :
         pass

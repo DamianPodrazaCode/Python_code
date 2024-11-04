@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Connected to serial port ###</string>
+   <string>COM ###</string>
   </property>
  </widget>
  <resources/>
