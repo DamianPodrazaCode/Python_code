@@ -13,6 +13,16 @@
   <property name="windowTitle">
    <string>COM ###</string>
   </property>
+  <widget class="QListWidget" name="lwDebug">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

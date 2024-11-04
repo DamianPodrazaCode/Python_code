@@ -46,7 +46,7 @@ class mainWindow(QWidget, Ui_TopForm) :
         self.windowsConnect.append(connect)
         
     def closeEvent(self, event) :
-        print("closeWindow")
+        print("close Top Window")
         self.windowsConnect.clear()        
 
     def treeItem(self, itemIndex) :

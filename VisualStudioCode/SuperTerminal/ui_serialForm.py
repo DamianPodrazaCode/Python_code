@@ -15,13 +15,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QListWidget, QListWidgetItem, QSizePolicy,
+    QWidget)
 
 class Ui_SerialForm(object):
     def setupUi(self, SerialForm):
         if not SerialForm.objectName():
             SerialForm.setObjectName(u"SerialForm")
         SerialForm.resize(400, 300)
+        self.lwDebug = QListWidget(SerialForm)
+        self.lwDebug.setObjectName(u"lwDebug")
+        self.lwDebug.setGeometry(QRect(10, 90, 256, 192))
 
         self.retranslateUi(SerialForm)
 
