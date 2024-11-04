@@ -26,7 +26,7 @@ class serialPortWindow(QWidget, Ui_SerialForm) :
 
         if self.serialPort.open(QIODevice.ReadWrite) :
             self.lwDebug.addItem("port otwarty")
-        else: 
+        else : 
             msgBox = QMessageBox() 
             msgBox.setWindowTitle("Error") 
             msgBox.setText("Port is busy. !!!") 
@@ -40,7 +40,6 @@ class serialPortWindow(QWidget, Ui_SerialForm) :
         self.lwDebug.addItem(str(self.serialPort.parity()))
         self.lwDebug.addItem(str(self.serialPort.stopBits()))
         self.lwDebug.addItem(str(self.serialPort.flowControl()))
-
 
     def closeEvent(self, event) :
         print("Close Serial Form")
