@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1118, 707)
+        MainWindow.resize(1127, 707)
         self.aScan = QAction(MainWindow)
         self.aScan.setObjectName(u"aScan")
         self.aScan.setMenuRole(QAction.MenuRole.NoRole)
@@ -197,13 +197,13 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.label_5)
 
-        self.comboBox = QComboBox(self.gbConnect)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
+        self.cbFlowControl = QComboBox(self.gbConnect)
+        self.cbFlowControl.addItem("")
+        self.cbFlowControl.addItem("")
+        self.cbFlowControl.addItem("")
+        self.cbFlowControl.setObjectName(u"cbFlowControl")
 
-        self.horizontalLayout.addWidget(self.comboBox)
+        self.horizontalLayout.addWidget(self.cbFlowControl)
 
 
         self.lyConnect.addLayout(self.horizontalLayout, 0, 0, 1, 1)
@@ -326,9 +326,9 @@ class Ui_MainWindow(object):
         self.cbStopBits.setItemText(2, QCoreApplication.translate("MainWindow", u"TwoStop", None))
 
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Flow control", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"NoFlowControl", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"HardwareControl", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"SoftwareControl", None))
+        self.cbFlowControl.setItemText(0, QCoreApplication.translate("MainWindow", u"NoFlowControl", None))
+        self.cbFlowControl.setItemText(1, QCoreApplication.translate("MainWindow", u"HardwareControl", None))
+        self.cbFlowControl.setItemText(2, QCoreApplication.translate("MainWindow", u"SoftwareControl", None))
 
         self.gbWrite.setTitle(QCoreApplication.translate("MainWindow", u"Write", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
