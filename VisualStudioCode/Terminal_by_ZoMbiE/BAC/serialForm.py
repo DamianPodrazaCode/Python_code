@@ -17,6 +17,7 @@ class serialPortWindow(QWidget, Ui_SerialForm) :
         self.setWindowTitle("Connect to: " + self.portName)
 
         self.serialPort = QSerialPort(self)
+        self.serialPort.readyRead.connect(self.readData)
         self.serialPort.setPortName(self.portName)
         self.serialPort.setBaudRate(int(self.bautRate))
         self.serialPort.setDataBits(getattr(QSerialPort, self.dataBits, None))
@@ -25,7 +26,8 @@ class serialPortWindow(QWidget, Ui_SerialForm) :
         self.serialPort.setFlowControl(getattr(QSerialPort, self.flowControl, None))
 
         if self.serialPort.open(QIODevice.ReadWrite) :
-            self.lwDebug.addItem("port otwarty")
+            pass
+            # self.lwDebug.addItem("port otwarty")
         else : 
             msgBox = QMessageBox() 
             msgBox.setWindowTitle("Error") 
@@ -34,12 +36,19 @@ class serialPortWindow(QWidget, Ui_SerialForm) :
             msgBox.exec()
             sys.exit()
 
-        self.lwDebug.addItem(self.serialPort.portName())
-        self.lwDebug.addItem(str(self.serialPort.baudRate()))
-        self.lwDebug.addItem(str(self.serialPort.dataBits()))
-        self.lwDebug.addItem(str(self.serialPort.parity()))
-        self.lwDebug.addItem(str(self.serialPort.stopBits()))
-        self.lwDebug.addItem(str(self.serialPort.flowControl()))
+        # self.lwDebug.addItem(self.serialPort.portName())
+        # self.lwDebug.addItem(str(self.serialPort.baudRate()))
+        # self.lwDebug.addItem(str(self.serialPort.dataBits()))
+        # self.lwDebug.addItem(str(self.serialPort.parity()))
+        # self.lwDebug.addItem(str(self.serialPort.stopBits()))
+        # self.lwDebug.addItem(str(self.serialPort.flowControl()))
+
+        self.serialPort.open(QIODevice.ReadWrite) 
+
+    def readData(self) : 
+        while self.serialPort.canReadLine() : 
+            data = self.serialPort.readLine().data().decode('utf-8').rstrip() 
+            self.pteReadSerial.appendPlainText(data)
 
     def closeEvent(self, event) :
         print("Close Serial Form")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'serialForm.ui'
+## Form generated from reading UI file 'widget.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.0
 ##
@@ -15,24 +15,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QListWidget, QListWidgetItem, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QSizePolicy, QWidget)
 
-class Ui_SerialForm(object):
-    def setupUi(self, SerialForm):
-        if not SerialForm.objectName():
-            SerialForm.setObjectName(u"SerialForm")
-        SerialForm.resize(400, 300)
-        self.lwDebug = QListWidget(SerialForm)
-        self.lwDebug.setObjectName(u"lwDebug")
-        self.lwDebug.setGeometry(QRect(10, 90, 256, 192))
+class Ui_Form(object):
+    def setupUi(self, Form):
+        if not Form.objectName():
+            Form.setObjectName(u"Form")
+        Form.resize(400, 300)
 
-        self.retranslateUi(SerialForm)
+        self.retranslateUi(Form)
 
-        QMetaObject.connectSlotsByName(SerialForm)
+        QMetaObject.connectSlotsByName(Form)
     # setupUi
 
-    def retranslateUi(self, SerialForm):
-        SerialForm.setWindowTitle(QCoreApplication.translate("SerialForm", u"COM ###", None))
+    def retranslateUi(self, Form):
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
     # retranslateUi
 
