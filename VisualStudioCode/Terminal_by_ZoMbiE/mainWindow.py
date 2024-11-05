@@ -254,9 +254,9 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.gbRead.sizePolicy().hasHeightForWidth())
         self.gbRead.setSizePolicy(sizePolicy2)
         self.gbRead.setFlat(True)
-        self.plainTextEdit = QPlainTextEdit(self.gbRead)
-        self.plainTextEdit.setObjectName(u"plainTextEdit")
-        self.plainTextEdit.setGeometry(QRect(20, 20, 781, 331))
+        self.pteReadSerial = QPlainTextEdit(self.gbRead)
+        self.pteReadSerial.setObjectName(u"pteReadSerial")
+        self.pteReadSerial.setGeometry(QRect(20, 20, 781, 241))
 
         self.verticalLayout.addWidget(self.gbRead)
 

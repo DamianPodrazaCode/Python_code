@@ -1,8 +1,8 @@
 import sys
 from PySide6 import QtWidgets
-from PySide6.QtCore import QSettings
+from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase
 from PySide6.QtWidgets import QMainWindow, QMessageBox
-from PySide6.QtSerialPort import QSerialPortInfo
+from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
 from mainWindow import Ui_MainWindow
 # ------------------------------------------------------------------------------------------------------
 class MainWindow(QMainWindow, Ui_MainWindow) :
@@ -21,7 +21,8 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.aAbout.triggered.connect(self.aboutTriger)
 
         self.pbConnect.clicked.connect(self.connectClick)
-        self.cbBaudRate.currentIndexChanged.connect(self.baudRatecurrentIndexChanged)
+        self.cbBaudRate.currentIndexChanged.connect(self.baudRateCurrentIndexChanged)
+        self.leBaudRate.returnPressed.connect(self.baudRateReturnPressed)
 # ------------------------------------------------------------------------------------------------------
     def scanTriger(self) :
         self.cbSerial.clear()
@@ -68,15 +69,38 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
     def connectClick(self) :
         if self.pbConnect.text() == "Connect" :
             self.pbConnect.setText("Disconnect")
+
+            self.serialPort = QSerialPort(self)
+            self.serialPort.readyRead.connect(self.readData)
+            self.serialPort.setPortName(self.cbSerial.currentText())
+            self.serialPort.setBaudRate(int(self.leBaudRate.text()))
+            self.serialPort.setDataBits(getattr(QSerialPort, self.cbDataBits.currentText(), None))
+            self.serialPort.setParity(getattr(QSerialPort, self.cbParity.currentText(), None))
+            self.serialPort.setStopBits(getattr(QSerialPort, self.cbStopBits.currentText(), None))
+            self.serialPort.setFlowControl(getattr(QSerialPort, self.cbFlowControl.currentText(), None))
+            self.serialPort.open(QSerialPort.OpenModeFlag.ReadWrite)
+
         else :
             self.pbConnect.setText("Connect")
+            if self.serialPort.isOpen() :
+                self.serialPort.close()
 
         self.writeSettings()
     
-    def baudRatecurrentIndexChanged(self) :
-        # print("baudRatecurrentIndexChanged")
+    def baudRateCurrentIndexChanged(self) :
         self.leBaudRate.setText(self.cbBaudRate.currentText())
+        if self.serialPort.isOpen() :
+            self.serialPort.setBaudRate(int(self.leBaudRate.text()))
+    
+    def baudRateReturnPressed(self) :
+        if self.serialPort.isOpen() :
+            self.serialPort.setBaudRate(int(self.leBaudRate.text()))
+       
 # ------------------------------------------------------------------------------------------------------
+    def readData(self) : 
+        while self.serialPort.canReadLine() : 
+            data = self.serialPort.readLine().data().decode().rstrip()
+            self.pteReadSerial.appendPlainText(data)
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
@@ -87,6 +111,8 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 # ------------------------------------------------------------------------------------------------------
     def closeEvent(self, event) :
         self.writeSettings()
+        if self.serialPort.isOpen() :
+            self.serialPort.close()
         print("close Top Window")
 # ------------------------------------------------------------------------------------------------------
 app = QtWidgets.QApplication(sys.argv)
