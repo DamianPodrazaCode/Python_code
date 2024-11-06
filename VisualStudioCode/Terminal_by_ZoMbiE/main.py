@@ -1,7 +1,7 @@
 import sys
 from PySide6 import QtWidgets
-from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase, Qt
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QMenu
+from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase, Qt, QPoint
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QMenu, QPushButton
 from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
 from sympy import true
 from mainWindow import Ui_MainWindow
@@ -35,19 +35,30 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.leSend.returnPressed.connect(self.sendReturnPressed)
         self.pbDTR.clicked.connect(self.DTRclicked)
         self.pbRTS.clicked.connect(self.RTSclicked)
-        self.pbMacro1.clicked.connect(self.macro1Clicked)
-        self.pbMacro2.clicked.connect(self.macro2Clicked)
-        self.pbMacro3.clicked.connect(self.macro3Clicked)
-        self.pbMacro4.clicked.connect(self.macro4Clicked)
-        self.pbMacro5.clicked.connect(self.macro5Clicked)
-        self.pbMacro6.clicked.connect(self.macro6Clicked)
-        self.pbMacro7.clicked.connect(self.macro7Clicked)
-        self.pbMacro8.clicked.connect(self.macro8Clicked)
-        self.pbMacro9.clicked.connect(self.macro9Clicked)
-        self.pbMacro10.clicked.connect(self.macro10Clicked)
 
-        self.pbMacro1.customContextMenuRequested.connect(self.macro1CustomContextMenuRequested)
+        self.pbMacro1.clicked.connect(lambda: self.macroClicked(self.pbMacro1.text()))
+        self.pbMacro2.clicked.connect(lambda: self.macroClicked(self.pbMacro2.text()))
+        self.pbMacro3.clicked.connect(lambda: self.macroClicked(self.pbMacro3.text()))
+        self.pbMacro4.clicked.connect(lambda: self.macroClicked(self.pbMacro4.text()))
+        self.pbMacro5.clicked.connect(lambda: self.macroClicked(self.pbMacro5.text()))
+        self.pbMacro6.clicked.connect(lambda: self.macroClicked(self.pbMacro6.text()))
+        self.pbMacro7.clicked.connect(lambda: self.macroClicked(self.pbMacro7.text()))
+        self.pbMacro8.clicked.connect(lambda: self.macroClicked(self.pbMacro8.text()))
+        self.pbMacro9.clicked.connect(lambda: self.macroClicked(self.pbMacro9.text()))
+        self.pbMacro10.clicked.connect(lambda: self.macroClicked(self.pbMacro10.text()))
+
+        self.pbMacro1.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro1.mapToGlobal(QPoint(0,0)), self.pbMacro1))
+        self.pbMacro2.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro2.mapToGlobal(QPoint(0,0)), self.pbMacro2))
+        self.pbMacro3.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro3.mapToGlobal(QPoint(0,0)), self.pbMacro3))
+        self.pbMacro4.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro4.mapToGlobal(QPoint(0,0)), self.pbMacro4))
+        self.pbMacro5.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro5.mapToGlobal(QPoint(0,0)), self.pbMacro5))
+        self.pbMacro6.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro6.mapToGlobal(QPoint(0,0)), self.pbMacro6))
+        self.pbMacro7.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro7.mapToGlobal(QPoint(0,0)), self.pbMacro7))
+        self.pbMacro8.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro8.mapToGlobal(QPoint(0,0)), self.pbMacro8))
+        self.pbMacro9.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro9.mapToGlobal(QPoint(0,0)), self.pbMacro9))
+        self.pbMacro10.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro10.mapToGlobal(QPoint(0,0)), self.pbMacro10))
         
+
 # ------------------------------------------------------------------------------------------------------
     def scanTriger(self) :
         self.cbSerial.clear()
@@ -177,70 +188,35 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.sendClicked()
 
     def DTRclicked(self) :
-        if self.pbDTR.isChecked() :
-            self.serialPort.setDataTerminalReady(True)
-        else :
-            self.serialPort.setDataTerminalReady(False)
+        if self.serialPort.isOpen() : 
+            if self.pbDTR.isChecked() :
+                self.serialPort.setDataTerminalReady(True)
+            else :
+                self.serialPort.setDataTerminalReady(False)
 
     def RTSclicked(self) :
-        if self.pbRTS.isChecked() :
-            self.serialPort.setRequestToSend(True)
-        else :
-            self.serialPort.setRequestToSend(False)
-
-    def macro1Clicked(self) :            
-        self.leSend.setText(self.pbMacro1.text())
-        self.sendClicked()    
+        if self.serialPort.isOpen() : 
+            if self.pbRTS.isChecked() :
+                self.serialPort.setRequestToSend(True)
+            else :
+                self.serialPort.setRequestToSend(False)
     
-    def macro2Clicked(self) :            
-        self.leSend.setText(self.pbMacro2.text())
-        self.sendClicked()
+    def macroClicked(self, text) :            
+        self.leSend.setText(text)
+        self.sendClicked()   
 
-    def macro3Clicked(self) :            
-        self.leSend.setText(self.pbMacro3.text())
-        self.sendClicked()
+    def macroCustomContextMenuRequested(self, pos, ptrButton) :
+        def update(text) :
+            ptrButton.setText(text)  
+        def menuAction() : 
+            macroWin = MacroWindow()
+            macroWin.macroSubmitted.connect(update) 
+            macroWin.exec()  
+        contextMenu = QMenu(self) 
+        action = contextMenu.addAction("Edit this macro.") 
+        action.triggered.connect(menuAction) 
+        contextMenu.exec(pos)
 
-    def macro4Clicked(self) :            
-        self.leSend.setText(self.pbMacro4.text())
-        self.sendClicked()
-
-    def macro5Clicked(self) :            
-        self.leSend.setText(self.pbMacro5.text())
-        self.sendClicked()
-
-    def macro6Clicked(self) :            
-        self.leSend.setText(self.pbMacro6.text())
-        self.sendClicked()
-
-    def macro7Clicked(self) :            
-        self.leSend.setText(self.pbMacro7.text())
-        self.sendClicked()
-
-    def macro8Clicked(self) :            
-        self.leSend.setText(self.pbMacro8.text())
-        self.sendClicked()
-
-    def macro9Clicked(self) :            
-        self.leSend.setText(self.pbMacro9.text())
-        self.sendClicked()
-
-    def macro10Clicked(self) :            
-        self.leSend.setText(self.pbMacro10.text())
-        self.sendClicked()
-
-    def macro1CustomContextMenuRequested(self, pos) :
-        context_menu = QMenu(self) 
-        action1 = context_menu.addAction("Edit this macro.") 
-        action1.triggered.connect(lambda: self.menu_action("Akcja 1")) 
-        context_menu.exec(self.pbMacro1.mapToGlobal(pos))
-    def menu_action(self, action_name) : 
-        print(f"Wybrano: {action_name}")  
-        self.macroWin1 = MacroWindow()
-        self.macroWin1.macroSubmitted.connect(self.updateMacro1)  # Łączenie sygnału z slotem
-        self.macroWin1.exec()  
-    def updateMacro1(self, text):
-        self.pbMacro1.setText(text)         
-           
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
         while self.serialPort.canReadLine() : 

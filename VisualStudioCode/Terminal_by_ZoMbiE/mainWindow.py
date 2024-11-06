@@ -277,46 +277,55 @@ class Ui_MainWindow(object):
 
         self.pbMacro2 = QPushButton(self.gbWrite)
         self.pbMacro2.setObjectName(u"pbMacro2")
+        self.pbMacro2.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro2)
 
         self.pbMacro3 = QPushButton(self.gbWrite)
         self.pbMacro3.setObjectName(u"pbMacro3")
+        self.pbMacro3.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro3)
 
         self.pbMacro4 = QPushButton(self.gbWrite)
         self.pbMacro4.setObjectName(u"pbMacro4")
+        self.pbMacro4.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro4)
 
         self.pbMacro5 = QPushButton(self.gbWrite)
         self.pbMacro5.setObjectName(u"pbMacro5")
+        self.pbMacro5.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro5)
 
         self.pbMacro6 = QPushButton(self.gbWrite)
         self.pbMacro6.setObjectName(u"pbMacro6")
+        self.pbMacro6.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro6)
 
         self.pbMacro7 = QPushButton(self.gbWrite)
         self.pbMacro7.setObjectName(u"pbMacro7")
+        self.pbMacro7.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro7)
 
         self.pbMacro8 = QPushButton(self.gbWrite)
         self.pbMacro8.setObjectName(u"pbMacro8")
+        self.pbMacro8.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro8)
 
         self.pbMacro9 = QPushButton(self.gbWrite)
         self.pbMacro9.setObjectName(u"pbMacro9")
+        self.pbMacro9.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro9)
 
         self.pbMacro10 = QPushButton(self.gbWrite)
         self.pbMacro10.setObjectName(u"pbMacro10")
+        self.pbMacro10.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro10)
 

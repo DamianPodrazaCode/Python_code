@@ -474,6 +474,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro2">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 2</string>
              </property>
@@ -481,6 +484,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro3">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 3</string>
              </property>
@@ -488,6 +494,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro4">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 4</string>
              </property>
@@ -495,6 +504,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro5">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 5</string>
              </property>
@@ -502,6 +514,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro6">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 6</string>
              </property>
@@ -509,6 +524,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro7">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 7</string>
              </property>
@@ -516,6 +534,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro8">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 8</string>
              </property>
@@ -523,6 +544,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro9">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 9</string>
              </property>
@@ -530,6 +554,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbMacro10">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 10</string>
              </property>
