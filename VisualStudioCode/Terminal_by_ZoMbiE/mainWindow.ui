@@ -14,8 +14,8 @@
    <string>Terminal by ZoMbiE</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QGroupBox" name="gbConnect">
@@ -88,7 +88,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="lBaudRaste">
              <property name="text">
               <string>Baud rate</string>
              </property>
@@ -211,7 +211,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="lDataBits">
              <property name="text">
               <string>Data bits</string>
              </property>
@@ -249,7 +249,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="lParity">
              <property name="text">
               <string>Parity</string>
              </property>
@@ -292,7 +292,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="lStopBits">
              <property name="text">
               <string>Stop bits</string>
              </property>
@@ -325,7 +325,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="lFlowControl">
              <property name="text">
               <string>Flow control</string>
              </property>
@@ -371,7 +371,7 @@
       <item>
        <widget class="QGroupBox" name="gbWrite">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -382,7 +382,7 @@
         <property name="flat">
          <bool>true</bool>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -395,18 +395,140 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <item row="0" column="0">
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="leSend"/>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_2"/>
+            <widget class="QComboBox" name="cbSendEoL">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>\n</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>\r</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>\r\n</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QCheckBox" name="cbEchoSend">
              <property name="text">
-              <string>PushButton</string>
+              <string>Echo</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbSend">
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbDTR">
+             <property name="text">
+              <string>DTR</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbRTS">
+             <property name="text">
+              <string>RTS</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="pbMacro1">
+             <property name="text">
+              <string>Macro 1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro2">
+             <property name="text">
+              <string>Macro 2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro3">
+             <property name="text">
+              <string>Macro 3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro4">
+             <property name="text">
+              <string>Macro 4</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro5">
+             <property name="text">
+              <string>Macro 5</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro6">
+             <property name="text">
+              <string>Macro 6</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro7">
+             <property name="text">
+              <string>Macro 7</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro8">
+             <property name="text">
+              <string>Macro 8</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro9">
+             <property name="text">
+              <string>Macro 9</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbMacro10">
+             <property name="text">
+              <string>Macro 10</string>
              </property>
             </widget>
            </item>
@@ -461,6 +583,7 @@
    <addaction name="aPortInfo"/>
    <addaction name="aHelp"/>
    <addaction name="aAbout"/>
+   <addaction name="separator"/>
   </widget>
   <action name="aScan">
    <property name="text">

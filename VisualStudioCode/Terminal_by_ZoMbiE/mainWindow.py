@@ -16,11 +16,11 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QPlainTextEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QStatusBar, QToolBar, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QStatusBar, QToolBar,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -41,8 +41,8 @@ class Ui_MainWindow(object):
         self.aAbout.setMenuRole(QAction.MenuRole.NoRole)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.gridLayout = QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gbConnect = QGroupBox(self.centralwidget)
@@ -84,10 +84,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.line)
 
-        self.label = QLabel(self.gbConnect)
-        self.label.setObjectName(u"label")
+        self.lBaudRaste = QLabel(self.gbConnect)
+        self.lBaudRaste.setObjectName(u"lBaudRaste")
 
-        self.horizontalLayout.addWidget(self.label)
+        self.horizontalLayout.addWidget(self.lBaudRaste)
 
         self.leBaudRate = QLineEdit(self.gbConnect)
         self.leBaudRate.setObjectName(u"leBaudRate")
@@ -129,10 +129,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.line_2)
 
-        self.label_2 = QLabel(self.gbConnect)
-        self.label_2.setObjectName(u"label_2")
+        self.lDataBits = QLabel(self.gbConnect)
+        self.lDataBits.setObjectName(u"lDataBits")
 
-        self.horizontalLayout.addWidget(self.label_2)
+        self.horizontalLayout.addWidget(self.lDataBits)
 
         self.cbDataBits = QComboBox(self.gbConnect)
         self.cbDataBits.addItem("")
@@ -150,10 +150,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.line_3)
 
-        self.label_3 = QLabel(self.gbConnect)
-        self.label_3.setObjectName(u"label_3")
+        self.lParity = QLabel(self.gbConnect)
+        self.lParity.setObjectName(u"lParity")
 
-        self.horizontalLayout.addWidget(self.label_3)
+        self.horizontalLayout.addWidget(self.lParity)
 
         self.cbParity = QComboBox(self.gbConnect)
         self.cbParity.addItem("")
@@ -172,10 +172,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.line_4)
 
-        self.label_4 = QLabel(self.gbConnect)
-        self.label_4.setObjectName(u"label_4")
+        self.lStopBits = QLabel(self.gbConnect)
+        self.lStopBits.setObjectName(u"lStopBits")
 
-        self.horizontalLayout.addWidget(self.label_4)
+        self.horizontalLayout.addWidget(self.lStopBits)
 
         self.cbStopBits = QComboBox(self.gbConnect)
         self.cbStopBits.addItem("")
@@ -192,10 +192,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.line_5)
 
-        self.label_5 = QLabel(self.gbConnect)
-        self.label_5.setObjectName(u"label_5")
+        self.lFlowControl = QLabel(self.gbConnect)
+        self.lFlowControl.setObjectName(u"lFlowControl")
 
-        self.horizontalLayout.addWidget(self.label_5)
+        self.horizontalLayout.addWidget(self.lFlowControl)
 
         self.cbFlowControl = QComboBox(self.gbConnect)
         self.cbFlowControl.addItem("")
@@ -217,42 +217,121 @@ class Ui_MainWindow(object):
 
         self.gbWrite = QGroupBox(self.centralwidget)
         self.gbWrite.setObjectName(u"gbWrite")
-        sizePolicy.setHeightForWidth(self.gbWrite.sizePolicy().hasHeightForWidth())
-        self.gbWrite.setSizePolicy(sizePolicy)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.gbWrite.sizePolicy().hasHeightForWidth())
+        self.gbWrite.setSizePolicy(sizePolicy2)
         self.gbWrite.setFlat(True)
-        self.gridLayout_2 = QGridLayout(self.gbWrite)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3 = QVBoxLayout(self.gbWrite)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.lineEdit = QLineEdit(self.gbWrite)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.leSend = QLineEdit(self.gbWrite)
+        self.leSend.setObjectName(u"leSend")
 
-        self.horizontalLayout_2.addWidget(self.lineEdit)
+        self.horizontalLayout_2.addWidget(self.leSend)
 
-        self.comboBox_2 = QComboBox(self.gbWrite)
-        self.comboBox_2.setObjectName(u"comboBox_2")
+        self.cbSendEoL = QComboBox(self.gbWrite)
+        self.cbSendEoL.addItem("")
+        self.cbSendEoL.addItem("")
+        self.cbSendEoL.addItem("")
+        self.cbSendEoL.addItem("")
+        self.cbSendEoL.setObjectName(u"cbSendEoL")
 
-        self.horizontalLayout_2.addWidget(self.comboBox_2)
+        self.horizontalLayout_2.addWidget(self.cbSendEoL)
 
-        self.pushButton = QPushButton(self.gbWrite)
-        self.pushButton.setObjectName(u"pushButton")
+        self.cbEchoSend = QCheckBox(self.gbWrite)
+        self.cbEchoSend.setObjectName(u"cbEchoSend")
 
-        self.horizontalLayout_2.addWidget(self.pushButton)
+        self.horizontalLayout_2.addWidget(self.cbEchoSend)
+
+        self.pbSend = QPushButton(self.gbWrite)
+        self.pbSend.setObjectName(u"pbSend")
+
+        self.horizontalLayout_2.addWidget(self.pbSend)
+
+        self.pbDTR = QPushButton(self.gbWrite)
+        self.pbDTR.setObjectName(u"pbDTR")
+        self.pbDTR.setCheckable(True)
+
+        self.horizontalLayout_2.addWidget(self.pbDTR)
+
+        self.pbRTS = QPushButton(self.gbWrite)
+        self.pbRTS.setObjectName(u"pbRTS")
+        self.pbRTS.setCheckable(True)
+
+        self.horizontalLayout_2.addWidget(self.pbRTS)
 
 
-        self.gridLayout_2.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.pbMacro1 = QPushButton(self.gbWrite)
+        self.pbMacro1.setObjectName(u"pbMacro1")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro1)
+
+        self.pbMacro2 = QPushButton(self.gbWrite)
+        self.pbMacro2.setObjectName(u"pbMacro2")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro2)
+
+        self.pbMacro3 = QPushButton(self.gbWrite)
+        self.pbMacro3.setObjectName(u"pbMacro3")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro3)
+
+        self.pbMacro4 = QPushButton(self.gbWrite)
+        self.pbMacro4.setObjectName(u"pbMacro4")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro4)
+
+        self.pbMacro5 = QPushButton(self.gbWrite)
+        self.pbMacro5.setObjectName(u"pbMacro5")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro5)
+
+        self.pbMacro6 = QPushButton(self.gbWrite)
+        self.pbMacro6.setObjectName(u"pbMacro6")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro6)
+
+        self.pbMacro7 = QPushButton(self.gbWrite)
+        self.pbMacro7.setObjectName(u"pbMacro7")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro7)
+
+        self.pbMacro8 = QPushButton(self.gbWrite)
+        self.pbMacro8.setObjectName(u"pbMacro8")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro8)
+
+        self.pbMacro9 = QPushButton(self.gbWrite)
+        self.pbMacro9.setObjectName(u"pbMacro9")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro9)
+
+        self.pbMacro10 = QPushButton(self.gbWrite)
+        self.pbMacro10.setObjectName(u"pbMacro10")
+
+        self.horizontalLayout_4.addWidget(self.pbMacro10)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
 
 
         self.verticalLayout.addWidget(self.gbWrite)
 
         self.gbRead = QGroupBox(self.centralwidget)
         self.gbRead.setObjectName(u"gbRead")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.gbRead.sizePolicy().hasHeightForWidth())
-        self.gbRead.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.gbRead.sizePolicy().hasHeightForWidth())
+        self.gbRead.setSizePolicy(sizePolicy3)
         self.gbRead.setFlat(True)
         self.pteReadSerial = QPlainTextEdit(self.gbRead)
         self.pteReadSerial.setObjectName(u"pteReadSerial")
@@ -261,7 +340,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.gbRead)
 
 
-        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -276,6 +355,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.aPortInfo)
         self.toolBar.addAction(self.aHelp)
         self.toolBar.addAction(self.aAbout)
+        self.toolBar.addSeparator()
 
         self.retranslateUi(MainWindow)
 
@@ -292,7 +372,7 @@ class Ui_MainWindow(object):
         self.cbSerial.setItemText(0, QCoreApplication.translate("MainWindow", u"COM ##", None))
 
         self.pbConnect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Baud rate", None))
+        self.lBaudRaste.setText(QCoreApplication.translate("MainWindow", u"Baud rate", None))
         self.cbBaudRate.setItemText(0, QCoreApplication.translate("MainWindow", u"300", None))
         self.cbBaudRate.setItemText(1, QCoreApplication.translate("MainWindow", u"600", None))
         self.cbBaudRate.setItemText(2, QCoreApplication.translate("MainWindow", u"1200", None))
@@ -307,31 +387,49 @@ class Ui_MainWindow(object):
         self.cbBaudRate.setItemText(11, QCoreApplication.translate("MainWindow", u"460800", None))
         self.cbBaudRate.setItemText(12, QCoreApplication.translate("MainWindow", u"921600", None))
 
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Data bits", None))
+        self.lDataBits.setText(QCoreApplication.translate("MainWindow", u"Data bits", None))
         self.cbDataBits.setItemText(0, QCoreApplication.translate("MainWindow", u"Data5", None))
         self.cbDataBits.setItemText(1, QCoreApplication.translate("MainWindow", u"Data6", None))
         self.cbDataBits.setItemText(2, QCoreApplication.translate("MainWindow", u"Data7", None))
         self.cbDataBits.setItemText(3, QCoreApplication.translate("MainWindow", u"Data8", None))
 
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Parity", None))
+        self.lParity.setText(QCoreApplication.translate("MainWindow", u"Parity", None))
         self.cbParity.setItemText(0, QCoreApplication.translate("MainWindow", u"NoParity", None))
         self.cbParity.setItemText(1, QCoreApplication.translate("MainWindow", u"EvenParity", None))
         self.cbParity.setItemText(2, QCoreApplication.translate("MainWindow", u"OddParity", None))
         self.cbParity.setItemText(3, QCoreApplication.translate("MainWindow", u"SpaceParity", None))
         self.cbParity.setItemText(4, QCoreApplication.translate("MainWindow", u"MarkParity", None))
 
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Stop bits", None))
+        self.lStopBits.setText(QCoreApplication.translate("MainWindow", u"Stop bits", None))
         self.cbStopBits.setItemText(0, QCoreApplication.translate("MainWindow", u"OneStop", None))
         self.cbStopBits.setItemText(1, QCoreApplication.translate("MainWindow", u"OneAndHalfStop", None))
         self.cbStopBits.setItemText(2, QCoreApplication.translate("MainWindow", u"TwoStop", None))
 
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Flow control", None))
+        self.lFlowControl.setText(QCoreApplication.translate("MainWindow", u"Flow control", None))
         self.cbFlowControl.setItemText(0, QCoreApplication.translate("MainWindow", u"NoFlowControl", None))
         self.cbFlowControl.setItemText(1, QCoreApplication.translate("MainWindow", u"HardwareControl", None))
         self.cbFlowControl.setItemText(2, QCoreApplication.translate("MainWindow", u"SoftwareControl", None))
 
         self.gbWrite.setTitle(QCoreApplication.translate("MainWindow", u"Write", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.cbSendEoL.setItemText(0, QCoreApplication.translate("MainWindow", u"None", None))
+        self.cbSendEoL.setItemText(1, QCoreApplication.translate("MainWindow", u"\\n", None))
+        self.cbSendEoL.setItemText(2, QCoreApplication.translate("MainWindow", u"\\r", None))
+        self.cbSendEoL.setItemText(3, QCoreApplication.translate("MainWindow", u"\\r\\n", None))
+
+        self.cbEchoSend.setText(QCoreApplication.translate("MainWindow", u"Echo", None))
+        self.pbSend.setText(QCoreApplication.translate("MainWindow", u"Send", None))
+        self.pbDTR.setText(QCoreApplication.translate("MainWindow", u"DTR", None))
+        self.pbRTS.setText(QCoreApplication.translate("MainWindow", u"RTS", None))
+        self.pbMacro1.setText(QCoreApplication.translate("MainWindow", u"Macro 1", None))
+        self.pbMacro2.setText(QCoreApplication.translate("MainWindow", u"Macro 2", None))
+        self.pbMacro3.setText(QCoreApplication.translate("MainWindow", u"Macro 3", None))
+        self.pbMacro4.setText(QCoreApplication.translate("MainWindow", u"Macro 4", None))
+        self.pbMacro5.setText(QCoreApplication.translate("MainWindow", u"Macro 5", None))
+        self.pbMacro6.setText(QCoreApplication.translate("MainWindow", u"Macro 6", None))
+        self.pbMacro7.setText(QCoreApplication.translate("MainWindow", u"Macro 7", None))
+        self.pbMacro8.setText(QCoreApplication.translate("MainWindow", u"Macro 8", None))
+        self.pbMacro9.setText(QCoreApplication.translate("MainWindow", u"Macro 9", None))
+        self.pbMacro10.setText(QCoreApplication.translate("MainWindow", u"Macro 10", None))
         self.gbRead.setTitle(QCoreApplication.translate("MainWindow", u"Read", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
