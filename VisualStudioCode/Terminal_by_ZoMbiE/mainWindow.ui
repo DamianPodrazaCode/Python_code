@@ -464,6 +464,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QPushButton" name="pbMacro1">
+             <property name="contextMenuPolicy">
+              <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+             </property>
              <property name="text">
               <string>Macro 1</string>
              </property>

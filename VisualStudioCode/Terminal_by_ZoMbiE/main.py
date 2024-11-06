@@ -1,10 +1,11 @@
 import sys
 from PySide6 import QtWidgets
-from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase
-from PySide6.QtWidgets import QMainWindow, QMessageBox
+from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase, Qt
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QMenu
 from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
 from sympy import true
 from mainWindow import Ui_MainWindow
+from macroWindow import MacroWindow
 # ------------------------------------------------------------------------------------------------------
 class MainWindow(QMainWindow, Ui_MainWindow) :
     def __init__(self) :
@@ -44,6 +45,9 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.pbMacro8.clicked.connect(self.macro8Clicked)
         self.pbMacro9.clicked.connect(self.macro9Clicked)
         self.pbMacro10.clicked.connect(self.macro10Clicked)
+
+        self.pbMacro1.customContextMenuRequested.connect(self.macro1CustomContextMenuRequested)
+        
 # ------------------------------------------------------------------------------------------------------
     def scanTriger(self) :
         self.cbSerial.clear()
@@ -224,6 +228,19 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.leSend.setText(self.pbMacro10.text())
         self.sendClicked()
 
+    def macro1CustomContextMenuRequested(self, pos) :
+        context_menu = QMenu(self) 
+        action1 = context_menu.addAction("Edit this macro.") 
+        action1.triggered.connect(lambda: self.menu_action("Akcja 1")) 
+        context_menu.exec(self.pbMacro1.mapToGlobal(pos))
+    def menu_action(self, action_name) : 
+        print(f"Wybrano: {action_name}")  
+        self.macroWin1 = MacroWindow()
+        self.macroWin1.macroSubmitted.connect(self.updateMacro1)  # Łączenie sygnału z slotem
+        self.macroWin1.exec()  
+    def updateMacro1(self, text):
+        self.pbMacro1.setText(text)         
+           
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
         while self.serialPort.canReadLine() : 

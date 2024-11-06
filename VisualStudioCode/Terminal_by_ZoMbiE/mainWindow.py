@@ -271,6 +271,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.pbMacro1 = QPushButton(self.gbWrite)
         self.pbMacro1.setObjectName(u"pbMacro1")
+        self.pbMacro1.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.horizontalLayout_4.addWidget(self.pbMacro1)
 
