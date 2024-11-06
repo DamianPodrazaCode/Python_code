@@ -3,6 +3,7 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase
 from PySide6.QtWidgets import QMainWindow, QMessageBox
 from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
+from sympy import true
 from mainWindow import Ui_MainWindow
 # ------------------------------------------------------------------------------------------------------
 class MainWindow(QMainWindow, Ui_MainWindow) :
@@ -33,6 +34,16 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.leSend.returnPressed.connect(self.sendReturnPressed)
         self.pbDTR.clicked.connect(self.DTRclicked)
         self.pbRTS.clicked.connect(self.RTSclicked)
+        self.pbMacro1.clicked.connect(self.macro1Clicked)
+        self.pbMacro2.clicked.connect(self.macro2Clicked)
+        self.pbMacro3.clicked.connect(self.macro3Clicked)
+        self.pbMacro4.clicked.connect(self.macro4Clicked)
+        self.pbMacro5.clicked.connect(self.macro5Clicked)
+        self.pbMacro6.clicked.connect(self.macro6Clicked)
+        self.pbMacro7.clicked.connect(self.macro7Clicked)
+        self.pbMacro8.clicked.connect(self.macro8Clicked)
+        self.pbMacro9.clicked.connect(self.macro9Clicked)
+        self.pbMacro10.clicked.connect(self.macro10Clicked)
 # ------------------------------------------------------------------------------------------------------
     def scanTriger(self) :
         self.cbSerial.clear()
@@ -70,6 +81,16 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.cbFlowControl.setCurrentIndex(self.settings.value("cbFlowControl", 0, type=int))
         self.cbSendEoL.setCurrentIndex(self.settings.value("cbSendEoL", 0, type=int))
         self.cbEchoSend.setChecked(self.settings.value("cbEchoSend", 0, type=bool))
+        self.pbMacro1.setText(self.settings.value("pbMacro1"))
+        self.pbMacro2.setText(self.settings.value("pbMacro2"))
+        self.pbMacro3.setText(self.settings.value("pbMacro3"))
+        self.pbMacro4.setText(self.settings.value("pbMacro4"))
+        self.pbMacro5.setText(self.settings.value("pbMacro5"))
+        self.pbMacro6.setText(self.settings.value("pbMacro6"))
+        self.pbMacro7.setText(self.settings.value("pbMacro7"))
+        self.pbMacro8.setText(self.settings.value("pbMacro8"))
+        self.pbMacro9.setText(self.settings.value("pbMacro9"))
+        self.pbMacro10.setText(self.settings.value("pbMacro10"))
 
     def writeSettings(self) :
         self.settings.setValue("leBaudRate", self.leBaudRate.text())
@@ -79,6 +100,16 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.settings.setValue("cbFlowControl", self.cbFlowControl.currentIndex())
         self.settings.setValue("cbSendEoL", self.cbSendEoL.currentIndex())
         self.settings.setValue("cbEchoSend", self.cbEchoSend.isChecked())
+        self.settings.setValue("pbMacro1", self.pbMacro1.text())
+        self.settings.setValue("pbMacro2", self.pbMacro2.text())
+        self.settings.setValue("pbMacro3", self.pbMacro3.text())
+        self.settings.setValue("pbMacro4", self.pbMacro4.text())
+        self.settings.setValue("pbMacro5", self.pbMacro5.text())
+        self.settings.setValue("pbMacro6", self.pbMacro6.text())
+        self.settings.setValue("pbMacro7", self.pbMacro7.text())
+        self.settings.setValue("pbMacro8", self.pbMacro8.text())
+        self.settings.setValue("pbMacro9", self.pbMacro9.text())
+        self.settings.setValue("pbMacro10", self.pbMacro10.text())
 # ------------------------------------------------------------------------------------------------------
     def connectClick(self) :
         if self.pbConnect.text() == "Connect" :
@@ -92,7 +123,6 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
             self.serialPort.setStopBits(getattr(QSerialPort, self.cbStopBits.currentText(), None))
             self.serialPort.setFlowControl(getattr(QSerialPort, self.cbFlowControl.currentText(), None))
             self.serialPort.open(QSerialPort.OpenModeFlag.ReadWrite)
-
         else :
             self.pbConnect.setText("Connect")
             if self.serialPort.isOpen() :
@@ -142,11 +172,58 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
     def sendReturnPressed(self) :
         self.sendClicked()
 
-    def DTRclicked (self) :
-        pass
+    def DTRclicked(self) :
+        if self.pbDTR.isChecked() :
+            self.serialPort.setDataTerminalReady(True)
+        else :
+            self.serialPort.setDataTerminalReady(False)
 
-    def RTSclicked (self) :
-        pass
+    def RTSclicked(self) :
+        if self.pbRTS.isChecked() :
+            self.serialPort.setRequestToSend(True)
+        else :
+            self.serialPort.setRequestToSend(False)
+
+    def macro1Clicked(self) :            
+        self.leSend.setText(self.pbMacro1.text())
+        self.sendClicked()    
+    
+    def macro2Clicked(self) :            
+        self.leSend.setText(self.pbMacro2.text())
+        self.sendClicked()
+
+    def macro3Clicked(self) :            
+        self.leSend.setText(self.pbMacro3.text())
+        self.sendClicked()
+
+    def macro4Clicked(self) :            
+        self.leSend.setText(self.pbMacro4.text())
+        self.sendClicked()
+
+    def macro5Clicked(self) :            
+        self.leSend.setText(self.pbMacro5.text())
+        self.sendClicked()
+
+    def macro6Clicked(self) :            
+        self.leSend.setText(self.pbMacro6.text())
+        self.sendClicked()
+
+    def macro7Clicked(self) :            
+        self.leSend.setText(self.pbMacro7.text())
+        self.sendClicked()
+
+    def macro8Clicked(self) :            
+        self.leSend.setText(self.pbMacro8.text())
+        self.sendClicked()
+
+    def macro9Clicked(self) :            
+        self.leSend.setText(self.pbMacro9.text())
+        self.sendClicked()
+
+    def macro10Clicked(self) :            
+        self.leSend.setText(self.pbMacro10.text())
+        self.sendClicked()
+
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
         while self.serialPort.canReadLine() : 
