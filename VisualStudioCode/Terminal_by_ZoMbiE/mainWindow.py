@@ -401,52 +401,15 @@ class Ui_MainWindow(object):
         self.groupBox_2.setSizePolicy(sizePolicy4)
         self.gridLayout_3 = QGridLayout(self.groupBox_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.pbStartStopLog = QPushButton(self.groupBox_2)
-        self.pbStartStopLog.setObjectName(u"pbStartStopLog")
-        self.pbStartStopLog.setCheckable(True)
-
-        self.gridLayout_3.addWidget(self.pbStartStopLog, 8, 0, 1, 1)
-
-        self.pbClear = QPushButton(self.groupBox_2)
-        self.pbClear.setObjectName(u"pbClear")
-
-        self.gridLayout_3.addWidget(self.pbClear, 0, 0, 1, 1)
-
         self.pbSaveWindow = QPushButton(self.groupBox_2)
         self.pbSaveWindow.setObjectName(u"pbSaveWindow")
 
-        self.gridLayout_3.addWidget(self.pbSaveWindow, 7, 0, 1, 1)
-
-        self.cbTextEncode = QComboBox(self.groupBox_2)
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.addItem("")
-        self.cbTextEncode.setObjectName(u"cbTextEncode")
-
-        self.gridLayout_3.addWidget(self.cbTextEncode, 5, 0, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_3.addItem(self.verticalSpacer, 9, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.pbSaveWindow, 9, 0, 1, 1)
 
         self.cbTime = QCheckBox(self.groupBox_2)
         self.cbTime.setObjectName(u"cbTime")
 
-        self.gridLayout_3.addWidget(self.cbTime, 6, 0, 1, 1)
-
-        self.cbWarp = QCheckBox(self.groupBox_2)
-        self.cbWarp.setObjectName(u"cbWarp")
-
-        self.gridLayout_3.addWidget(self.cbWarp, 1, 0, 1, 1)
-
-        self.cb1Window = QCheckBox(self.groupBox_2)
-        self.cb1Window.setObjectName(u"cb1Window")
-
-        self.gridLayout_3.addWidget(self.cb1Window, 4, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.cbTime, 8, 0, 1, 1)
 
         self.cbIgnoreRN = QCheckBox(self.groupBox_2)
         self.cbIgnoreRN.setObjectName(u"cbIgnoreRN")
@@ -458,10 +421,55 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.cbIgnoreRN, 2, 0, 1, 1)
 
+        self.cbHex = QCheckBox(self.groupBox_2)
+        self.cbHex.setObjectName(u"cbHex")
+
+        self.gridLayout_3.addWidget(self.cbHex, 6, 0, 1, 1)
+
         self.cbAutoScroll = QCheckBox(self.groupBox_2)
         self.cbAutoScroll.setObjectName(u"cbAutoScroll")
 
         self.gridLayout_3.addWidget(self.cbAutoScroll, 3, 0, 1, 1)
+
+        self.cb1Window = QCheckBox(self.groupBox_2)
+        self.cb1Window.setObjectName(u"cb1Window")
+
+        self.gridLayout_3.addWidget(self.cb1Window, 4, 0, 1, 1)
+
+        self.cbTextEncode = QComboBox(self.groupBox_2)
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.setObjectName(u"cbTextEncode")
+
+        self.gridLayout_3.addWidget(self.cbTextEncode, 5, 0, 1, 1)
+
+        self.pbStartStopLog = QPushButton(self.groupBox_2)
+        self.pbStartStopLog.setObjectName(u"pbStartStopLog")
+        self.pbStartStopLog.setCheckable(True)
+
+        self.gridLayout_3.addWidget(self.pbStartStopLog, 10, 0, 1, 1)
+
+        self.pbClear = QPushButton(self.groupBox_2)
+        self.pbClear.setObjectName(u"pbClear")
+
+        self.gridLayout_3.addWidget(self.pbClear, 0, 0, 1, 1)
+
+        self.cbWarp = QCheckBox(self.groupBox_2)
+        self.cbWarp.setObjectName(u"cbWarp")
+
+        self.gridLayout_3.addWidget(self.cbWarp, 1, 0, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_3.addItem(self.verticalSpacer, 11, 0, 1, 1)
+
+        self.cbBin = QCheckBox(self.groupBox_2)
+        self.cbBin.setObjectName(u"cbBin")
+
+        self.gridLayout_3.addWidget(self.cbBin, 7, 0, 1, 1)
 
 
         self.verticalLayout_4.addWidget(self.groupBox_2)
@@ -570,22 +578,22 @@ class Ui_MainWindow(object):
         self.cbDSR.setText(QCoreApplication.translate("MainWindow", u"DSR", None))
         self.cbRI.setText(QCoreApplication.translate("MainWindow", u"RI", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Reading settings", None))
+        self.pbSaveWindow.setText(QCoreApplication.translate("MainWindow", u"Save window", None))
+        self.cbTime.setText(QCoreApplication.translate("MainWindow", u"Time", None))
+        self.cbIgnoreRN.setText(QCoreApplication.translate("MainWindow", u"Ingnore \\r\\n", None))
+        self.cbHex.setText(QCoreApplication.translate("MainWindow", u"HEX", None))
+        self.cbAutoScroll.setText(QCoreApplication.translate("MainWindow", u"Auto scroll", None))
+        self.cb1Window.setText(QCoreApplication.translate("MainWindow", u"1 window", None))
+        self.cbTextEncode.setItemText(0, QCoreApplication.translate("MainWindow", u"utf-8", None))
+        self.cbTextEncode.setItemText(1, QCoreApplication.translate("MainWindow", u"ascii", None))
+        self.cbTextEncode.setItemText(2, QCoreApplication.translate("MainWindow", u"iso-8859-1", None))
+        self.cbTextEncode.setItemText(3, QCoreApplication.translate("MainWindow", u"utf-16", None))
+        self.cbTextEncode.setItemText(4, QCoreApplication.translate("MainWindow", u"utf-32", None))
+
         self.pbStartStopLog.setText(QCoreApplication.translate("MainWindow", u"Start log", None))
         self.pbClear.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
-        self.pbSaveWindow.setText(QCoreApplication.translate("MainWindow", u"Save window", None))
-        self.cbTextEncode.setItemText(0, QCoreApplication.translate("MainWindow", u"UTF-8", None))
-        self.cbTextEncode.setItemText(1, QCoreApplication.translate("MainWindow", u"ASCII", None))
-        self.cbTextEncode.setItemText(2, QCoreApplication.translate("MainWindow", u"iso-8859-1", None))
-        self.cbTextEncode.setItemText(3, QCoreApplication.translate("MainWindow", u"UTF-16", None))
-        self.cbTextEncode.setItemText(4, QCoreApplication.translate("MainWindow", u"UTF-32", None))
-        self.cbTextEncode.setItemText(5, QCoreApplication.translate("MainWindow", u"HEX", None))
-        self.cbTextEncode.setItemText(6, QCoreApplication.translate("MainWindow", u"BIN", None))
-
-        self.cbTime.setText(QCoreApplication.translate("MainWindow", u"Time", None))
         self.cbWarp.setText(QCoreApplication.translate("MainWindow", u"Warp line", None))
-        self.cb1Window.setText(QCoreApplication.translate("MainWindow", u"1 window", None))
-        self.cbIgnoreRN.setText(QCoreApplication.translate("MainWindow", u"Ingnore \\r\\n", None))
-        self.cbAutoScroll.setText(QCoreApplication.translate("MainWindow", u"Auto scroll", None))
+        self.cbBin.setText(QCoreApplication.translate("MainWindow", u"BIN", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 

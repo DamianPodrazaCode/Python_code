@@ -9,6 +9,7 @@ import PySide6.QtWidgets
 from sympy import true
 from mainWindow import Ui_MainWindow
 from macroWindow import MacroWindow
+from datetime import datetime
 # ------------------------------------------------------------------------------------------------------
 class MainWindow(QMainWindow, Ui_MainWindow) :
     def __init__(self) :
@@ -68,8 +69,8 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.pbClear.clicked.connect(self.clearClicked)
         self.cbWarp.checkStateChanged.connect(self.warpCheckStateChanged)
         self.cb1Window.checkStateChanged.connect(self.oneWindowCheckStateChanged)
+        self.myEncode = self.cbTextEncode.currentText()
         self.cbTextEncode.currentIndexChanged.connect(self.textEncodeCurrentIndexChanged)
-        self.cbTime.checkStateChanged.connect(self.timeCheckStateChanged)
         self.pbSaveWindow.clicked.connect(self.saveWindowClicked)
         self.pbStartStopLog.clicked.connect(self.startStopLogClicked)
 # ------------------------------------------------------------------------------------------------------
@@ -172,7 +173,6 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.writeSettings()
         self.warpCheckStateChanged(self.cbWarp.checkState())
         self.oneWindowCheckStateChanged(self.cb1Window.checkState())
-        self.timeCheckStateChanged(self.cbTime.checkState())
     
     def baudRateCurrentIndexChanged(self) :
         self.leBaudRate.setText(self.cbBaudRate.currentText())
@@ -248,8 +248,15 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
-        data = self.serialPort.readAll().data().decode("utf-8", errors="ignore")
+        data = self.serialPort.readAll().data().decode(self.myEncode, errors="ignore")
         cursor = self.pteReadSerial.textCursor() 
+
+        if self.cbTime.isChecked() :
+            current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+            column_number = cursor.columnNumber() 
+            if column_number == 0:    
+                data = current_time + " -> " + data 
+
         cursor.movePosition(QTextCursor.End)
         if self.cbIgnoreRN.isChecked() :
             data = data.replace("\r", "")
@@ -290,10 +297,7 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
             self.pteReadSerial.setMaximumBlockCount(0)
 
     def textEncodeCurrentIndexChanged(self) :
-        pass
-
-    def timeCheckStateChanged(self, state) :
-        pass
+        self.myEncode = self.cbTextEncode.currentText()
 
     def saveWindowClicked(self) :
         pass
