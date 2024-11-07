@@ -686,13 +686,6 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QPushButton" name="pbAutoScroll">
-                <property name="text">
-                 <string>Auto scroll</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QPushButton" name="pbClear">
                 <property name="text">
@@ -769,7 +762,7 @@
               <item row="1" column="0">
                <widget class="QCheckBox" name="cbWarp">
                 <property name="text">
-                 <string>Warp</string>
+                 <string>Warp line</string>
                 </property>
                </widget>
               </item>
@@ -790,6 +783,13 @@
                 </property>
                 <property name="text">
                  <string>Ingnore \r\n</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="cbAutoScroll">
+                <property name="text">
+                 <string>Auto scroll</string>
                 </property>
                </widget>
               </item>

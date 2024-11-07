@@ -67,8 +67,6 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 
         self.pbClear.clicked.connect(self.clearClicked)
         self.cbWarp.checkStateChanged.connect(self.warpCheckStateChanged)
-        self.cbIgnoreRN.checkStateChanged.connect(self.ignoreRNCheckStateChanged)
-        self.pbAutoScroll.clicked.connect(self.autoScrollClicked)
         self.cb1Window.checkStateChanged.connect(self.oneWindowCheckStateChanged)
         self.cbTextEncode.currentIndexChanged.connect(self.textEncodeCurrentIndexChanged)
         self.cbTime.checkStateChanged.connect(self.timeCheckStateChanged)
@@ -121,6 +119,12 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.pbMacro8.setText(self.settings.value("pbMacro8"))
         self.pbMacro9.setText(self.settings.value("pbMacro9"))
         self.pbMacro10.setText(self.settings.value("pbMacro10"))
+        self.cbWarp.setChecked(self.settings.value("cbWarp", 0, type=bool))
+        self.cbIgnoreRN.setChecked(self.settings.value("cbIgnoreRN", 0, type=bool))
+        self.cbAutoScroll.setChecked(self.settings.value("cbAutoScroll", 0, type=bool))
+        self.cb1Window.setChecked(self.settings.value("cb1Window", 0, type=bool))
+        self.cbTextEncode.setCurrentIndex(self.settings.value("cbTextEncode", 0, type=int))
+        self.cbTime.setChecked(self.settings.value("cbTime", 0, type=bool))
 
     def writeSettings(self) :
         self.settings.setValue("leBaudRate", self.leBaudRate.text())
@@ -140,6 +144,13 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.settings.setValue("pbMacro8", self.pbMacro8.text())
         self.settings.setValue("pbMacro9", self.pbMacro9.text())
         self.settings.setValue("pbMacro10", self.pbMacro10.text())
+        self.settings.setValue("cbWarp", self.cbWarp.isChecked())
+        self.settings.setValue("cbIgnoreRN", self.cbIgnoreRN.isChecked())
+        self.settings.setValue("cbAutoScroll", self.cbAutoScroll.isChecked())
+        self.settings.setValue("cb1Window", self.cb1Window.isChecked())
+        self.settings.setValue("cbTextEncode", self.cbTextEncode.currentIndex())
+        self.settings.setValue("cbTime", self.cbTime.isChecked())
+
 # ------------------------------------------------------------------------------------------------------
     def connectClick(self) :
         if self.pbConnect.text() == "Connect" :
@@ -159,6 +170,9 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
                 self.serialPort.close()
 
         self.writeSettings()
+        self.warpCheckStateChanged(self.cbWarp.checkState())
+        self.oneWindowCheckStateChanged(self.cb1Window.checkState())
+        self.timeCheckStateChanged(self.cbTime.checkState())
     
     def baudRateCurrentIndexChanged(self) :
         self.leBaudRate.setText(self.cbBaudRate.currentText())
@@ -234,9 +248,15 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
-        while self.serialPort.canReadLine() : 
-            data = self.serialPort.readLine().data().decode().rstrip()
-            self.pteReadSerial.appendPlainText(data)
+        data = self.serialPort.readAll().data().decode("utf-8", errors="ignore")
+        cursor = self.pteReadSerial.textCursor() 
+        cursor.movePosition(QTextCursor.End)
+        if self.cbIgnoreRN.isChecked() :
+            data = data.replace("\r", "")
+            data = data.replace("\n", "")
+        cursor.insertText(data)
+        if self.cbAutoScroll.isChecked() :
+            self.pteReadSerial.setTextCursor(cursor)
 
     def checkPinoutSerialInputSignals(self):
         if self.serialPort.isOpen() : 
@@ -245,7 +265,6 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
             dsr = signals & QSerialPort.PinoutSignal.DataSetReadySignal
             dcd = signals & QSerialPort.PinoutSignal.DataCarrierDetectSignal
             ri = signals & QSerialPort.PinoutSignal.RingIndicatorSignal
-            # print(f"CTS: {bool(cts)}, DSR: {bool(dsr)}, DCD: {bool(dcd)}, RI: {bool(ri)}")
             self.cbCTS.setChecked(bool(cts))
             self.cbDSR.setChecked(bool(dsr))
             self.cbCD.setChecked(bool(dcd))
@@ -255,28 +274,19 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.pteReadSerial.clear()
 
     def warpCheckStateChanged(self, state) :
-        if state == Qt.Checked :
+        if state == Qt.CheckState.Checked :
             self.pteReadSerial.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
-        elif state == Qt.Unchecked: 
+        elif state == Qt.CheckState.Unchecked: 
             self.pteReadSerial.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
 
-    def ignoreRNCheckStateChanged(self, state) :
-        pass
-
-    def autoScrollClicked(self) :
-        cursor = self.pteReadSerial.textCursor() 
-        cursor.movePosition(QTextCursor.End) 
-        self.pteReadSerial.setTextCursor(cursor) 
-        self.pteReadSerial.ensureCursorVisible()
-
     def oneWindowCheckStateChanged(self, state) :
-        if state == Qt.Checked :
+        if state == Qt.CheckState.Checked :
             fontMetrics = self.pteReadSerial.fontMetrics() 
             lineHeight = fontMetrics.lineSpacing() 
             viewportHeight = self.pteReadSerial.viewport().height() 
             visibleLines = viewportHeight // lineHeight
             self.pteReadSerial.setMaximumBlockCount(visibleLines - 1)
-        elif state == Qt.Unchecked : 
+        elif state == Qt.CheckState.Unchecked : 
             self.pteReadSerial.setMaximumBlockCount(0)
 
     def textEncodeCurrentIndexChanged(self) :
@@ -290,11 +300,6 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 
     def startStopLogClicked(self) :
         pass
-# ------------------------------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
