@@ -248,14 +248,21 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
 
 # ------------------------------------------------------------------------------------------------------
     def readData(self) : 
-        data = self.serialPort.readAll().data().decode(self.myEncode, errors="ignore")
+        if self.cbHex.isChecked() :
+            data = self.serialPort.readAll()
+            data = (data.toHex(":").toStdString()) + ":"
+        elif self.cbBin.isChecked() :
+            pass
+        else :            
+            data = self.serialPort.readAll().data().decode(self.myEncode, errors="ignore")
+            
         cursor = self.pteReadSerial.textCursor() 
 
         if self.cbTime.isChecked() :
-            current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-            column_number = cursor.columnNumber() 
-            if column_number == 0:    
-                data = current_time + " -> " + data 
+            currentTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+            columnNumber = cursor.columnNumber() 
+            if columnNumber == 0:    
+                data = currentTime + " -> " + data 
 
         cursor.movePosition(QTextCursor.End)
         if self.cbIgnoreRN.isChecked() :
