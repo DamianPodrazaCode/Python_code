@@ -250,27 +250,39 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
     def readData(self) : 
         if self.cbHex.isChecked() :
             data = self.serialPort.readAll()
-            data = (data.toHex(":").toStdString()) + ":"
+            data = (data.toHex(":").toStdString())
+            cursor = self.pteReadSerial.textCursor() 
+            cursor.insertText(data + "\n")
+            if self.cbAutoScroll.isChecked() :
+                self.pteReadSerial.setTextCursor(cursor)
+
         elif self.cbBin.isChecked() :
-            pass
+            data = str(self.serialPort.readAll())
+            data = ' : '.join(format(ord(char), '08b') for char in data)
+            cursor = self.pteReadSerial.textCursor() 
+            cursor.insertText(data + "\r")
+            if self.cbAutoScroll.isChecked() :
+                self.pteReadSerial.setTextCursor(cursor)
+
         else :            
             data = self.serialPort.readAll().data().decode(self.myEncode, errors="ignore")
+
+            if self.cbIgnoreRN.isChecked() :
+                data = data.replace("\r", "")
+                data = data.replace("\n", "")
             
-        cursor = self.pteReadSerial.textCursor() 
+            cursor = self.pteReadSerial.textCursor() 
+            
+            if self.cbTime.isChecked() :
+                currentTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+                columnNumber = cursor.columnNumber() 
+                if columnNumber == 0:    
+                    data = currentTime + " -> " + data 
+            
+            cursor.insertText(data)
 
-        if self.cbTime.isChecked() :
-            currentTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-            columnNumber = cursor.columnNumber() 
-            if columnNumber == 0:    
-                data = currentTime + " -> " + data 
-
-        cursor.movePosition(QTextCursor.End)
-        if self.cbIgnoreRN.isChecked() :
-            data = data.replace("\r", "")
-            data = data.replace("\n", "")
-        cursor.insertText(data)
-        if self.cbAutoScroll.isChecked() :
-            self.pteReadSerial.setTextCursor(cursor)
+            if self.cbAutoScroll.isChecked() :
+                self.pteReadSerial.setTextCursor(cursor)
 
     def checkPinoutSerialInputSignals(self):
         if self.serialPort.isOpen() : 

@@ -15,7 +15,7 @@ String inputString = "";
 bool stringComplete = false;  
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(921600);
   inputString.reserve(200);
   timer.start();
 }

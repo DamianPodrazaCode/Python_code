@@ -343,15 +343,18 @@ class Ui_MainWindow(object):
         sizePolicy3.setHeightForWidth(self.gbRead.sizePolicy().hasHeightForWidth())
         self.gbRead.setSizePolicy(sizePolicy3)
         self.gbRead.setFlat(True)
+        self.gridLayout_2 = QGridLayout(self.gbRead)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.pteReadSerial = QPlainTextEdit(self.gbRead)
         self.pteReadSerial.setObjectName(u"pteReadSerial")
-        self.pteReadSerial.setGeometry(QRect(10, 26, 681, 471))
         self.pteReadSerial.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.pteReadSerial.setOverwriteMode(False)
         self.pteReadSerial.setMaximumBlockCount(0)
+
+        self.gridLayout_2.addWidget(self.pteReadSerial, 0, 0, 2, 1)
+
         self.groupBox = QGroupBox(self.gbRead)
         self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setGeometry(QRect(918, 27, 115, 82))
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
         self.groupBox.setSizePolicy(sizePolicy)
         self.gridLayout = QGridLayout(self.groupBox)
@@ -384,9 +387,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.cbRI, 1, 1, 1, 1)
 
+
+        self.gridLayout_2.addWidget(self.groupBox, 0, 1, 1, 1)
+
         self.groupBox_2 = QGroupBox(self.gbRead)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.groupBox_2.setGeometry(QRect(918, 115, 111, 376))
         sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
@@ -397,12 +402,12 @@ class Ui_MainWindow(object):
         self.pbSaveWindow = QPushButton(self.groupBox_2)
         self.pbSaveWindow.setObjectName(u"pbSaveWindow")
 
-        self.gridLayout_3.addWidget(self.pbSaveWindow, 7, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.pbSaveWindow, 8, 0, 1, 1)
 
         self.cbTime = QCheckBox(self.groupBox_2)
         self.cbTime.setObjectName(u"cbTime")
 
-        self.gridLayout_3.addWidget(self.cbTime, 6, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.cbTime, 7, 0, 1, 1)
 
         self.cbIgnoreRN = QCheckBox(self.groupBox_2)
         self.cbIgnoreRN.setObjectName(u"cbIgnoreRN")
@@ -438,7 +443,7 @@ class Ui_MainWindow(object):
         self.pbStartStopLog.setObjectName(u"pbStartStopLog")
         self.pbStartStopLog.setCheckable(True)
 
-        self.gridLayout_3.addWidget(self.pbStartStopLog, 8, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.pbStartStopLog, 9, 0, 1, 1)
 
         self.pbClear = QPushButton(self.groupBox_2)
         self.pbClear.setObjectName(u"pbClear")
@@ -452,32 +457,34 @@ class Ui_MainWindow(object):
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_3.addItem(self.verticalSpacer, 9, 0, 1, 1)
+        self.gridLayout_3.addItem(self.verticalSpacer, 10, 0, 1, 1)
 
-        self.widget = QWidget(self.gbRead)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(760, 280, 81, 74))
-        self.verticalLayout_4 = QVBoxLayout(self.widget)
+        self.verticalLayout_4 = QVBoxLayout()
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.checkBox = QCheckBox(self.widget)
+        self.checkBox = QCheckBox(self.groupBox_2)
         self.checkBox.setObjectName(u"checkBox")
         self.checkBox.setChecked(True)
         self.checkBox.setAutoExclusive(True)
 
         self.verticalLayout_4.addWidget(self.checkBox)
 
-        self.cbHex = QCheckBox(self.widget)
+        self.cbHex = QCheckBox(self.groupBox_2)
         self.cbHex.setObjectName(u"cbHex")
         self.cbHex.setAutoExclusive(True)
 
         self.verticalLayout_4.addWidget(self.cbHex)
 
-        self.cbBin = QCheckBox(self.widget)
+        self.cbBin = QCheckBox(self.groupBox_2)
         self.cbBin.setObjectName(u"cbBin")
         self.cbBin.setAutoExclusive(True)
 
         self.verticalLayout_4.addWidget(self.cbBin)
+
+
+        self.gridLayout_3.addLayout(self.verticalLayout_4, 6, 0, 1, 1)
+
+
+        self.gridLayout_2.addWidget(self.groupBox_2, 1, 1, 1, 1)
 
 
         self.verticalLayout.addWidget(self.gbRead)
