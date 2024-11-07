@@ -1,8 +1,11 @@
 import sys
 from PySide6 import QtWidgets
-from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase, Qt, QPoint
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QMenu, QPushButton
+import PySide6
+from PySide6.QtCore import QSettings, QIODevice, QIODeviceBase, Qt, QPoint, Signal, QTimer
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QMenu, QPushButton, QPlainTextEdit
 from PySide6.QtSerialPort import QSerialPortInfo, QSerialPort
+from PySide6.QtGui import QTextCursor
+import PySide6.QtWidgets
 from sympy import true
 from mainWindow import Ui_MainWindow
 from macroWindow import MacroWindow
@@ -58,7 +61,19 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         self.pbMacro9.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro9.mapToGlobal(QPoint(0,0)), self.pbMacro9))
         self.pbMacro10.customContextMenuRequested.connect(lambda: self.macroCustomContextMenuRequested(self.pbMacro10.mapToGlobal(QPoint(0,0)), self.pbMacro10))
         
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.checkPinoutSerialInputSignals)
+        self.timer.start(200) 
 
+        self.pbClear.clicked.connect(self.clearClicked)
+        self.cbWarp.checkStateChanged.connect(self.warpCheckStateChanged)
+        self.cbIgnoreRN.checkStateChanged.connect(self.ignoreRNCheckStateChanged)
+        self.pbAutoScroll.clicked.connect(self.autoScrollClicked)
+        self.cb1Window.checkStateChanged.connect(self.oneWindowCheckStateChanged)
+        self.cbTextEncode.currentIndexChanged.connect(self.textEncodeCurrentIndexChanged)
+        self.cbTime.checkStateChanged.connect(self.timeCheckStateChanged)
+        self.pbSaveWindow.clicked.connect(self.saveWindowClicked)
+        self.pbStartStopLog.clicked.connect(self.startStopLogClicked)
 # ------------------------------------------------------------------------------------------------------
     def scanTriger(self) :
         self.cbSerial.clear()
@@ -222,6 +237,59 @@ class MainWindow(QMainWindow, Ui_MainWindow) :
         while self.serialPort.canReadLine() : 
             data = self.serialPort.readLine().data().decode().rstrip()
             self.pteReadSerial.appendPlainText(data)
+
+    def checkPinoutSerialInputSignals(self):
+        if self.serialPort.isOpen() : 
+            signals = self.serialPort.pinoutSignals()
+            cts = signals & QSerialPort.PinoutSignal.ClearToSendSignal
+            dsr = signals & QSerialPort.PinoutSignal.DataSetReadySignal
+            dcd = signals & QSerialPort.PinoutSignal.DataCarrierDetectSignal
+            ri = signals & QSerialPort.PinoutSignal.RingIndicatorSignal
+            # print(f"CTS: {bool(cts)}, DSR: {bool(dsr)}, DCD: {bool(dcd)}, RI: {bool(ri)}")
+            self.cbCTS.setChecked(bool(cts))
+            self.cbDSR.setChecked(bool(dsr))
+            self.cbCD.setChecked(bool(dcd))
+            self.cbRI.setChecked(bool(ri))
+    
+    def clearClicked(self) :
+        self.pteReadSerial.clear()
+
+    def warpCheckStateChanged(self, state) :
+        if state == Qt.Checked :
+            self.pteReadSerial.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
+        elif state == Qt.Unchecked: 
+            self.pteReadSerial.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
+
+    def ignoreRNCheckStateChanged(self, state) :
+        pass
+
+    def autoScrollClicked(self) :
+        cursor = self.pteReadSerial.textCursor() 
+        cursor.movePosition(QTextCursor.End) 
+        self.pteReadSerial.setTextCursor(cursor) 
+        self.pteReadSerial.ensureCursorVisible()
+
+    def oneWindowCheckStateChanged(self, state) :
+        if state == Qt.Checked :
+            fontMetrics = self.pteReadSerial.fontMetrics() 
+            lineHeight = fontMetrics.lineSpacing() 
+            viewportHeight = self.pteReadSerial.viewport().height() 
+            visibleLines = viewportHeight // lineHeight
+            self.pteReadSerial.setMaximumBlockCount(visibleLines - 1)
+        elif state == Qt.Unchecked : 
+            self.pteReadSerial.setMaximumBlockCount(0)
+
+    def textEncodeCurrentIndexChanged(self) :
+        pass
+
+    def timeCheckStateChanged(self, state) :
+        pass
+
+    def saveWindowClicked(self) :
+        pass
+
+    def startStopLogClicked(self) :
+        pass
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------

@@ -343,9 +343,132 @@ class Ui_MainWindow(object):
         sizePolicy3.setHeightForWidth(self.gbRead.sizePolicy().hasHeightForWidth())
         self.gbRead.setSizePolicy(sizePolicy3)
         self.gbRead.setFlat(True)
+        self.gridLayout_2 = QGridLayout(self.gbRead)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.pteReadSerial = QPlainTextEdit(self.gbRead)
         self.pteReadSerial.setObjectName(u"pteReadSerial")
-        self.pteReadSerial.setGeometry(QRect(20, 20, 781, 241))
+        self.pteReadSerial.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.pteReadSerial.setOverwriteMode(False)
+        self.pteReadSerial.setMaximumBlockCount(0)
+
+        self.gridLayout_2.addWidget(self.pteReadSerial, 0, 0, 1, 1)
+
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.groupBox = QGroupBox(self.gbRead)
+        self.groupBox.setObjectName(u"groupBox")
+        sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
+        self.groupBox.setSizePolicy(sizePolicy)
+        self.gridLayout = QGridLayout(self.groupBox)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.cbCTS = QCheckBox(self.groupBox)
+        self.cbCTS.setObjectName(u"cbCTS")
+        self.cbCTS.setEnabled(False)
+        self.cbCTS.setCheckable(True)
+
+        self.gridLayout.addWidget(self.cbCTS, 0, 0, 1, 1)
+
+        self.cbCD = QCheckBox(self.groupBox)
+        self.cbCD.setObjectName(u"cbCD")
+        self.cbCD.setEnabled(False)
+        self.cbCD.setCheckable(True)
+
+        self.gridLayout.addWidget(self.cbCD, 0, 1, 1, 1)
+
+        self.cbDSR = QCheckBox(self.groupBox)
+        self.cbDSR.setObjectName(u"cbDSR")
+        self.cbDSR.setEnabled(False)
+        self.cbDSR.setCheckable(True)
+
+        self.gridLayout.addWidget(self.cbDSR, 1, 0, 1, 1)
+
+        self.cbRI = QCheckBox(self.groupBox)
+        self.cbRI.setObjectName(u"cbRI")
+        self.cbRI.setEnabled(False)
+        self.cbRI.setCheckable(True)
+
+        self.gridLayout.addWidget(self.cbRI, 1, 1, 1, 1)
+
+
+        self.verticalLayout_4.addWidget(self.groupBox)
+
+        self.groupBox_2 = QGroupBox(self.gbRead)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
+        self.groupBox_2.setSizePolicy(sizePolicy4)
+        self.gridLayout_3 = QGridLayout(self.groupBox_2)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.pbStartStopLog = QPushButton(self.groupBox_2)
+        self.pbStartStopLog.setObjectName(u"pbStartStopLog")
+        self.pbStartStopLog.setCheckable(True)
+
+        self.gridLayout_3.addWidget(self.pbStartStopLog, 8, 0, 1, 1)
+
+        self.pbAutoScroll = QPushButton(self.groupBox_2)
+        self.pbAutoScroll.setObjectName(u"pbAutoScroll")
+
+        self.gridLayout_3.addWidget(self.pbAutoScroll, 3, 0, 1, 1)
+
+        self.pbClear = QPushButton(self.groupBox_2)
+        self.pbClear.setObjectName(u"pbClear")
+
+        self.gridLayout_3.addWidget(self.pbClear, 0, 0, 1, 1)
+
+        self.pbSaveWindow = QPushButton(self.groupBox_2)
+        self.pbSaveWindow.setObjectName(u"pbSaveWindow")
+
+        self.gridLayout_3.addWidget(self.pbSaveWindow, 7, 0, 1, 1)
+
+        self.cbTextEncode = QComboBox(self.groupBox_2)
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.addItem("")
+        self.cbTextEncode.setObjectName(u"cbTextEncode")
+
+        self.gridLayout_3.addWidget(self.cbTextEncode, 5, 0, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_3.addItem(self.verticalSpacer, 9, 0, 1, 1)
+
+        self.cbTime = QCheckBox(self.groupBox_2)
+        self.cbTime.setObjectName(u"cbTime")
+
+        self.gridLayout_3.addWidget(self.cbTime, 6, 0, 1, 1)
+
+        self.cbWarp = QCheckBox(self.groupBox_2)
+        self.cbWarp.setObjectName(u"cbWarp")
+
+        self.gridLayout_3.addWidget(self.cbWarp, 1, 0, 1, 1)
+
+        self.cb1Window = QCheckBox(self.groupBox_2)
+        self.cb1Window.setObjectName(u"cb1Window")
+
+        self.gridLayout_3.addWidget(self.cb1Window, 4, 0, 1, 1)
+
+        self.cbIgnoreRN = QCheckBox(self.groupBox_2)
+        self.cbIgnoreRN.setObjectName(u"cbIgnoreRN")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.cbIgnoreRN.sizePolicy().hasHeightForWidth())
+        self.cbIgnoreRN.setSizePolicy(sizePolicy5)
+
+        self.gridLayout_3.addWidget(self.cbIgnoreRN, 2, 0, 1, 1)
+
+
+        self.verticalLayout_4.addWidget(self.groupBox_2)
+
+
+        self.gridLayout_2.addLayout(self.verticalLayout_4, 0, 1, 1, 1)
+
 
         self.verticalLayout.addWidget(self.gbRead)
 
@@ -441,6 +564,28 @@ class Ui_MainWindow(object):
         self.pbMacro9.setText(QCoreApplication.translate("MainWindow", u"Macro 9", None))
         self.pbMacro10.setText(QCoreApplication.translate("MainWindow", u"Macro 10", None))
         self.gbRead.setTitle(QCoreApplication.translate("MainWindow", u"Read", None))
+        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Input signals", None))
+        self.cbCTS.setText(QCoreApplication.translate("MainWindow", u"CTS", None))
+        self.cbCD.setText(QCoreApplication.translate("MainWindow", u"CD", None))
+        self.cbDSR.setText(QCoreApplication.translate("MainWindow", u"DSR", None))
+        self.cbRI.setText(QCoreApplication.translate("MainWindow", u"RI", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Reading settings", None))
+        self.pbStartStopLog.setText(QCoreApplication.translate("MainWindow", u"Start log", None))
+        self.pbAutoScroll.setText(QCoreApplication.translate("MainWindow", u"Auto scroll", None))
+        self.pbClear.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.pbSaveWindow.setText(QCoreApplication.translate("MainWindow", u"Save window", None))
+        self.cbTextEncode.setItemText(0, QCoreApplication.translate("MainWindow", u"UTF-8", None))
+        self.cbTextEncode.setItemText(1, QCoreApplication.translate("MainWindow", u"ASCII", None))
+        self.cbTextEncode.setItemText(2, QCoreApplication.translate("MainWindow", u"iso-8859-1", None))
+        self.cbTextEncode.setItemText(3, QCoreApplication.translate("MainWindow", u"UTF-16", None))
+        self.cbTextEncode.setItemText(4, QCoreApplication.translate("MainWindow", u"UTF-32", None))
+        self.cbTextEncode.setItemText(5, QCoreApplication.translate("MainWindow", u"HEX", None))
+        self.cbTextEncode.setItemText(6, QCoreApplication.translate("MainWindow", u"BIN", None))
+
+        self.cbTime.setText(QCoreApplication.translate("MainWindow", u"Time", None))
+        self.cbWarp.setText(QCoreApplication.translate("MainWindow", u"Warp", None))
+        self.cb1Window.setText(QCoreApplication.translate("MainWindow", u"1 window", None))
+        self.cbIgnoreRN.setText(QCoreApplication.translate("MainWindow", u"Ingnore \\r\\n", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 
