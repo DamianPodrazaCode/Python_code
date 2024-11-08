@@ -862,17 +862,17 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="aHelp">
+  <action name="aAbout">
    <property name="text">
-    <string>Help</string>
+    <string>About</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="aAbout">
+  <action name="aHelp">
    <property name="text">
-    <string>About</string>
+    <string>Help</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
