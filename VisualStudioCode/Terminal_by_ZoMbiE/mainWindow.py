@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1127, 707)
+        MainWindow.resize(1127, 763)
         self.aScan = QAction(MainWindow)
         self.aScan.setObjectName(u"aScan")
         self.aScan.setMenuRole(QAction.MenuRole.NoRole)
